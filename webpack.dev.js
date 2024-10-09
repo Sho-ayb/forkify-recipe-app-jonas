@@ -21,6 +21,8 @@ export default merge(common, {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.[contenthash].js',
     assetModuleFilename: 'assets/img/[name][ext]',
+    publicPath: '/',
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

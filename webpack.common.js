@@ -26,7 +26,7 @@ export default {
       webSocketTransport: 'ws',
     },
     webSocketServer: 'ws',
-    hot: false,
+    hot: true,
     port: 9000,
     compress: true,
   },
@@ -41,7 +41,7 @@ export default {
   module: {
     rules: [
       {
-        test: /\.(svg|jpg|png)$/,
+        test: /\.(svg|jpg|jpeg|png|gif)$/i,
         type: 'asset/resource',
       },
       {
