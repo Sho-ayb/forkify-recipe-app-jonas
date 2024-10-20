@@ -1,0 +1,13 @@
+.u-grid {
+  display: grid;
+  gap: 1em;
+  padding: 1em;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.u-grid-template-areas {
+  grid-template-areas:
+    "hdr"
+    "mnn"
+    "ftr";
+}

@@ -3,11 +3,120 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Meta description for better SEO optimisation -->
+    <meta
+      name="description"
+      content="Forkify Recipe Application: Search, discover and save your favourite recipes easily with this mobile-friendly"
+    />
+    <!-- Boxicons icon link -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <title>Forkify Recipe Application</title>
   </head>
   <body>
-    <div class="[ grid grid-main ]">
-      <header class="header"></header>
+    <div class="[ u-grid u-grid-template-areas ]">
+      <header class="header">
+        <form class="header__search-form">
+          <input
+            type="text"
+            placeholder="Search over a 1,000,000 recipes..."
+            class="header__search-form-input"
+          />
+          <button type="submit" class="header__search-form-btn">
+            <svg class="search__icon">
+              <use href="assets/img/icons.svg#icon-search"></use>
+            </svg>
+            <span>Search</span>
+          </button>
+        </form>
+        <nav class="header__nav nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--add-recipe">
+                <svg class="nav__icon">
+                  <use href="assets/img/icons.svg#icon-edit"></use>
+                </svg>
+                <span>ADD RECIPE</span>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--bookmark-recipe">
+                <svg class="nav__icon">
+                  <use href="assets/img/icons.svg#icon-bookmark"></use>
+                </svg>
+                <span>BOOKMARKS</span>
+              </button>
+              <div class="bookmarks">
+                <ul class="bookmarks__list [ hidden ]">
+                  <div class="error">
+                    <div class="error__icon">
+                      <svg>
+                        <use
+                          href="assets/img/icons.svg#icon-alert-triangle"
+                        ></use>
+                      </svg>
+                    </div>
+                    <p class="error__message">
+                      No bookmarks yet. Find a nice recipe and bookmark it 😊
+                    </p>
+                  </div>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <aside class="recipe__list-container">
+        <p>this is the aside element</p>
+        <div class="recipe__list"></div>
+      </aside>
+      <main class="main">
+        <p>this is the main element</p>
+        <div class="recipe__detail-container"></div>
+      </main>
+      <footer class="footer">
+        <p class="project__info">
+          This website was developed to learn Javascript as part of Jonas
+          Schmedtmanns course:
+          <a
+            href="https://www.udemy.com/the-complete-javascript-course/"
+            target="_blank"
+            >The Complete JavaScript course 2024: From zero to expert.</a
+          >
+          The original template was not mobile ready, so I have made it
+          responsive using CSS Grid and Flexbox. Built with 🖤 by Sho'ayb
+          <a
+            href="https://github.com/Sho-ayb"
+            target="_blank"
+            class="github-icon"
+            ><i class="bx bxl-github"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/shoaybchoudhry"
+            target="_blank"
+            class="linkedin-icon"
+            ><i class="bx bxl-linkedin-square"></i
+          ></a>
+        </p>
+        <p class="copyright">
+          &copy; Copyright by
+          <a
+            href="https://twitter.com/jonasschmedtman"
+            class="twitter-link"
+            target="_blank"
+            >Jonas Schmedtmann</a
+          >
+          . Use for learning or your portfolio. Don't use to teach. Don't claim
+          as your own.
+        </p>
+      </footer>
+
+      <!-- Template Elements -->
+
+      <template class="recipe__list-template"></template>
+      <template class="recipe__detail-template"></template>
     </div>
   </body>
 </html>

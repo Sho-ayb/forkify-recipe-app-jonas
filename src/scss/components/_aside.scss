@@ -1,0 +1,16 @@
+@use "../base/variables" as variables;
+
+body .recipe__list-container {
+  grid-area: asd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 90%;
+  max-width: 40rem; // Maximum width for larger screen sizes
+  background-color: variables.$color-text-white;
+  box-shadow: 0 0 10px rgba($color: #000, $alpha: 100%);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}

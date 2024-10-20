@@ -2,3 +2,23 @@
 
 @use "base/reset";
 @use "base/variables" as variables;
+
+//  Mixins
+
+@forward "utilities/mixins";
+
+// Blocks
+
+@use "blocks/nav-item";
+@use "blocks/nav-btn";
+
+// Components
+
+@use "components/header";
+@use "components/main";
+@use "components/aside";
+@use "components/footer";
+
+// Utilities
+@use "utilities/layout";
+@use "utilities/hidden";
