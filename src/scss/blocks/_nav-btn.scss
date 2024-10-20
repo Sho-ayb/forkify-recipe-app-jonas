@@ -18,7 +18,7 @@ body .header__nav .nav__list .nav__item .nav__btn {
   svg {
     width: 1.5rem;
     height: 1.5rem;
-    fill: currentcolor;
+    fill: variables.$color-text-orange;
     margin-bottom: variables.$spacing-xs + 0.45;
   }
 
