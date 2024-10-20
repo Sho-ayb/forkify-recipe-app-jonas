@@ -14,6 +14,7 @@ body .header {
     width: 55vw;
     max-width: 200px;
     height: auto;
+    padding: variables.$spacing-md;
   }
 
   &__search-form {
@@ -31,14 +32,24 @@ body .header {
       border: none;
       outline: none;
       padding-left: 1em;
-      color: inherit;
-      width: 13.6rem;
+      color: variables.$color-text-dark-1;
+      width: 12.6rem;
+      height: 3.2rem;
+
+      &::placeholder {
+        color: variables.$color-text-placeholder;
+      }
+
+      &:focus-within {
+        transform: translateY(-2px);
+        box-shadow: 0 0.7rem 3rem rgba(variables.$color-text-dark-1, 0.08);
+      }
     }
 
     &-btn {
       @include mix.button("small", "primary");
 
-      font-size: variables.$font-size-md;
+      font-size: variables.$font-size-sm;
       border-radius: 10em;
       color: variables.$color-text-white;
 

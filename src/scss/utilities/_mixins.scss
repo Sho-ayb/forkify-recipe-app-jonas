@@ -45,7 +45,7 @@
 
   // size variants
   @if $size == "small" {
-    padding: 0.5em 1em;
+    padding: 0.8em 1.25em;
     font-size: variables.$font-size-sm;
   } @else if $size == "medium" {
     padding: 0.75em 1.5em;
