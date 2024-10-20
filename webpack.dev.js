@@ -24,6 +24,21 @@ export default merge(common, {
     publicPath: '/',
     clean: true,
   },
+  devServer: {
+    watchFiles: ['src/*.html'],
+    static: {
+      directory: path.join(__dirname, 'src'),
+    },
+    client: {
+      logging: 'info',
+      webSocketURL: 'ws://localhost:9000/ws',
+      webSocketTransport: 'ws',
+    },
+    webSocketServer: 'ws',
+    hot: true,
+    port: 9000,
+    compress: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/template.html',

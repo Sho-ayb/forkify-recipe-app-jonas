@@ -1,0 +1,82 @@
+@use "../base/variables" as variables;
+
+// stack in column
+
+@mixin stack($space: 1em) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  > * + * {
+    margin-top: $space;
+  }
+}
+
+// stack in horizontal
+
+@mixin horizontal-stack($space: 1em) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  > * + * {
+    margin-left: $space;
+  }
+}
+
+// mixin for buttons
+
+@mixin button($size: "medium", $color: "primary") {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease transform 0.1s ease;
+
+  // size variants
+  @if $size == "small" {
+    padding: 0.5em 1em;
+    font-size: variables.$font-size-sm;
+  } @else if $size == "medium" {
+    padding: 0.75em 1.5em;
+    font-size: variables.$font-size-md;
+  } @else if $size == "large" {
+    padding: 1em 2em;
+    font-size: variables.$font-size-lg;
+  }
+
+  //   color variants
+
+  @if $color == "primary" {
+    background-image: linear-gradient(
+      to right bottom,
+      variables.$color-background-yellow,
+      variables.$color-background-orange
+    );
+    color: variables.$color-text-white;
+  } @else if $color == "secondary" {
+    background-color: variables.$color-body-backround-grey-1;
+    color: variables.$color-text-dark-1;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  //   for icon buttons
+  svg {
+    width: variables.$spacing-md;
+    height: variables.$spacing-md;
+    margin-right: variables.$spacing-xs;
+  }
+}

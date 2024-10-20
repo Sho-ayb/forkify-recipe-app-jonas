@@ -1,0 +1,28 @@
+@use "../base/variables" as variables;
+
+body .header__nav .nav__list .nav__item .nav__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: variables.$spacing-md;
+  border: none;
+  background-color: transparent;
+  color: variables.$color-text-dark-1;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    background-color: variables.$color-body-background-grey-2;
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentcolor;
+    margin-bottom: variables.$spacing-xs + 0.45;
+  }
+
+  span {
+    font-size: variables.$font-size-xs;
+  }
+}

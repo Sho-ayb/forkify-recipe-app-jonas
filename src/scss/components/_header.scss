@@ -1,0 +1,61 @@
+@use "../base/variables" as variables;
+@use "../utilities/mixins" as mix;
+
+body .header {
+  grid-area: hdr;
+  grid-column: 1 / -1;
+
+  // stacking all elements within header as stack
+  @include mix.stack(1.7em);
+
+  background-color: variables.$color-body-backround-grey-1;
+
+  &__logo {
+    width: 55vw;
+    max-width: 200px;
+    height: auto;
+  }
+
+  &__search-form {
+    @include mix.horizontal-stack(0.5em);
+
+    background-color: variables.$color-text-white;
+    border-radius: 10em;
+    transition: all 0.3s;
+
+    &-input {
+      flex-grow: 1;
+      font-size: variables.$font-size-md;
+      font-family: inherit;
+      background: none;
+      border: none;
+      outline: none;
+      padding-left: 1em;
+      color: inherit;
+      width: 13.6rem;
+    }
+
+    &-btn {
+      @include mix.button("small", "primary");
+
+      font-size: variables.$font-size-md;
+      border-radius: 10em;
+      color: variables.$color-text-white;
+
+      .search__icon {
+        fill: currentcolor;
+        width: 1.2em;
+        height: 1.2em;
+      }
+    }
+  }
+
+  &__nav {
+    .nav__list {
+      @include mix.horizontal-stack(1em);
+      @include mix.button("small", "secondary");
+
+      background-color: transparent;
+    }
+  }
+}
