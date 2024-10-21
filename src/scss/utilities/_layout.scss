@@ -1,8 +1,10 @@
 .u-grid {
-  display: grid;
-  gap: 1em;
+  min-height: 100vh;
+  gap: 0.3em;
   padding: 1em;
+  display: grid;
   grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto 1fr auto;
 }
 
 .u-grid-template-areas {

@@ -1,4 +1,92 @@
+@use "../base/variables" as variables;
+
 body .main {
   grid-area: mnn;
   grid-column: 1 / -1;
+  background-color: variables.$color-body-backround-grey-1;
+
+  .recipe {
+    &__fig {
+      height: 11.5rem;
+      position: relative;
+      transform-origin: top;
+
+      > img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(
+          to right bottom,
+          variables.$color-background-yellow,
+          variables.$color-background-orange
+        );
+        opacity: 0.6;
+      }
+    }
+
+    &__title-container {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translate(-50%, 20%);
+      width: 90%;
+      max-width: 40rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__title {
+      position: relative;
+      display: inline-block;
+      color: variables.$color-text-white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.95;
+      transform: skewY(-6deg);
+
+      > span {
+        display: inline;
+        z-index: 1;
+        padding: 0.8em 1.2em;
+        box-decoration-break: clone;
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0 -0.5em;
+          background-image: linear-gradient(
+            to right bottom,
+            variables.$color-background-yellow,
+            variables.$color-background-orange
+          );
+          z-index: -1;
+          transform: skew(-6deg);
+        }
+      }
+    }
+
+    &__detail-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__details {
+      display: flex;
+      align-items: center;
+      padding: 4.5em 3.8em 3em;
+      background-color: variables.$color-body-background-grey-2;
+    }
+  }
 }
