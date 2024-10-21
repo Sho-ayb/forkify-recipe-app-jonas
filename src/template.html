@@ -73,8 +73,65 @@
         <div class="recipe__list"></div>
       </aside>
       <main class="main">
-        <p>this is the main element</p>
-        <div class="recipe__detail-container"></div>
+        <figure class="recipe__fig">
+          <img
+            src="http://forkify-api.herokuapp.com/images/4797377235_c07589b7d4_be953.jpg"
+            alt="Mexican Flatbread"
+            class="recipe__img"
+          />
+
+          <div class="recipe__title-container">
+            <h1 class="recipe__title">
+              <span>Mexican "Flatbread" Pizza</span>
+            </h1>
+          </div>
+        </figure>
+        <div class="recipe__detail-container">
+          <div class="recipe__details">
+            <div class="recipe__info">
+              <svg class="recipe__info-icon">
+                <use href="assets/img/icons.svg#icon-clock"></use>
+              </svg>
+              <span class="recipe__info-data recipe__info-data-minutes"
+                >60</span
+              >
+              <span class="recipe__info-text">minutes</span>
+            </div>
+            <div class="recipe__info">
+              <svg class="recipe__info-icon">
+                <use href="assets/img/icons.svg#icon-users"></use>
+              </svg>
+              <span class="recipe__info-data recipe__info-data--people">4</span>
+              <span class="recipe__info-text">servings</span>
+
+              <div class="recipe__info-buttons">
+                <button class="btn--tiny btn--increase-servings">
+                  <svg>
+                    <use href="assets/img/icons.svg#icon-minus-circle"></use>
+                  </svg>
+                </button>
+                <button class="btn--tiny btn--increase-servings">
+                  <svg>
+                    <use href="assets/img/icons.svg#icon-plus-circle"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="recipe__user-generated [ hidden ]">
+              <svg>
+                <use href="assets/img/icons.svg#icon-user"></use>
+              </svg>
+            </div>
+            <button class="btn--round">
+              <svg class="">
+                <use href="assets/img/icons.svg#icon-bookmark-fill"></use>
+              </svg>
+            </button>
+          </div>
+          </div>
+          <div class="recipe__ingredients">ingredients</div>
+          <div class="recipe__directions">directions</div>
+        </div>
       </main>
       <footer class="footer">
         <p class="project__info">
