@@ -1,22 +1,64 @@
+@use "../base/variables" as variables;
+
 body .recipe__detail-container .recipe__details .recipe__info {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1em;
+  text-transform: uppercase;
+  font-size: variables.$font-size-sm;
 
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: variables.$color-background-orange;
+  }
+
+  span {
+    padding: 0.3em;
+  }
+
+  &-buttons {
+    display: flex;
+
+    > button {
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  &-data--minutes {
+    font-weight: 700;
+  }
+
+  &-data--people {
+    font-weight: 700;
   }
 }
 
 body .recipe__detail-container .recipe__details .recipe__user-generated {
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: variables.$color-background-orange;
   }
 }
 
 body .recipe__detail-container .recipe__details .btn--round {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  background-color: variables.$color-background-orange;
+  color: variables.$color-text-white;
+  cursor: pointer;
+
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: currentcolor;
   }
 }
