@@ -80,12 +80,18 @@ body .main {
     &__detail-container {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 3.5em 1em;
     }
 
     &__details {
+      width: 100%;
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 4.5em 3.8em 3em;
       background-color: variables.$color-body-background-grey-2;
     }
   }
