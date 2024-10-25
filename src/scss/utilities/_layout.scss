@@ -37,3 +37,9 @@
   align-items: center;
   width: fit-content;
 }
+
+.u-flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

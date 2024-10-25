@@ -1,4 +1,22 @@
+@use "../base/variables" as variables;
+
 body .footer {
   grid-area: ftr;
   grid-column: 1 / -1;
+  padding: 3em 1em;
+  text-align: center;
+  font-size: variables.$font-size-md;
+  color: variables.$color-text-grey-dark-1;
+
+  .project__info,
+  .copyright {
+    > a {
+      color: variables.$color-text-white;
+      text-decoration: none;
+
+      &:hover {
+        color: variables.$color-text-grey-dark-2;
+      }
+    }
+  }
 }
