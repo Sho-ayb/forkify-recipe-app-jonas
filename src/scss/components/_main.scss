@@ -34,6 +34,8 @@ body .main {
       }
     }
 
+    // section recipe details
+
     &__title-container {
       position: absolute;
       bottom: 15px;
@@ -83,7 +85,7 @@ body .main {
       justify-content: center;
       align-items: center;
       width: 100%;
-      padding: 3.5em 1em;
+      padding: 1.5em 1em;
     }
 
     &__details {
@@ -93,6 +95,27 @@ body .main {
       justify-content: center;
       align-items: center;
       background-color: variables.$color-body-background-grey-2;
+    }
+
+    // section ingredients
+
+    &__ingredients {
+      padding: 3.5em 1em;
+
+      &--heading {
+        font-size: variables.$font-size-xl;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 1em;
+        color: variables.$color-text-orange;
+      }
+    }
+
+    // section directions
+
+    &__directions {
+      padding: 3.5em 1em;
     }
   }
 }

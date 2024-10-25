@@ -1,0 +1,14 @@
+@use "../base/variables" as variables;
+
+body .main .recipe__ingredients .recipe__ingredient-list .recipe__ingredient {
+  font-size: variables.$font-size-md;
+  text-transform: uppercase;
+  justify-content: center;
+
+  svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: variables.$spacing-md;
+    fill: variables.$color-text-orange;
+  }
+}

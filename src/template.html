@@ -80,13 +80,13 @@
             class="recipe__img"
           />
 
-          <div class="recipe__title-container">
+          <figcaption class="recipe__title-container">
             <h1 class="recipe__title">
               <span>Mexican "Flatbread" Pizza</span>
             </h1>
-          </div>
+          </figcaption>
         </figure>
-        <div class="recipe__detail-container">
+        <section class="recipe__detail-container">
           <div class="recipe__details">
             <div class="recipe__info">
               <svg class="recipe__info-icon">
@@ -128,9 +128,39 @@
               </svg>
             </button>
           </div>
-          </div>
-          <div class="recipe__ingredients">ingredients</div>
-          <div class="recipe__directions">directions</div>
+          </section>
+          <section class="recipe__ingredients [ u-grid-col ]">
+
+            <h2 class="recipe__ingredients--heading">Recipe Ingredients</h2>
+            <ul class="recipe__ingredient-list [ u-grid-col ]">
+              <li class="recipe__ingredient [ u-flex-row ]">
+                <svg class="recipe__icon">
+                  <use href="assets/img/icons.svg#icon-check"></use>
+                </svg>
+                <div class="recipe__quantity">1000</div>
+                <div class="recipe__description">
+                  <span class="recipe__unit">g</span>
+                  pasta
+                </div>
+              </li>
+  
+              <li class="recipe__ingredient [ u-flex-row ]">
+                <svg class="recipe__icon">
+                  <use href="assets/img/icons.svg#icon-check"></use>
+                </svg>
+                <div class="recipe__quantity">0.5</div>
+                <div class="recipe__description">
+                  <span class="recipe__unit">cup</span>
+                  ricotta cheese
+                </div>
+              </li>
+            </ul>
+
+
+
+
+          </section>
+          <section class="recipe__directions">directions</section>
         </div>
       </main>
       <footer class="footer">
