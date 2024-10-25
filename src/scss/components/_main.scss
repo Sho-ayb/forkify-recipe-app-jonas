@@ -1,4 +1,5 @@
 @use "../base/variables" as variables;
+@use "../utilities/mixins" as mix;
 
 body .main {
   grid-area: mnn;
@@ -103,12 +104,10 @@ body .main {
       padding: 3.5em 1em;
 
       &--heading {
-        font-size: variables.$font-size-xl;
-        font-weight: 700;
-        text-transform: uppercase;
-        text-align: center;
-        margin-bottom: 1em;
-        color: variables.$color-text-orange;
+        @include mix.heading(
+          variables.$font-size-xl,
+          variables.$color-text-orange
+        );
       }
     }
 
@@ -116,6 +115,47 @@ body .main {
 
     &__directions {
       padding: 3.5em 1em;
+
+      &--heading {
+        @include mix.heading(
+          variables.$font-size-xl,
+          variables.$color-text-orange
+        );
+      }
+
+      &-text {
+        font-size: variables.$font-size-md;
+        text-align: center;
+        color: variables.$color-text-grey-dark-1;
+
+        &--publisher {
+          color: variables.$color-text-grey-dark-2;
+          font-weight: 700;
+        }
+      }
+
+      &--btn {
+        @include mix.button("small", "primary");
+
+        border-radius: 10em;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        > span {
+          text-transform: uppercase;
+          margin-right: variables.$spacing-sm;
+        }
+
+        svg {
+          fill: currentcolor;
+          font-weight: 700;
+        }
+      }
     }
   }
 }
