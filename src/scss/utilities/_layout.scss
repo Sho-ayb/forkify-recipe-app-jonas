@@ -20,6 +20,8 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
+  place-items: center;
+  gap: 1em;
 }
 
 // Flex layout
@@ -27,4 +29,11 @@
 .u-flex-row {
   display: flex;
   gap: 0.2em;
+}
+
+.u-flex-inline {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
 }

@@ -80,3 +80,14 @@
     margin-right: variables.$spacing-xs;
   }
 }
+
+// Mixin for headings
+
+@mixin heading($size, $color) {
+  font-size: $size;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1em;
+  color: $color;
+}
