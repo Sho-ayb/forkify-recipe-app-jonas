@@ -1,3 +1,5 @@
+// Grid layout
+
 .u-grid {
   min-height: 100vh;
   gap: 0.3em;
@@ -12,4 +14,17 @@
     "hdr"
     "mnn"
     "ftr";
+}
+
+.u-grid-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+// Flex layout
+
+.u-flex-row {
+  display: flex;
+  gap: 0.2em;
 }
