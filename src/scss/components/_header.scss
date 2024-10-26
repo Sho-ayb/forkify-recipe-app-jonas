@@ -68,5 +68,19 @@ body .header {
 
       background-color: transparent;
     }
+
+    .open__search-results {
+      margin-bottom: variables.$spacing-sm;
+      font-size: variables.$font-size-md;
+      padding: 0.2em 0.4em;
+      border: none;
+      cursor: pointer;
+      background-color: transparent;
+
+      span {
+        margin-left: variables.$spacing-md;
+        text-transform: uppercase;
+      }
+    }
   }
 }

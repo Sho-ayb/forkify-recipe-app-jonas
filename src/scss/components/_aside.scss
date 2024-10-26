@@ -1,6 +1,6 @@
 @use "../base/variables" as variables;
 
-body .recipe__list-container {
+body .recipe__search-list-container {
   grid-area: asd;
   position: fixed;
   top: 0;
@@ -10,7 +10,46 @@ body .recipe__list-container {
   max-width: 40rem; // Maximum width for larger screen sizes
   background-color: variables.$color-text-white;
   box-shadow: 0 0 10px rgba($color: #000, $alpha: 100%);
-  transform: translateX(-100%);
+
+  // transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
+
+  .recipe__search-list-header {
+    height: 2.9rem;
+    font-size: variables.$font-size-4xl;
+    text-align: right;
+    border-bottom: 0.56px solid variables.$color-border-maroon;
+  }
+
+  .recipe__search-list {
+    flex-grow: 1;
+    overflow-y: auto;
+
+    .results {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .pagination {
+      margin-top: auto;
+      padding: 0 3.5rem;
+
+      &::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      &__btn {
+        &--prev {
+          float: left;
+        }
+
+        &--next {
+          float: right;
+        }
+      }
+    }
+  }
 }
