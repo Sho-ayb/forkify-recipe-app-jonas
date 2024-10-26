@@ -1,0 +1,86 @@
+@use "../base/variables" as variables;
+
+body .recipe__search-list-container .recipe__search-list .results {
+  padding: 3em 1em;
+
+  .preview {
+    &__link {
+      &:link,
+      &:visited {
+        align-items: center;
+        padding: 1.25em 1.35em;
+        transition: all 0.3s;
+        border-right: 1px solid variables.$color-border-maroon;
+        text-decoration: none;
+
+        &:hover {
+          background-color: variables.$color-text-grey-dark-2;
+          transform: translateY(-2px);
+
+          &--active {
+            background-color: variables.$color-body-backround-grey-1;
+          }
+        }
+      }
+    }
+
+    &__fig {
+      flex: 0 0 5.8rem;
+      height: 5.8rem;
+      overflow: hidden;
+      margin-right: variables.$spacing-lg;
+
+      img {
+        display: block;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    &__data {
+      display: grid;
+      grid-template-columns: 1fr 2rem;
+      width: 100%;
+      row-gap: 0.1em;
+      align-items: center;
+    }
+
+    &__title {
+      grid-column: 1/-1;
+      font-size: variables.$font-size-lg;
+      color: variables.$color-text-orange;
+      text-transform: uppercase;
+      font-weight: 600;
+
+      // This is how text is truncated!
+      text-overflow: ellipsis;
+      max-width: 25rem;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &__publisher {
+      font-size: variables.$font-size-lg;
+      color: variables.$color-text-dark-2;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    &__user-generated {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2rem;
+      width: 2rem;
+      border-radius: 10rem;
+      margin-left: auto;
+      margin-right: 1.75rem;
+
+      svg {
+        height: 1.2rem;
+        width: 1.2rem;
+        fill: variables.$color-background-orange;
+      }
+    }
+  }
+}

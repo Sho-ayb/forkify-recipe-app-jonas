@@ -66,12 +66,73 @@
               </div>
             </li>
           </ul>
+          <button class="open__search-results">
+
+            <i class='bx bxs-chevrons-left bx-fade-right' ></i>
+            <span>Search results</span>
+
+
+          </button>
         </nav>
       </header>
-      <aside class="recipe__list-container">
-        <p>this is the aside element</p>
-        <div class="recipe__list"></div>
+
+      <!-- Aside  -->
+
+      <aside class="recipe__search-list-container [ u-flex-col ]">
+        <div class="recipe__search-list-header">
+
+          <i class='bx bx-x'></i>
+
+
+        </div>
+        <div class="recipe__search-list">
+
+          <ul class="results">
+            
+            <li class="preview">
+              <a class="preview__link preview__link--active [ u-flex-row ]" href="#23456">
+                <figure class="preview__fig">
+                  <img src="http://forkify-api.herokuapp.com/images/carbonara2f55.jpg" alt="Test" />
+                </figure>
+                <div class="preview__data">
+                  <h4 class="preview__title">Pasta carbonara ...</h4>
+                  <p class="preview__publisher">The Pioneer Woman</p>
+                  <div class="preview__user-generated">
+                    <svg class="[ hidden ]">
+                      <use href="assets/img/icons.svg#icon-user"></use>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </li>
+            
+          </ul>
+  
+          <div class="pagination">
+            <button class="btn--inline pagination__btn--prev">
+              <svg class="search__icon">
+                <use href="assets/img/icons.svg#icon-arrow-left"></use>
+              </svg>
+              <span>Page 1</span>
+            </button>
+            <button class="btn--inline pagination__btn--next">
+              <span>Page 3</span>
+              <svg class="search__icon">
+                <use href="assets/img/icons.svg#icon-arrow-right"></use>
+              </svg>
+            </button>
+          </div>
+
+
+
+
+
+
+        </div>
       </aside>
+
+      <!-- Main -->
+
       <main class="main">
         <figure class="recipe__fig">
           <img
@@ -230,9 +291,9 @@
       </footer>
 
       <!-- Template Elements -->
-
-      <template class="recipe__list-template"></template>
-      <template class="recipe__detail-template"></template>
+      <template class="recipe__search-results-template"></template>
+      <template class="recipe__detail-list-template"></template>
+      <template class="recipe__directions-template"></template>
     </div>
   </body>
 </html>
