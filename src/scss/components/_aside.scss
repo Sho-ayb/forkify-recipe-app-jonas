@@ -10,8 +10,7 @@ body .recipe__search-list-container {
   max-width: 40rem; // Maximum width for larger screen sizes
   background-color: variables.$color-text-white;
   box-shadow: 0 0 10px rgba($color: #000, $alpha: 100%);
-
-  // transform: translateX(-100%);
+  transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
 
@@ -25,6 +24,9 @@ body .recipe__search-list-container {
   .recipe__search-list {
     flex-grow: 1;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     .results {
       list-style: none;
@@ -32,22 +34,32 @@ body .recipe__search-list-container {
     }
 
     .pagination {
-      margin-top: auto;
-      padding: 0 3.5rem;
-
-      &::after {
-        content: "";
-        display: table;
-        clear: both;
-      }
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.5rem;
+      margin-bottom: 2em;
+      width: 100%;
 
       &__btn {
+        color: variables.$color-text-orange;
+        border: none;
+
+        > svg {
+          width: 1.6rem;
+          height: 1.6rem;
+          fill: currentcolor;
+        }
+
         &--prev {
-          float: left;
+          display: flex;
+          align-items: center;
+          border-radius: 10em;
         }
 
         &--next {
-          float: right;
+          display: flex;
+          align-items: center;
+          border-radius: 10em;
         }
       }
     }
