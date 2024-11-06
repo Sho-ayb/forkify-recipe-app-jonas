@@ -12,7 +12,9 @@
     "clean": "rimraf build node_modules",
     "clean:cache": "npm cache clean --force",
     "install": "npm install",
-    "reset": "npm run clean && npm run clean:cache && npm run install"
+    "reset": "npm run clean && npm run clean:cache && npm run install",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix"
   },
   "repository": {
     "type": "git",
