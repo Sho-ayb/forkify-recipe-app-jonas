@@ -3,8 +3,6 @@
 
 body .main {
   grid-area: mnn;
-
-  // grid-column: 1 / -1;
   grid-row: 2 / 3;
   background-color: variables.$color-body-backround-grey-1;
 
@@ -102,6 +100,10 @@ body .main {
       justify-content: center;
       align-items: center;
       background-color: variables.$color-body-background-grey-2;
+
+      @media (width >= 48rem) {
+        flex-direction: row;
+      }
     }
 
     // section ingredients
@@ -114,6 +116,20 @@ body .main {
           variables.$font-size-xl,
           variables.$color-text-orange
         );
+      }
+    }
+
+    &__ingredient-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      place-items: center;
+      gap: 1em;
+
+      @media (width >= 48rem) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        place-items: flex-start;
       }
     }
 

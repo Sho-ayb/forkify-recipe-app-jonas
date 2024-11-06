@@ -16,6 +16,15 @@
   > * + * {
     margin-top: $space;
   }
+
+  @media (width >= 64rem) {
+    flex-direction: row;
+    justify-content: space-between;
+
+    > * + * {
+      margin-top: 0;
+    }
+  }
 }
 
 // stack in horizontal

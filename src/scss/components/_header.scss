@@ -16,6 +16,10 @@ body .header {
     max-width: 200px;
     height: auto;
     padding: variables.$spacing-md;
+
+    @media (width >= 48rem) {
+      margin-left: variables.$spacing-md;
+    }
   }
 
   &__search-form {
@@ -35,7 +39,12 @@ body .header {
       padding-left: 1em;
       color: variables.$color-text-dark-1;
       width: 12.6rem;
-      height: 3.2rem;
+      height: 2.2rem;
+
+      @media (width >= 48rem) {
+        width: 18.6rem;
+        font-size: variables.$font-size-lg;
+      }
 
       &::placeholder {
         color: variables.$color-text-placeholder;
