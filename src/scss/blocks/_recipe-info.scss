@@ -6,7 +6,7 @@ body .recipe__detail-container .recipe__details .recipe__info {
   align-items: center;
   margin-right: 1em;
   text-transform: uppercase;
-  font-size: variables.$font-size-sm;
+  font-size: calc(variables.$font-size-sm + 0.5vw);
 
   svg {
     width: 1.2rem;

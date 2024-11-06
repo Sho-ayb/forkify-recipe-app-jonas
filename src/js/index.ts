@@ -32,11 +32,18 @@ const init = () => {
 
   function handleResponsiveLayout() {
     const aside = document.querySelector('.recipe__search-list-container');
+    const asideHeader = document.querySelector('.recipe__search-list-header');
+    const openSearchBtn = document.querySelector('.open__search-results');
+
     if (window.innerWidth >= 768) {
       aside?.classList.remove('hidden');
       aside?.classList.remove('active');
+      asideHeader?.classList.add('hidden');
+      openSearchBtn?.classList.add('hidden');
     } else {
       aside?.classList.add('hidden');
+      asideHeader?.classList.remove('hidden');
+      openSearchBtn?.classList.remove('hidden');
     }
   }
 

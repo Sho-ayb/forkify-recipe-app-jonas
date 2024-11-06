@@ -7,9 +7,18 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto 1fr auto;
+  max-width: 75rem;
+  margin: 4vw auto;
+
+  @media (width >= 75.0625rem) {
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+  }
 }
 
 .u-grid-template-areas {
+  width: 75rem;
   grid-template-areas:
     "hdr hdr hdr hdr hdr hdr hdr hdr hdr hdr hdr hdr"
     "mnn mnn mnn mnn mnn mnn mnn mnn mnn mnn mnn mnn"
