@@ -3,6 +3,7 @@
 body .footer {
   grid-area: ftr;
   grid-column: 1 / -1;
+  grid-row: 3 / 4;
   padding: 3em 1em;
   text-align: center;
   font-size: variables.$font-size-md;

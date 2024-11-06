@@ -11,9 +11,20 @@
 
 .u-grid-template-areas {
   grid-template-areas:
-    "hdr"
-    "mnn"
-    "ftr";
+    "asd asd asd asd asd asd asd asd asd asd hdr hdr"
+    "asd asd asd asd asd asd asd asd asd asd mnn mnn"
+    "asd asd asd asd asd asd asd asd asd asd ftr ftr";
+}
+
+// Media query
+
+@media (width >= 48rem) {
+  .u-grid-template-areas {
+    grid-template-areas:
+      "hdr hdr hdr hdr hdr hdr hdr hdr hdr hdr hdr hdr"
+      "asd asd asd asd mnn mnn mnn mnn mnn mnn mnn mnn"
+      "ftr ftr ftr ftr ftr ftr ftr ftr ftr ftr ftr ftr";
+  }
 }
 
 .u-grid-col {
