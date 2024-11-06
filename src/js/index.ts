@@ -25,6 +25,7 @@ const init = () => {
   function toggleSearchList() {
     const aside = document.querySelector('.recipe__search-list-container');
     aside?.classList.toggle('active');
+    aside?.classList.remove('hidden');
   }
 
   // Call this on page load and window resize

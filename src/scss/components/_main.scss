@@ -3,9 +3,14 @@
 
 body .main {
   grid-area: mnn;
-  grid-column: 1 / -1;
+
+  // grid-column: 1 / -1;
   grid-row: 2 / 3;
   background-color: variables.$color-body-backround-grey-1;
+
+  @media (min-width >= 48rem) {
+    grid-column: 5 span 7;
+  }
 
   .recipe {
     &__fig {
