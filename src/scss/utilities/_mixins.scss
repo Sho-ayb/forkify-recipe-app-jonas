@@ -84,8 +84,8 @@
 
   //   for icon buttons
   svg {
-    width: variables.$spacing-md;
-    height: variables.$spacing-md;
+    width: variables.$spacing-md + 0.2;
+    height: variables.$spacing-md + 0.2;
     margin-right: variables.$spacing-xs;
   }
 }
