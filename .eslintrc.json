@@ -27,7 +27,7 @@
     "no-debugger": "off",
     "prettier/prettier": [
       "error",
-      { "singleQuote": true, "trailingComma": "es5" }
+      { "singleQuotes": true, "trailingComma": "es5" }
     ],
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-unused-vars": [
