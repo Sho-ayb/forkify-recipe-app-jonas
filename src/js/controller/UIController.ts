@@ -6,6 +6,8 @@ export class UIController {
 
   private asideHeader: HTMLElement | null;
 
+  private asideHeaderCloseButton: HTMLElement | null;
+
   private searchButton: HTMLElement | null;
 
   private searchResultsButton: HTMLElement | null;
@@ -20,6 +22,9 @@ export class UIController {
     )! as HTMLElement;
     this.asideHeader = document.querySelector(
       ".recipe__search-list-header"
+    )! as HTMLElement;
+    this.asideHeaderCloseButton = document.querySelector(
+      ".recipe__search-list-header i"
     )! as HTMLElement;
     this.searchButton = document.querySelector(
       ".header__search-form-btn"
@@ -46,6 +51,9 @@ export class UIController {
 
     // Add a resize event listener
     window.addEventListener("resize", this.handleViewportChange.bind(this));
+
+    // Setup event listeners
+    this.setupEventListeners();
   }
 
   private insertLogo(): void {
@@ -74,18 +82,22 @@ export class UIController {
       searchResultsButton?.classList.remove("hidden");
     }
   }
-}
 
-/*
-if (window.innerWidth >= 768) {
-  aside?.classList.remove("hidden");
-  aside?.classList.remove("active");
-  asideHeader?.classList.add("hidden");
-  openSearchBtn?.classList.add("hidden");
-} else {
-  aside?.classList.add("hidden");
-  asideHeader?.classList.remove("hidden");
-  openSearchBtn?.classList.remove("hidden");
-}
+  private setupEventListeners(): void {
+    const { searchButton, searchResultsButton, aside, asideHeaderCloseButton } =
+      this;
 
-*/
+    searchButton?.addEventListener("click", (e) => {
+      e.preventDefault();
+      aside?.classList.toggle("active");
+    });
+
+    asideHeaderCloseButton?.addEventListener("click", () => {
+      aside?.classList.remove("active");
+    });
+
+    searchResultsButton?.addEventListener("click", () => {
+      aside?.classList.toggle("active");
+    });
+  }
+}
