@@ -41,7 +41,7 @@
                 <span>ADD RECIPE</span>
               </button>
             </li>
-            <li class="nav__item">
+            <li class="nav__item nav__item--bookmark">
               <button class="nav__btn nav__btn--bookmark-recipe">
                 <svg class="nav__icon">
                   <use href="assets/img/icons.svg#icon-bookmark"></use>
@@ -49,7 +49,7 @@
                 <span>BOOKMARKS</span>
               </button>
               <div class="bookmarks">
-                <ul class="bookmarks__list [ hidden ]">
+                <ul class="bookmarks__list">
                   <div class="error">
                     <div class="error__icon">
                       <svg>
@@ -67,11 +67,8 @@
             </li>
           </ul>
           <button class="open__search-results">
-
-            <i class='bx bxs-chevrons-left bx-fade-right' ></i>
+            <i class="bx bxs-chevrons-left bx-fade-right"></i>
             <span>Search results</span>
-
-
           </button>
         </nav>
       </header>
@@ -80,17 +77,21 @@
 
       <aside class="recipe__search-list-container [ hidden u-flex-col ]">
         <div class="recipe__search-list-header">
-          <i class='bx bx-x'></i>
+          <i class="bx bx-x"></i>
         </div>
 
         <div class="recipe__search-list">
-
           <ul class="results">
-            
             <li class="preview">
-              <a class="preview__link preview__link--active [ u-flex-row ]" href="#23456">
+              <a
+                class="preview__link preview__link--active [ u-flex-row ]"
+                href="#23456"
+              >
                 <figure class="preview__fig">
-                  <img src="http://forkify-api.herokuapp.com/images/carbonara2f55.jpg" alt="Test" />
+                  <img
+                    src="http://forkify-api.herokuapp.com/images/carbonara2f55.jpg"
+                    alt="Test"
+                  />
                 </figure>
                 <div class="preview__data">
                   <h4 class="preview__title">Pasta carbonara ...</h4>
@@ -103,9 +104,8 @@
                 </div>
               </a>
             </li>
-            
           </ul>
-  
+
           <div class="pagination">
             <button class="pagination__btn pagination__btn--prev">
               <svg class="search__icon">
@@ -141,7 +141,6 @@
         </figure>
 
         <!-- Section details -->
-
 
         <section class="recipe__detail-container">
           <div class="recipe__details">
@@ -185,60 +184,63 @@
               </svg>
             </button>
           </div>
-          </section>
+        </section>
 
-          <!-- Section ingredients -->
+        <!-- Section ingredients -->
 
-          <section class="recipe__ingredients [ u-grid-col ]">
-
-            <h2 class="recipe__ingredients--heading">Recipe Ingredients</h2>
-            <ul class="recipe__ingredient-list">
-              <li class="recipe__ingredient [ u-flex-row ]">
-                <svg class="recipe__icon">
-                  <use href="assets/img/icons.svg#icon-check"></use>
-                </svg>
-                <div class="recipe__quantity">1000</div>
-                <div class="recipe__description">
-                  <span class="recipe__unit">g</span>
-                  pasta
-                </div>
-              </li>
-  
-              <li class="recipe__ingredient [ u-flex-row ]">
-                <svg class="recipe__icon">
-                  <use href="assets/img/icons.svg#icon-check"></use>
-                </svg>
-                <div class="recipe__quantity">0.5</div>
-                <div class="recipe__description">
-                  <span class="recipe__unit">cup</span>
-                  ricotta cheese
-                </div>
-              </li>
-            </ul>
-          </section>
-          
-          <!-- Section directions -->
-          
-          <section class="recipe__directions [ u-grid-col ]">
-
-            <h2 class="recipe__directions--heading">How to cook it</h2>
-            <p class="recipe__directions-text">This recipe was carefully designed and tested by 
-
-              <span class="recipe__directions-text--publisher">The Pioneer Woman</span>. Please check out directions at their website.
-
-            </p>
-            <a href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/" class="recipe__directions--btn [ u-flex-inline ]" target="_blank">
-              <span>Directions</span>
-              <svg class="search__icon">
-                <use href="assets/img/icons.svg#icon-arrow-right"></use>
+        <section class="recipe__ingredients [ u-grid-col ]">
+          <h2 class="recipe__ingredients--heading">Recipe Ingredients</h2>
+          <ul class="recipe__ingredient-list">
+            <li class="recipe__ingredient [ u-flex-row ]">
+              <svg class="recipe__icon">
+                <use href="assets/img/icons.svg#icon-check"></use>
               </svg>
-            </a>
+              <div class="recipe__quantity">1000</div>
+              <div class="recipe__description">
+                <span class="recipe__unit">g</span>
+                pasta
+              </div>
+            </li>
 
-          </section>
-        </main>
-        <footer class="footer [ u-flex-col ]">
-          <p class="project__info">
-            This website was developed to learn Javascript as part of Jonas
+            <li class="recipe__ingredient [ u-flex-row ]">
+              <svg class="recipe__icon">
+                <use href="assets/img/icons.svg#icon-check"></use>
+              </svg>
+              <div class="recipe__quantity">0.5</div>
+              <div class="recipe__description">
+                <span class="recipe__unit">cup</span>
+                ricotta cheese
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section directions -->
+
+        <section class="recipe__directions [ u-grid-col ]">
+          <h2 class="recipe__directions--heading">How to cook it</h2>
+          <p class="recipe__directions-text">
+            This recipe was carefully designed and tested by
+
+            <span class="recipe__directions-text--publisher"
+              >The Pioneer Woman</span
+            >. Please check out directions at their website.
+          </p>
+          <a
+            href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/"
+            class="recipe__directions--btn [ u-flex-inline ]"
+            target="_blank"
+          >
+            <span>Directions</span>
+            <svg class="search__icon">
+              <use href="assets/img/icons.svg#icon-arrow-right"></use>
+            </svg>
+          </a>
+        </section>
+      </main>
+      <footer class="footer [ u-flex-col ]">
+        <p class="project__info">
+          This website was developed to learn Javascript as part of Jonas
           Schmedtmanns course:
           <a
             href="https://www.udemy.com/the-complete-javascript-course/"
@@ -267,16 +269,25 @@
             class="twitter-link"
             target="_blank"
             >Jonas Schmedtmann</a
-            >. Use for learning or your portfolio. Don't use to teach. Don't claim
-            as your own.
-          </p>
-        </footer>
-      </div>
+          >. Use for learning or your portfolio. Don't use to teach. Don't claim
+          as your own.
+        </p>
+      </footer>
 
-      <!-- Template Elements -->
-      <template class="recipe__search-results-template"></template>
-      <template class="recipe__detail-list-template"></template>
-      <template class="recipe__directions-template"></template>
+      <div class="modal [ hidden ]" id="modal-bookmarks">
+        <div class="modal__content">
+          <button class="close__modal">&times;</button>
+          <h2 class="modal__heading">Your Bookmarks</h2>
+          <ul class="modal__bookmarks-list"></ul>
+        </div>
+      </div>
     </div>
+
+    <div class="overlay [ hidden ]"></div>
+
+    <!-- Template Elements -->
+    <template class="recipe__search-results-template"></template>
+    <template class="recipe__detail-list-template"></template>
+    <template class="recipe__directions-template"></template>
   </body>
 </html>
