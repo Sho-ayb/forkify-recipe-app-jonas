@@ -1,0 +1,31 @@
+@use "../base/variables" as variables;
+
+body .header .header__nav .nav__list .nav__item--bookmark .bookmarks {
+  position: absolute;
+  width: 20rem;
+  top: 100%;
+  left: -130%;
+  background-color: white;
+  color: black;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+  padding: 1em;
+  border-radius: 5px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden; /* Initially hidden */
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+
+  &__list {
+    .error {
+      font-size: variables.$font-size-md;
+      font-weight: 300;
+
+      &__icon {
+        font-size: variables.$font-size-2xl;
+        fill: variables.$color-text-orange;
+      }
+    }
+  }
+}

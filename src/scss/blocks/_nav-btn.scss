@@ -25,4 +25,11 @@ body .header__nav .nav__list .nav__item .nav__btn {
   span {
     font-size: variables.$font-size-xs;
   }
+
+  // the bookmark button
+
+  &--bookmark-recipe:hover ~ .bookmarks {
+    opacity: 1;
+    visibility: visible;
+  }
 }

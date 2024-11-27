@@ -9,6 +9,7 @@
 
 // Blocks
 
+@use "blocks/bookmarks";
 @use "blocks/nav-item";
 @use "blocks/nav-btn";
 @use "blocks/recipe-info";
@@ -21,6 +22,8 @@
 @use "components/main";
 @use "components/aside";
 @use "components/footer";
+@use "components/modal";
+@use "components/overlay";
 
 // Utilities
 @use "utilities/layout";

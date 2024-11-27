@@ -7,5 +7,9 @@ body .header .header__nav .nav {
     border-radius: 0.25em;
     padding: variables.$spacing-md;
     text-align: center;
+
+    &--bookmark {
+      position: relative;
+    }
   }
 }
