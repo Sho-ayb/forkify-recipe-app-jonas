@@ -1,0 +1,53 @@
+@use "../base/variables" as variables;
+
+body .bookmarks {
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &-item {
+      padding: variables.$spacing-md;
+      background-color: variables.$color-body-background-grey-2;
+      border-radius: 5px;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: variables.$font-size-md;
+      margin-bottom: variables.$spacing-md;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+
+      > a {
+        text-decoration: none;
+        color: variables.$color-text-orange;
+        cursor: pointer;
+
+        &:hover {
+          color: variables.$color-border-maroon;
+        }
+      }
+    }
+
+    .error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: 300;
+
+      &__message {
+        font-size: variables.$font-size-xl;
+        text-align: center;
+      }
+
+      &__icon {
+        flex-shrink: 0;
+        margin-right: 0.5em;
+
+        > svg {
+          width: 2.5rem;
+          height: 2.5rem;
+          fill: variables.$color-text-orange;
+        }
+      }
+    }
+  }
+}

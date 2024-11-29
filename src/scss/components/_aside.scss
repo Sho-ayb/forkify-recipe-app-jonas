@@ -2,7 +2,7 @@
 
 body .recipe__search-list-container {
   grid-area: asd;
-  z-index: 1000;
+  z-index: 99;
   background-color: variables.$color-text-white;
 
   @media (min-width >= 48rem) {

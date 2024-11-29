@@ -17,6 +17,10 @@
     border: 2px solid variables.$color-border-darker-orange;
     box-shadow: 0 0 10px rgb(0 0 0 / 10%);
   }
+
+  @media (width <= 64rem) {
+    position: relative;
+  }
 }
 
 .u-grid-template-areas {
