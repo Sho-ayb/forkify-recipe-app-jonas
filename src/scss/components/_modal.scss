@@ -1,7 +1,6 @@
 @use "../base/variables" as variables;
 
 body .modal {
-  display: flex;
   flex-direction: column;
   max-width: 500px;
   min-height: 300px;
