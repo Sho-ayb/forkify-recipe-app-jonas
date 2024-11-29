@@ -62,6 +62,11 @@
                       No bookmarks yet. Find a nice recipe and bookmark it 😊
                     </p>
                   </div>
+                  <li class="bookmarks__list-item">
+                    <a href="#" class="bookmarks__item"
+                      >mexican flatbread pizza - the pioneer woman</a
+                    >
+                  </li>
                 </ul>
               </div>
             </li>
@@ -275,19 +280,39 @@
       </footer>
 
       <div class="modal [ hidden ]" id="modal-bookmarks">
-        <div class="modal__content">
-          <button class="close__modal">&times;</button>
+        <div class="modal__header">
           <h2 class="modal__heading">Your Bookmarks</h2>
-          <ul class="modal__bookmarks-list"></ul>
+          <button class="close__modal">&times;</button>
+        </div>
+
+        <div class="modal__content">
+          <ul class="bookmarks__list">
+            <div class="error">
+              <div class="error__icon">
+                <svg>
+                  <use href="assets/img/icons.svg#icon-alert-triangle"></use>
+                </svg>
+              </div>
+              <p class="error__message">
+                No bookmarks yet. Find a nice recipe and bookmark it 😊
+              </p>
+            </div>
+
+            <li class="bookmarks__list-item">
+              <a href="#" class="bookmarks__item"
+                >mexican flatbread pizza - the pioneer woman</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
+
+      <div class="overlay [ hidden ]"></div>
+
+      <!-- Template Elements -->
+      <template class="recipe__search-results-template"></template>
+      <template class="recipe__detail-list-template"></template>
+      <template class="recipe__directions-template"></template>
     </div>
-
-    <div class="overlay [ hidden ]"></div>
-
-    <!-- Template Elements -->
-    <template class="recipe__search-results-template"></template>
-    <template class="recipe__detail-list-template"></template>
-    <template class="recipe__directions-template"></template>
   </body>
 </html>

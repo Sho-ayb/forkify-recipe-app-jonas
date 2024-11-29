@@ -16,16 +16,4 @@ body .header .header__nav .nav__list .nav__item--bookmark .bookmarks {
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
-
-  &__list {
-    .error {
-      font-size: variables.$font-size-md;
-      font-weight: 300;
-
-      &__icon {
-        font-size: variables.$font-size-2xl;
-        fill: variables.$color-text-orange;
-      }
-    }
-  }
 }
