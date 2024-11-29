@@ -11,9 +11,4 @@ body .header .header__nav .nav__list .nav__item--bookmark .bookmarks {
   padding: 1em;
   border-radius: 5px;
   z-index: 100;
-  opacity: 0;
-  visibility: hidden; /* Initially hidden */
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
 }
