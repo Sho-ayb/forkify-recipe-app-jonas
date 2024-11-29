@@ -16,6 +16,16 @@ export class UIController {
 
   private headerLogo: HTMLImageElement | null;
 
+  private modal: HTMLElement | null;
+
+  private overlay: HTMLElement | null;
+
+  private closeModalButton: HTMLElement | null;
+
+  private bookmarksButton: HTMLButtonElement | null;
+
+  private bookmarks: HTMLElement | null;
+
   constructor() {
     this.aside = document.querySelector(
       ".recipe__search-list-container"
@@ -36,6 +46,11 @@ export class UIController {
     this.headerLogo = document.querySelector(
       ".header__logo"
     ) as HTMLImageElement;
+    this.modal = document.getElementById("modal-bookmarks");
+    this.overlay = document.querySelector(".overlay");
+    this.closeModalButton = document.querySelector(".close__modal");
+    this.bookmarksButton = document.querySelector(".nav__btn--bookmark-recipe");
+    this.bookmarks = document.querySelector(".bookmarks");
 
     // invoke the init method here
 
@@ -84,8 +99,19 @@ export class UIController {
   }
 
   private setupEventListeners(): void {
-    const { searchButton, searchResultsButton, aside, asideHeaderCloseButton } =
-      this;
+    const {
+      searchButton,
+      searchResultsButton,
+      aside,
+      asideHeaderCloseButton,
+      bookmarks,
+      bookmarksButton,
+      modal,
+      overlay,
+      closeModalButton,
+    } = this;
+
+    console.log(bookmarksButton);
 
     searchButton?.addEventListener("click", (e) => {
       e.preventDefault();
@@ -99,5 +125,31 @@ export class UIController {
     searchResultsButton?.addEventListener("click", () => {
       aside?.classList.toggle("active");
     });
+
+    if (bookmarksButton && modal && overlay && closeModalButton) {
+      // Show modal on mobile view when the bookmarks button is clicked
+
+      bookmarksButton.addEventListener("click", (e) => {
+        console.log("bookmarks button clicked");
+
+        e.preventDefault();
+        if (window.innerWidth < 1024) {
+          modal.classList.add("visible");
+          overlay.classList.add("visible");
+          bookmarks?.classList.add("hidden");
+        }
+
+        // Close modal on clicking the close button or overlay
+        closeModalButton.addEventListener("click", () => {
+          modal.classList.remove("visible");
+          overlay.classList.remove("visible");
+        });
+
+        overlay.addEventListener("click", () => {
+          modal.classList.remove("visible");
+          overlay.classList.remove("visible");
+        });
+      });
+    }
   }
 }
