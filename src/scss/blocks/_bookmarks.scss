@@ -11,4 +11,5 @@ body .header .header__nav .nav__list .nav__item--bookmark .bookmarks {
   padding: 1em;
   border-radius: 5px;
   z-index: 100;
+  overflow-y: auto;
 }

@@ -111,7 +111,7 @@ export class UIController {
       closeModalButton,
     } = this;
 
-    console.log(bookmarksButton);
+    console.log(bookmarks);
 
     searchButton?.addEventListener("click", (e) => {
       e.preventDefault();
@@ -134,22 +134,63 @@ export class UIController {
 
         e.preventDefault();
         if (window.innerWidth < 1024) {
-          modal.classList.add("visible");
-          overlay.classList.add("visible");
           bookmarks?.classList.add("hidden");
+        } else {
+          bookmarks?.classList.remove("hidden");
         }
 
-        // Close modal on clicking the close button or overlay
-        closeModalButton.addEventListener("click", () => {
-          modal.classList.remove("visible");
-          overlay.classList.remove("visible");
+        if (window.innerWidth < 1024) {
+          if (modal.classList.contains("visible")) {
+            modal.classList.add("hidden");
+            overlay.classList.add("hidden");
+            modal.classList.remove("visible");
+            overlay.classList.remove("visible");
+          } else {
+            modal.classList.add("visible");
+            overlay.classList.add("visible");
+            modal.classList.remove("hidden");
+            overlay.classList.remove("hidden");
+          }
+        }
+      });
+
+      // Close modal on clicking the close button or overlay
+      closeModalButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        modal.classList.remove("visible");
+        overlay.classList.add("hidden");
+        overlay.classList.remove("visible");
+      });
+
+      overlay.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        modal.classList.remove("visible");
+        overlay.classList.add("hidden");
+        overlay.classList.remove("visible");
+      });
+
+      // Show bookmarks popdown on hover in desktop view
+
+      if (window.innerWidth >= 1024) {
+        bookmarksButton.addEventListener("mouseenter", () => {
+          bookmarks?.classList.add("visible");
         });
 
-        overlay.addEventListener("click", () => {
-          modal.classList.remove("visible");
-          overlay.classList.remove("visible");
+        bookmarksButton.addEventListener("mouseleave", () => {
+          setTimeout(() => {
+            if (!bookmarks?.matches(":hover")) {
+              bookmarks?.classList.remove("visible");
+            }
+          }, 300);
         });
-      });
+
+        // A event to listen for when the mouse leaves the bookmarks element
+        bookmarks?.addEventListener("mouseleave", () => {
+          setTimeout(() => {
+            bookmarks?.classList.remove("visible");
+          }, 300);
+        });
+      }
     }
   }
 }
