@@ -28,8 +28,10 @@ body .header__nav .nav__list .nav__item .nav__btn {
 
   // the bookmark button
 
-  &--bookmark-recipe:hover ~ .bookmarks {
-    opacity: 1;
-    visibility: visible;
-  }
+  // @media (width >= 64rem) {
+  //   &--bookmark-recipe:hover ~ .bookmarks {
+  //     opacity: 1;
+  //     visibility: visible;
+  //   }
+  // }
 }
