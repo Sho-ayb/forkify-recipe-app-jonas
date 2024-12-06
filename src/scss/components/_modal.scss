@@ -14,6 +14,7 @@ body .modal {
   box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
   border-radius: 5px;
   z-index: 100;
+  overflow-y: auto;
 
   &__header {
     display: flex;

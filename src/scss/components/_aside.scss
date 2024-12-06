@@ -50,38 +50,5 @@ body .recipe__search-list-container {
       list-style: none;
       margin-bottom: 2rem;
     }
-
-    .pagination {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 0.5rem;
-      margin-bottom: 1em;
-      width: 100%;
-
-      &__btn {
-        font-size: variables.$font-size-sm;
-        color: variables.$color-text-orange;
-        border: none;
-        padding: 0.5em 1em;
-
-        > svg {
-          width: 1.6rem;
-          height: 1.6rem;
-          fill: currentcolor;
-        }
-
-        &--prev {
-          display: flex;
-          align-items: center;
-          border-radius: 10em;
-        }
-
-        &--next {
-          display: flex;
-          align-items: center;
-          border-radius: 10em;
-        }
-      }
-    }
   }
 }
