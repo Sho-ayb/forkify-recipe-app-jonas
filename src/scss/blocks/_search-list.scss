@@ -14,7 +14,7 @@ body .recipe__search-list-container .recipe__search-list .results {
         text-decoration: none;
 
         &:hover {
-          background-color: variables.$color-text-grey-dark-2;
+          background-color: variables.$color-body-backround-grey-1;
           transform: translateY(-2px);
 
           &--active {
