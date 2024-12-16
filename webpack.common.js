@@ -1,14 +1,6 @@
-import path from "path";
-
 import GoogleFontsPlugin from "@beyonk/google-fonts-webpack-plugin";
 
-// Using ESModules __filename and __dirname are not available by default and must be imported.
-
-import { fileURLToPath } from "url";
-
-// we can then extract the __dirname to a variable
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import Dotenv from "dotenv-webpack";
 
 export default {
   entry: "./src/js/index.ts",
@@ -22,6 +14,7 @@ export default {
       // Add more fonts if needed
       local: false, // Use Google fonts CDN instead of downloading
     }),
+    new Dotenv(),
   ],
   module: {
     rules: [

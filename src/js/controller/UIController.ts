@@ -32,42 +32,42 @@ export class UIController {
 
   constructor() {
     this.aside = document.querySelector(
-      ".recipe__search-list-container"
+      ".recipe__search-list-container",
     )! as HTMLElement | null;
     this.asideHeader = document.querySelector(
-      ".recipe__search-list-header"
+      ".recipe__search-list-header",
     )! as HTMLElement | null;
     this.asideHeaderCloseButton = document.querySelector(
-      ".recipe__search-list-header i"
+      ".recipe__search-list-header i",
     )! as HTMLElement | null;
     this.searchButton = document.querySelector(
-      ".header__search-form-btn"
+      ".header__search-form-btn",
     )! as HTMLElement | null;
     this.searchResultsButton = document.querySelector(
-      ".open__search-results"
+      ".open__search-results",
     )! as HTMLElement | null;
     this.headerContainer = document.querySelector(
-      ".header"
+      ".header",
     )! as HTMLElement | null;
     this.headerLogo = document.querySelector(
-      ".header__logo"
+      ".header__logo",
     ) as HTMLImageElement | null;
     this.modal = document.getElementById(
-      "modal-bookmarks"
+      "modal-bookmarks",
     ) as HTMLElement | null;
     this.overlay = document.querySelector(".overlay") as HTMLElement | null;
     this.closeModalButton = document.querySelector(
-      ".close__modal"
+      ".close__modal",
     ) as HTMLElement | null;
     this.bookmarksButton = document.querySelector(
-      ".nav__btn--bookmark-recipe"
+      ".nav__btn--bookmark-recipe",
     ) as HTMLButtonElement | null;
     this.bookmarks = document.querySelector(".bookmarks") as HTMLElement | null;
     this.bookmarksList = document.querySelectorAll(
-      ".bookmarks__list"
+      ".bookmarks__list",
     ) as NodeListOf<HTMLUListElement>;
     this.errorEl = document.querySelectorAll(
-      ".error"
+      ".error",
     ) as NodeListOf<HTMLElement>;
 
     // invoke the init method here
@@ -118,8 +118,6 @@ export class UIController {
       overlay,
       closeModalButton,
     } = this;
-
-    console.log(bookmarks);
 
     searchButton?.addEventListener("click", (e) => {
       e.preventDefault();
@@ -276,8 +274,6 @@ export class UIController {
   // Function to determine if the bookmarks list is empty
 
   private checkBookmarks(): void {
-    console.log(this.bookmarksList);
-
     this.bookmarksList?.forEach((bookmarksList, index) => {
       const errorDiv = this.errorEl[index];
 

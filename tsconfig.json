@@ -14,8 +14,8 @@
     "strict": true,
     "baseUrl": ".",
     "skipLibCheck": true,
-    "typeRoots": ["./node_modules", "./types"],
-    "types": ["webpack"],
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["webpack", "node"],
     "paths": { "*": ["src/*"] }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts"],
