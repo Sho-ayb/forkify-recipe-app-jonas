@@ -44,6 +44,9 @@
         "jsx": "never",
         "ts": "never",
         "tsx": "never"
+      },
+      {
+        "devDependencies": true
       }
     ]
   },

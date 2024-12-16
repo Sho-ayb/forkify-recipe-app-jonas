@@ -75,11 +75,27 @@ init();
 
 */
 
+import { RecipeController } from "./controller/RecipeController";
 import { UIController } from "./controller/UIController";
+import { State } from "./model/state";
+
+import { RecipeService } from "./service/service";
 
 const init = () => {
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     const uiController = new UIController();
+    const state = new State();
+    const recipeService = new RecipeService();
+
+    // Passing in a manual query here to set the initial state
+    const searchResults = await recipeService.searchRecipes("pizza");
+
+    console.log(searchResults);
+
+    // calling the setSearchResults method on state object
+    state.setSearchResults(searchResults);
+
+    const recipeController = new RecipeController(state);
   });
 };
 

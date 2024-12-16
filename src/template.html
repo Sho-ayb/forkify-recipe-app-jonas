@@ -16,303 +16,284 @@
     <title>Forkify Recipe Application</title>
   </head>
   <body>
-    <div class="[ u-grid u-grid-template-areas ]">
-      <header class="header">
-        <form class="header__search-form">
-          <input
-            type="text"
-            placeholder="Search over a 1,000,000 recipes..."
-            class="header__search-form-input"
-          />
-          <button type="submit" class="header__search-form-btn">
-            <svg class="search__icon">
-              <use href="assets/img/icons.svg#icon-search"></use>
-            </svg>
-            <span>SEARCH</span>
-          </button>
-        </form>
-        <nav class="header__nav nav">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <button class="nav__btn nav__btn--add-recipe">
-                <svg class="nav__icon">
-                  <use href="assets/img/icons.svg#icon-edit"></use>
-                </svg>
-                <span>ADD RECIPE</span>
-              </button>
-            </li>
-            <li class="nav__item nav__item--bookmark">
-              <button class="nav__btn nav__btn--bookmark-recipe">
-                <svg class="nav__icon">
-                  <use href="assets/img/icons.svg#icon-bookmark"></use>
-                </svg>
-                <span>BOOKMARKS</span>
-              </button>
-              <div class="bookmarks">
-                <ul class="bookmarks__list">
-                  <div class="error">
-                    <div class="error__icon">
-                      <svg>
-                        <use
-                          href="assets/img/icons.svg#icon-alert-triangle"
-                        ></use>
-                      </svg>
-                    </div>
-                    <p class="error__message">
-                      No bookmarks yet. Find a nice recipe and bookmark it 😊
-                    </p>
-                  </div>
-                  <li class="bookmarks__list-item">
-                    <a href="#" class="bookmarks__item"
-                      >mexican flatbread pizza - the pioneer woman</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-          <button class="open__search-results">
-            <i class="bx bxs-chevrons-left bx-fade-right"></i>
-            <span>Search results</span>
-          </button>
-        </nav>
-      </header>
-
-      <!-- Aside  -->
-
-      <aside class="recipe__search-list-container [ hidden u-flex-col ]">
-        <div class="recipe__search-list-header">
-          <i class="bx bx-x"></i>
-        </div>
-
-        <div class="recipe__search-list">
-          <ul class="results">
-            <li class="preview">
-              <a
-                class="preview__link preview__link--active [ u-flex-row ]"
-                href="#23456"
-              >
-                <figure class="preview__fig">
-                  <img
-                    src="http://forkify-api.herokuapp.com/images/carbonara2f55.jpg"
-                    alt="Test"
-                  />
-                </figure>
-                <div class="preview__data">
-                  <h4 class="preview__title">Pasta carbonara ...</h4>
-                  <p class="preview__publisher">The Pioneer Woman</p>
-                  <div class="preview__user-generated">
-                    <svg class="[ hidden ]">
-                      <use href="assets/img/icons.svg#icon-user"></use>
-                    </svg>
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
-
-          <div class="pagination">
-            <button class="pagination__btn pagination__btn--prev">
+    <div id="app">
+      <div class="[ u-grid u-grid-template-areas ]">
+        <header class="header">
+          <form class="header__search-form">
+            <input
+              type="text"
+              placeholder="Search over a 1,000,000 recipes..."
+              class="header__search-form-input"
+            />
+            <button type="submit" class="header__search-form-btn">
               <svg class="search__icon">
-                <use href="assets/img/icons.svg#icon-arrow-left"></use>
+                <use href="assets/img/icons.svg#icon-search"></use>
               </svg>
-              <span>Page 1</span>
+              <span>SEARCH</span>
             </button>
-            <button class="pagination__btn pagination__btn--next">
-              <span>Page 3</span>
+          </form>
+          <nav class="header__nav nav">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <button class="nav__btn nav__btn--add-recipe">
+                  <svg class="nav__icon">
+                    <use href="assets/img/icons.svg#icon-edit"></use>
+                  </svg>
+                  <span>ADD RECIPE</span>
+                </button>
+              </li>
+              <li class="nav__item nav__item--bookmark">
+                <button class="nav__btn nav__btn--bookmark-recipe">
+                  <svg class="nav__icon">
+                    <use href="assets/img/icons.svg#icon-bookmark"></use>
+                  </svg>
+                  <span>BOOKMARKS</span>
+                </button>
+                <div class="bookmarks">
+                  <ul class="bookmarks__list">
+                    <div class="error">
+                      <div class="error__icon">
+                        <svg>
+                          <use
+                            href="assets/img/icons.svg#icon-alert-triangle"
+                          ></use>
+                        </svg>
+                      </div>
+                      <p class="error__message">
+                        No bookmarks yet. Find a nice recipe and bookmark it 😊
+                      </p>
+                    </div>
+                    <li class="bookmarks__list-item">
+                      <a href="#" class="bookmarks__item"
+                        >mexican flatbread pizza - the pioneer woman</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+            <button class="open__search-results">
+              <i class="bx bxs-chevrons-left bx-fade-right"></i>
+              <span>Search results</span>
+            </button>
+          </nav>
+        </header>
+
+        <!-- Aside  -->
+
+        <aside class="recipe__search-list-container [ hidden u-flex-col ]">
+          <div class="recipe__search-list-header">
+            <i class="bx bx-x"></i>
+          </div>
+
+          <div class="recipe__search-list"></div>
+        </aside>
+
+        <!-- Main -->
+
+        <main class="main">
+          <figure class="recipe__fig">
+            <img
+              src="http://forkify-api.herokuapp.com/images/4797377235_c07589b7d4_be953.jpg"
+              alt="Mexican Flatbread"
+              class="recipe__img"
+            />
+
+            <figcaption class="recipe__title-container">
+              <h1 class="recipe__title">
+                <span>Mexican "Flatbread" Pizza</span>
+              </h1>
+            </figcaption>
+          </figure>
+
+          <!-- Section details -->
+
+          <section class="recipe__detail-container">
+            <div class="recipe__details">
+              <div class="recipe__info">
+                <svg class="recipe__info-icon">
+                  <use href="assets/img/icons.svg#icon-clock"></use>
+                </svg>
+                <span class="recipe__info-data recipe__info-data--minutes"
+                  >60</span
+                >
+                <span class="recipe__info-text">minutes</span>
+              </div>
+              <div class="recipe__info">
+                <svg class="recipe__info-icon">
+                  <use href="assets/img/icons.svg#icon-users"></use>
+                </svg>
+                <span class="recipe__info-data recipe__info-data--people"
+                  >4</span
+                >
+                <span class="recipe__info-text">servings</span>
+
+                <div class="recipe__info-buttons">
+                  <button class="btn--tiny btn--increase-servings">
+                    <svg>
+                      <use href="assets/img/icons.svg#icon-minus-circle"></use>
+                    </svg>
+                  </button>
+                  <button class="btn--tiny btn--increase-servings">
+                    <svg>
+                      <use href="assets/img/icons.svg#icon-plus-circle"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="recipe__user-generated [ hidden ]">
+                <svg>
+                  <use href="assets/img/icons.svg#icon-user"></use>
+                </svg>
+              </div>
+              <button class="btn--round">
+                <svg class="">
+                  <use href="assets/img/icons.svg#icon-bookmark-fill"></use>
+                </svg>
+              </button>
+            </div>
+          </section>
+
+          <!-- Section ingredients -->
+
+          <section class="recipe__ingredients [ u-grid-col ]">
+            <h2 class="recipe__ingredients--heading">Recipe Ingredients</h2>
+            <ul class="recipe__ingredient-list">
+              <li class="recipe__ingredient [ u-flex-row ]">
+                <svg class="recipe__icon">
+                  <use href="assets/img/icons.svg#icon-check"></use>
+                </svg>
+                <div class="recipe__quantity">1000</div>
+                <div class="recipe__description">
+                  <span class="recipe__unit">g</span>
+                  pasta
+                </div>
+              </li>
+
+              <li class="recipe__ingredient [ u-flex-row ]">
+                <svg class="recipe__icon">
+                  <use href="assets/img/icons.svg#icon-check"></use>
+                </svg>
+                <div class="recipe__quantity">0.5</div>
+                <div class="recipe__description">
+                  <span class="recipe__unit">cup</span>
+                  ricotta cheese
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Section directions -->
+
+          <section class="recipe__directions [ u-grid-col ]">
+            <h2 class="recipe__directions--heading">How to cook it</h2>
+            <p class="recipe__directions-text">
+              This recipe was carefully designed and tested by
+
+              <span class="recipe__directions-text--publisher"
+                >The Pioneer Woman</span
+              >. Please check out directions at their website.
+            </p>
+            <a
+              href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/"
+              class="recipe__directions--btn [ u-flex-inline ]"
+              target="_blank"
+            >
+              <span>Directions</span>
               <svg class="search__icon">
                 <use href="assets/img/icons.svg#icon-arrow-right"></use>
               </svg>
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Main -->
-
-      <main class="main">
-        <figure class="recipe__fig">
-          <img
-            src="http://forkify-api.herokuapp.com/images/4797377235_c07589b7d4_be953.jpg"
-            alt="Mexican Flatbread"
-            class="recipe__img"
-          />
-
-          <figcaption class="recipe__title-container">
-            <h1 class="recipe__title">
-              <span>Mexican "Flatbread" Pizza</span>
-            </h1>
-          </figcaption>
-        </figure>
-
-        <!-- Section details -->
-
-        <section class="recipe__detail-container">
-          <div class="recipe__details">
-            <div class="recipe__info">
-              <svg class="recipe__info-icon">
-                <use href="assets/img/icons.svg#icon-clock"></use>
-              </svg>
-              <span class="recipe__info-data recipe__info-data--minutes"
-                >60</span
-              >
-              <span class="recipe__info-text">minutes</span>
-            </div>
-            <div class="recipe__info">
-              <svg class="recipe__info-icon">
-                <use href="assets/img/icons.svg#icon-users"></use>
-              </svg>
-              <span class="recipe__info-data recipe__info-data--people">4</span>
-              <span class="recipe__info-text">servings</span>
-
-              <div class="recipe__info-buttons">
-                <button class="btn--tiny btn--increase-servings">
-                  <svg>
-                    <use href="assets/img/icons.svg#icon-minus-circle"></use>
-                  </svg>
-                </button>
-                <button class="btn--tiny btn--increase-servings">
-                  <svg>
-                    <use href="assets/img/icons.svg#icon-plus-circle"></use>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="recipe__user-generated [ hidden ]">
-              <svg>
-                <use href="assets/img/icons.svg#icon-user"></use>
-              </svg>
-            </div>
-            <button class="btn--round">
-              <svg class="">
-                <use href="assets/img/icons.svg#icon-bookmark-fill"></use>
-              </svg>
-            </button>
-          </div>
-        </section>
-
-        <!-- Section ingredients -->
-
-        <section class="recipe__ingredients [ u-grid-col ]">
-          <h2 class="recipe__ingredients--heading">Recipe Ingredients</h2>
-          <ul class="recipe__ingredient-list">
-            <li class="recipe__ingredient [ u-flex-row ]">
-              <svg class="recipe__icon">
-                <use href="assets/img/icons.svg#icon-check"></use>
-              </svg>
-              <div class="recipe__quantity">1000</div>
-              <div class="recipe__description">
-                <span class="recipe__unit">g</span>
-                pasta
-              </div>
-            </li>
-
-            <li class="recipe__ingredient [ u-flex-row ]">
-              <svg class="recipe__icon">
-                <use href="assets/img/icons.svg#icon-check"></use>
-              </svg>
-              <div class="recipe__quantity">0.5</div>
-              <div class="recipe__description">
-                <span class="recipe__unit">cup</span>
-                ricotta cheese
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        <!-- Section directions -->
-
-        <section class="recipe__directions [ u-grid-col ]">
-          <h2 class="recipe__directions--heading">How to cook it</h2>
-          <p class="recipe__directions-text">
-            This recipe was carefully designed and tested by
-
-            <span class="recipe__directions-text--publisher"
-              >The Pioneer Woman</span
-            >. Please check out directions at their website.
+            </a>
+          </section>
+        </main>
+        <footer class="footer [ u-flex-col ]">
+          <p class="project__info">
+            This website was developed to learn Javascript as part of Jonas
+            Schmedtmanns course:
+            <a
+              href="https://www.udemy.com/the-complete-javascript-course/"
+              target="_blank"
+              >The Complete JavaScript course 2024: From zero to expert.</a
+            >
+            The original template was not mobile ready, so I have made it
+            responsive using CSS Grid and Flexbox. Built with 🖤 by Sho'ayb
+            <a
+              href="https://github.com/Sho-ayb"
+              target="_blank"
+              class="github-icon"
+              ><i class="bx bxl-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/shoaybchoudhry"
+              target="_blank"
+              class="linkedin-icon"
+              ><i class="bx bxl-linkedin-square"></i
+            ></a>
           </p>
-          <a
-            href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/"
-            class="recipe__directions--btn [ u-flex-inline ]"
-            target="_blank"
-          >
-            <span>Directions</span>
-            <svg class="search__icon">
-              <use href="assets/img/icons.svg#icon-arrow-right"></use>
-            </svg>
-          </a>
-        </section>
-      </main>
-      <footer class="footer [ u-flex-col ]">
-        <p class="project__info">
-          This website was developed to learn Javascript as part of Jonas
-          Schmedtmanns course:
-          <a
-            href="https://www.udemy.com/the-complete-javascript-course/"
-            target="_blank"
-            >The Complete JavaScript course 2024: From zero to expert.</a
-          >
-          The original template was not mobile ready, so I have made it
-          responsive using CSS Grid and Flexbox. Built with 🖤 by Sho'ayb
-          <a
-            href="https://github.com/Sho-ayb"
-            target="_blank"
-            class="github-icon"
-            ><i class="bx bxl-github"></i
-          ></a>
-          <a
-            href="https://www.linkedin.com/in/shoaybchoudhry"
-            target="_blank"
-            class="linkedin-icon"
-            ><i class="bx bxl-linkedin-square"></i
-          ></a>
-        </p>
-        <p class="copyright">
-          &copy; Copyright by
-          <a
-            href="https://twitter.com/jonasschmedtman"
-            class="twitter-link"
-            target="_blank"
-            >Jonas Schmedtmann</a
-          >. Use for learning or your portfolio. Don't use to teach. Don't claim
-          as your own.
-        </p>
-      </footer>
+          <p class="copyright">
+            &copy; Copyright by
+            <a
+              href="https://twitter.com/jonasschmedtman"
+              class="twitter-link"
+              target="_blank"
+              >Jonas Schmedtmann</a
+            >. Use for learning or your portfolio. Don't use to teach. Don't
+            claim as your own.
+          </p>
+        </footer>
 
-      <div class="modal [ hidden ]" id="modal-bookmarks">
-        <div class="modal__header">
-          <h2 class="modal__heading">Your Bookmarks</h2>
-          <button class="close__modal">&times;</button>
-        </div>
+        <div class="modal [ hidden ]" id="modal-bookmarks">
+          <div class="modal__header">
+            <h2 class="modal__heading">Your Bookmarks</h2>
+            <button class="close__modal">&times;</button>
+          </div>
 
-        <div class="modal__content">
-          <ul class="bookmarks__list">
-            <div class="error">
-              <div class="error__icon">
-                <svg>
-                  <use href="assets/img/icons.svg#icon-alert-triangle"></use>
-                </svg>
+          <div class="modal__content">
+            <ul class="bookmarks__list">
+              <div class="error">
+                <div class="error__icon">
+                  <svg>
+                    <use href="assets/img/icons.svg#icon-alert-triangle"></use>
+                  </svg>
+                </div>
+                <p class="error__message">
+                  No bookmarks yet. Find a nice recipe and bookmark it 😊
+                </p>
               </div>
-              <p class="error__message">
-                No bookmarks yet. Find a nice recipe and bookmark it 😊
-              </p>
-            </div>
 
-            <li class="bookmarks__list-item">
-              <a href="#" class="bookmarks__item"
-                >mexican flatbread pizza - the pioneer woman</a
-              >
-            </li>
-          </ul>
+              <li class="bookmarks__list-item">
+                <a href="#" class="bookmarks__item"
+                  >mexican flatbread pizza - the pioneer woman</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <div class="overlay [ hidden ]"></div>
       </div>
-
-      <div class="overlay [ hidden ]"></div>
-
-      <!-- Template Elements -->
-      <template class="recipe__search-results-template"></template>
-      <template class="recipe__detail-list-template"></template>
-      <template class="recipe__directions-template"></template>
     </div>
+
+    <!-- Template Elements -->
+    <template id="recipe__search-results-template">
+      <ul class="results"></ul>
+
+      <div class="pagination">
+        <button class="pagination__btn pagination__btn--prev">
+          <svg class="search__icon">
+            <use href="assets/img/icons.svg#icon-arrow-left"></use>
+          </svg>
+          <span>Page 1</span>
+        </button>
+        <button class="pagination__btn pagination__btn--next">
+          <span>Page 3</span>
+          <svg class="search__icon">
+            <use href="assets/img/icons.svg#icon-arrow-right"></use>
+          </svg>
+        </button>
+      </div>
+    </template>
+    <template id="recipe__detail-list-template"></template>
+    <template id="recipe__directions-template"></template>
   </body>
 </html>

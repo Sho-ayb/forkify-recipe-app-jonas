@@ -41,6 +41,7 @@ body .recipe__search-list-container {
 
   .recipe__search-list {
     flex-grow: 1;
+    max-height: calc(100vh - 130.172px - 184px);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
