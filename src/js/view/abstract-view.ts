@@ -1,9 +1,10 @@
+import { AppState, Observer } from "js/model/interfaces";
+
 // An abstract class that views inherit from
 
-export abstract class AbstractView<
-  T extends HTMLElement,
-  U extends HTMLElement,
-> {
+export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
+  implements Observer
+{
   // the template element in the DOM
   protected templateEl: HTMLTemplateElement;
 
@@ -52,6 +53,8 @@ export abstract class AbstractView<
   abstract configure(): void;
 
   abstract renderContent(): void;
+
+  abstract update(state: AppState): void;
 
   private attach(insertAtBeginning: Boolean): void {
     this.hostEl.insertAdjacentElement(

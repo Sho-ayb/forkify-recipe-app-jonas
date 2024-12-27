@@ -22,6 +22,7 @@
           <form class="header__search-form">
             <input
               type="text"
+              name="search"
               placeholder="Search over a 1,000,000 recipes..."
               class="header__search-form-input"
             />
@@ -81,12 +82,26 @@
 
         <!-- Aside  -->
 
-        <aside class="recipe__search-list-container [ hidden u-flex-col ]">
+        <aside class="recipe__search-list-container [ u-flex-col ]">
           <div class="recipe__search-list-header">
             <i class="bx bx-x"></i>
           </div>
 
           <div class="recipe__search-list"></div>
+          <div class="pagination">
+            <button class="pagination__btn pagination__btn--prev">
+              <svg class="search__icon">
+                <use href="assets/img/icons.svg#icon-arrow-left"></use>
+              </svg>
+              <span>Page 1</span>
+            </button>
+            <button class="pagination__btn pagination__btn--next">
+              <span>Page 3</span>
+              <svg class="search__icon">
+                <use href="assets/img/icons.svg#icon-arrow-right"></use>
+              </svg>
+            </button>
+          </div>
         </aside>
 
         <!-- Main -->
@@ -277,21 +292,6 @@
     <!-- Template Elements -->
     <template id="recipe__search-results-template">
       <ul class="results"></ul>
-
-      <div class="pagination">
-        <button class="pagination__btn pagination__btn--prev">
-          <svg class="search__icon">
-            <use href="assets/img/icons.svg#icon-arrow-left"></use>
-          </svg>
-          <span>Page 1</span>
-        </button>
-        <button class="pagination__btn pagination__btn--next">
-          <span>Page 3</span>
-          <svg class="search__icon">
-            <use href="assets/img/icons.svg#icon-arrow-right"></use>
-          </svg>
-        </button>
-      </div>
     </template>
     <template id="recipe__detail-list-template"></template>
     <template id="recipe__directions-template"></template>

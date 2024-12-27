@@ -88,14 +88,14 @@ const init = () => {
     const recipeService = new RecipeService();
 
     // Passing in a manual query here to set the initial state
-    const searchResults = await recipeService.searchRecipes("pizza");
+    // const searchResults = await recipeService.searchRecipes("pasta");
 
-    console.log(searchResults);
+    // console.log(searchResults);
 
-    // calling the setSearchResults method on state object
-    state.setSearchResults(searchResults);
+    // // calling the setSearchResults method on state object
+    // state.setSearchResults(searchResults);
 
-    const recipeController = new RecipeController(state);
+    const recipeController = new RecipeController(state, recipeService);
   });
 };
 
