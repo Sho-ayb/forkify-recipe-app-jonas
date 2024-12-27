@@ -1,19 +1,30 @@
 import { AbstractView } from "./abstract-view";
-import { SearchRecipe } from "js/model/interfaces";
+import { AppState, SearchRecipe } from "js/model/interfaces";
 
 export class SearchListView extends AbstractView<
   HTMLDivElement,
   HTMLUListElement
 > {
-  private recipeResults: SearchRecipe[];
+  recipeResults: SearchRecipe[];
+  private resultsPerPage!: number;
+  private currentPage!: number;
 
   constructor(hostEl: HTMLDivElement, recipes: SearchRecipe[]) {
     super("recipe__search-results-template", hostEl, "recipe-results", true);
 
     this.recipeResults = recipes;
+    this.configure();
   }
 
-  configure(): void {}
+  configure(): void {
+    this.resultsPerPage = 10;
+    this.currentPage = 1;
+  }
+
+  update(state: AppState): void {
+    this.recipeResults = state.searchResults?.data.recipes || [];
+    this.renderContent();
+  }
 
   renderContent(): void {
     this.element.innerHTML = "";

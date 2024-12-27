@@ -103,7 +103,24 @@ export class UIController {
   }
 
   private handleViewportChange(): void {
+    const isDesktopView = window.innerWidth >= 768;
     this.updateHoverListener();
+
+    if (isDesktopView) {
+      this.showAside();
+    } else {
+      this.hideAside();
+    }
+  }
+
+  private showAside(): void {
+    this.aside?.classList.remove("hidden");
+    this.aside?.classList.add("active");
+  }
+
+  private hideAside(): void {
+    this.aside?.classList.add("hidden");
+    this.aside?.classList.remove("active");
   }
 
   private setupEventListeners(): void {
@@ -122,24 +139,21 @@ export class UIController {
     searchButton?.addEventListener("click", (e) => {
       e.preventDefault();
 
-      if (aside) {
-        aside?.classList.toggle("active");
-        aside?.classList.toggle("hidden");
+      if (aside?.classList.contains("hidden")) {
+        this.showAside();
       }
     });
 
     searchResultsButton?.addEventListener("click", () => {
-      if (aside) {
-        aside?.classList.toggle("active");
-        aside?.classList.toggle("hidden");
+      if (aside?.classList.contains("hidden")) {
+        this.showAside();
+      } else {
+        this.hideAside();
       }
     });
 
     asideHeaderCloseButton?.addEventListener("click", () => {
-      if (aside) {
-        aside?.classList.toggle("active");
-        aside?.classList.toggle("hidden");
-      }
+      this.hideAside();
     });
 
     if (bookmarksButton && modal && overlay && closeModalButton) {
@@ -203,14 +217,15 @@ export class UIController {
     } = this;
 
     if (window.innerWidth >= 768) {
-      // Show the aside element and hide the aside headear and search results button in desktop view
-      aside?.classList.remove("hidden");
-      aside?.classList.remove("active");
+      // Show the aside element and hide the aside header and search results button in desktop view
+      // aside?.classList.remove("hidden");
+      // aside?.classList.add("active");
       asideHeader?.classList.add("hidden");
       searchResultsButton?.classList.add("hidden");
     } else {
       // Hide aside element and show the aside header in mobile view
-      aside?.classList.add("hidden");
+      // aside?.classList.toggle("active");
+      // aside?.classList.toggle("hidden");
       asideHeader?.classList.remove("hidden");
       searchResultsButton?.classList.remove("hidden");
     }

@@ -28,9 +28,9 @@ export interface SearchResult {
   };
   results: number;
   status: string;
-  // query?: string;
-  // page?: number;
-  // resultsPerPage?: number;
+  query?: string;
+  page?: number;
+  resultsPerPage?: number;
 }
 
 export interface AppState {

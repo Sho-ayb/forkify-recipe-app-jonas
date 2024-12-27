@@ -4,6 +4,9 @@ body .recipe__search-list-container {
   grid-area: asd;
   z-index: 99;
   background-color: variables.$color-text-white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @media (min-width >= 48rem) {
     grid-column: 1 / 5;
@@ -11,7 +14,6 @@ body .recipe__search-list-container {
 
   // Styles for the active state (mobile side)
   &.active {
-    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,7 +27,6 @@ body .recipe__search-list-container {
 
     @media (width >= 48rem) {
       position: static;
-      height: auto;
       width: auto;
       max-width: none;
       box-shadow: none;
@@ -40,12 +41,9 @@ body .recipe__search-list-container {
   }
 
   .recipe__search-list {
-    flex-grow: 1;
-    max-height: calc(100vh - 130.172px - 184px);
+    flex: 1;
+    max-height: 80%;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 
     .results {
       list-style: none;
