@@ -28,6 +28,8 @@ export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
       templateId,
     )! as HTMLTemplateElement;
 
+    // This if condition simply allows for passing in a "string" instead of
+    // directly passing in the hostEl element
     if (typeof hostElId === "string") {
       this.hostEl = document.getElementById(hostElId)! as T;
     } else {
