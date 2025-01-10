@@ -19,17 +19,45 @@ export class SearchListView extends AbstractView<
   configure(): void {
     this.resultsPerPage = 10;
     this.currentPage = 1;
+    this.setupPagination();
+  }
+
+  renderPaginationResults(): void {
+    console.log(this.currentPage);
+
+    const start = (this.currentPage - 1) * this.resultsPerPage;
+    const end = this.currentPage * this.resultsPerPage;
+
+    console.log(start, end);
+
+    const paginationResults = this.recipeResults.slice(start, end);
+
+    console.log(paginationResults);
+
+    // Render the paginated results using the existing method
+    this.renderPaginatedContent(paginationResults);
   }
 
   update(state: AppState): void {
     this.recipeResults = state.searchResults?.data.recipes || [];
-    this.renderContent();
+    // Reset to the first page whenever there is an update
+    this.currentPage = 1;
+    // Render the paginated results and buttons
+    this.renderPaginationResults();
+    this.updatePaginationButtons();
   }
 
   renderContent(): void {
+    // For initial rendering of search results and buttons
+    this.renderPaginationResults();
+    this.updatePaginationButtons();
+  }
+
+  // Dedicated class within this class to handle paginated results
+  private renderPaginatedContent(results: SearchRecipe[]): void {
     this.element.innerHTML = "";
 
-    this.recipeResults.forEach((recipe) => {
+    results.forEach((recipe) => {
       const markup = `
             
           <li class="preview">
@@ -54,9 +82,91 @@ export class SearchListView extends AbstractView<
             </div>
           </a>
         </li>
-            `;
+      `;
 
       this.element.insertAdjacentHTML("beforeend", markup);
     });
+  }
+
+  private setupPagination(): void {
+    const paginationContainer = document.querySelector(".pagination");
+
+    console.log(this.currentPage);
+
+    if (!paginationContainer) return;
+
+    // Clear existing listeners to prevent multiple attachments
+    // paginationContainer.innerHTML = "";
+
+    // Add event listeners to pagination buttons
+    paginationContainer.addEventListener("click", (event: Event) => {
+      console.log("button clicked");
+      const target = event.target as HTMLElement;
+      const prevBtn = target.closest(
+        ".pagination__btn--prev",
+      ) as HTMLButtonElement;
+      const nextBtn = target.closest(
+        ".pagination__btn--next",
+      ) as HTMLButtonElement;
+
+      if (prevBtn) {
+        this.currentPage = this.currentPage - 1;
+        this.renderPaginationResults();
+        this.updatePaginationButtons();
+      }
+
+      if (nextBtn) {
+        this.currentPage = this.currentPage + 1;
+        this.renderPaginationResults();
+        this.updatePaginationButtons();
+      }
+    });
+  }
+
+  private updatePaginationButtons(): void {
+    const paginationContainer = document.querySelector(".pagination");
+
+    if (!paginationContainer) return;
+
+    const prevBtn = paginationContainer.querySelector(
+      ".pagination__btn--prev",
+    )! as HTMLButtonElement;
+    const nextBtn = paginationContainer.querySelector(
+      ".pagination__btn--next",
+    )! as HTMLButtonElement;
+    const totalPages = Math.ceil(
+      this.recipeResults.length / this.resultsPerPage,
+    );
+
+    console.log(prevBtn, nextBtn);
+
+    // If no results hide both buttons and set default text
+    if (totalPages === 0) {
+      if (prevBtn) {
+        prevBtn.querySelector("span")!.textContent = `Page ${this.currentPage}`;
+        prevBtn.style.visibility = "hidden";
+      }
+
+      if (nextBtn) {
+        nextBtn.querySelector("span")!.textContent = `Page ${this.currentPage}`;
+        nextBtn.style.visibility = "hidden";
+      }
+
+      return;
+    }
+
+    if (prevBtn) {
+      prevBtn.querySelector("span")!.textContent =
+        `Page ${this.currentPage - 1}`;
+      console.log(this.currentPage);
+      prevBtn.style.visibility = this.currentPage === 1 ? "hidden" : "visible";
+    }
+
+    if (nextBtn) {
+      nextBtn.querySelector("span")!.textContent =
+        `Page ${this.currentPage + 1}`;
+      nextBtn.style.visibility =
+        this.currentPage === totalPages ? "hidden" : "visible";
+    }
   }
 }
