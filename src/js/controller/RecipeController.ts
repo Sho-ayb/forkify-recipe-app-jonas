@@ -1,6 +1,7 @@
 import { State } from "../model/state";
 import { RecipeService } from "js/service/service";
 import { SearchListView } from "../view/search-list-view";
+import { RecipeView } from "../view/recipe-view";
 
 export class RecipeController {
   private searchListView: SearchListView | undefined;
@@ -15,22 +16,37 @@ export class RecipeController {
   }
 
   private initialiseView(): void {
-    const hostEl = document.querySelector(
+    // Query selecting the host elements
+    const searchHostEl = document.querySelector(
       ".recipe__search-list",
     ) as HTMLDivElement;
+    const recipeHostEl = document.querySelector(".recipe") as HTMLDivElement;
 
-    if (hostEl) {
-      // To ensure that the searchResults object is not empty
+    // Initialise the search list view
+    if (searchHostEl) {
+      // Gets search results object
       const searchResults = this.state.getState().searchResults;
       // Extract the recipes array from the above object
       const recipes = searchResults?.data?.recipes || [];
 
       // Create the search list view
-      this.searchListView = new SearchListView(hostEl, recipes);
+      this.searchListView = new SearchListView(searchHostEl, recipes);
       // Subscribe to observer
       this.state.subscribe(this.searchListView);
       // Invoke method to render the intitial search results
       this.searchListView?.renderContent();
+    }
+
+    // Initialise the initial recipe view
+
+    if (recipeHostEl) {
+      console.log(recipeHostEl);
+
+      // Get the single recipe
+      const recipe = this.state.getState().recipe;
+
+      // Create the recipe view instance
+      const recipeView = new RecipeView(recipeHostEl, recipe);
     }
   }
 

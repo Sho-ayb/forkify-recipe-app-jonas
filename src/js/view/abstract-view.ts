@@ -45,6 +45,9 @@ export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
 
     this.element = cloneNode.firstElementChild as U;
 
+    // this.element = document.createElement("div") as unknown as U;
+    // this.element.appendChild(cloneNode);
+
     if (typeof newElId === "string") {
       this.element.id = newElId;
     }
@@ -58,6 +61,7 @@ export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
 
   abstract update(state: AppState): void;
 
+  // Method to insert the this.element to the host element
   private attach(insertAtBeginning: Boolean): void {
     this.hostEl.insertAdjacentElement(
       insertAtBeginning ? "afterbegin" : "beforeend",
