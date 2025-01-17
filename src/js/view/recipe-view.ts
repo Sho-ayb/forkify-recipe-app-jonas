@@ -6,7 +6,7 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
   private recipe: Recipe | undefined;
 
   constructor(hostEl: HTMLDivElement, recipe?: Recipe | undefined) {
-    super("recipe__detail-template", hostEl, "recipe-result", false);
+    super("recipe__container-template", hostEl, "recipe-result", false);
 
     // Initailise recipe prop
     this.recipe = recipe;

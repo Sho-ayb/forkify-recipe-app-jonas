@@ -27,6 +27,8 @@ export class RecipeController {
     ) as HTMLDivElement;
     const recipeHostEl = document.querySelector(".recipe") as HTMLDivElement;
 
+    console.log(recipeHostEl);
+
     // Initialise the search list view
     if (searchHostEl) {
       // Gets search results object
