@@ -23,16 +23,10 @@ export class SearchListView extends AbstractView<
   }
 
   renderPaginationResults(): void {
-    console.log(this.currentPage);
-
     const start = (this.currentPage - 1) * this.resultsPerPage;
     const end = this.currentPage * this.resultsPerPage;
 
-    console.log(start, end);
-
     const paginationResults = this.recipeResults.slice(start, end);
-
-    console.log(paginationResults);
 
     // Render the paginated results using the existing method
     this.renderPaginatedContent(paginationResults);
@@ -60,7 +54,7 @@ export class SearchListView extends AbstractView<
     results.forEach((recipe) => {
       const markup = `
             
-          <li class="preview">
+          <li class="preview" data-id="${recipe.id}">
           <a
             class="preview__link preview__link--active [ u-flex-row ]"
             href="#${recipe.id}"
@@ -90,8 +84,6 @@ export class SearchListView extends AbstractView<
 
   private setupPagination(): void {
     const paginationContainer = document.querySelector(".pagination");
-
-    console.log(this.currentPage);
 
     if (!paginationContainer) return;
 
@@ -138,8 +130,6 @@ export class SearchListView extends AbstractView<
       this.recipeResults.length / this.resultsPerPage,
     );
 
-    console.log(prevBtn, nextBtn);
-
     // If no results hide both buttons and set default text
     if (totalPages === 0) {
       if (prevBtn) {
@@ -158,7 +148,6 @@ export class SearchListView extends AbstractView<
     if (prevBtn) {
       prevBtn.querySelector("span")!.textContent =
         `Page ${this.currentPage - 1}`;
-      console.log(this.currentPage);
       prevBtn.style.visibility = this.currentPage === 1 ? "hidden" : "visible";
     }
 
