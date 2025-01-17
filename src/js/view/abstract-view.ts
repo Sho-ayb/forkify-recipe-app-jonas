@@ -62,7 +62,11 @@ export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
   abstract update(state: AppState): void;
 
   // Method to insert the this.element to the host element
-  private attach(insertAtBeginning: Boolean): void {
+
+  // Changing this attach method from private to protected so it can be
+  // overridden in the recipeView class
+
+  protected attach(insertAtBeginning: Boolean): void {
     this.hostEl.insertAdjacentElement(
       insertAtBeginning ? "afterbegin" : "beforeend",
       this.element,

@@ -12,7 +12,7 @@ export class State {
     this.state = {
       bookmarks: this.bookmarks,
       searchResults: {} as SearchResult,
-      recipe: undefined,
+      recipe: undefined as Recipe | undefined,
     };
 
     this.observers = [];

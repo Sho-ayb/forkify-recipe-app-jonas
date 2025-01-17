@@ -1,8 +1,6 @@
 @use "../base/variables" as variables;
 
 body .recipe__search-list-container .recipe__search-list .results {
-  padding: 3em 1em;
-
   .preview {
     &__link {
       &:link,
@@ -10,7 +8,6 @@ body .recipe__search-list-container .recipe__search-list .results {
         align-items: center;
         padding: 1.25em 1.35em;
         transition: all 0.3s;
-        border-right: 1px solid variables.$color-border-maroon;
         text-decoration: none;
 
         &:hover {

@@ -5,33 +5,33 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
   private messageEl: HTMLDivElement;
   private recipe: Recipe | undefined;
 
-  constructor(hostEl: HTMLDivElement, recipe: Recipe | undefined) {
-    super("recipe__detail-template", hostEl, "recipe-result", true);
+  constructor(hostEl: HTMLDivElement, recipe?: Recipe | undefined) {
+    super("recipe__detail-template", hostEl, "recipe-result", false);
 
     // Initailise recipe prop
     this.recipe = recipe;
     this.messageEl = this.createMessageElement();
 
-    console.log(this.recipe);
-
+    // Render the initial view - displays the message
     this.renderContent();
+
     this.configure();
   }
 
   configure(): void {}
 
   renderContent(): void {
-    console.log(this.recipe);
+    console.log("this is recipe view render content: ", this.recipe);
 
     if (this.recipe) {
+      // Gets rid of the initial message
       this.messageEl.style.display = "none";
       // Clear existing content
       while (this.hostEl.firstChild) {
         this.hostEl.removeChild(this.hostEl.firstChild);
       }
 
-      this.hostEl.innerHTML = "";
-
+      this.attach(true);
       console.log("intialises all recipe views");
     } else {
       this.messageEl.style.display = "block";
@@ -40,7 +40,16 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
     }
   }
 
-  update(state: AppState): void {}
+  update(state: AppState): void {
+    this.recipe = state.recipe;
+    this.renderContent();
+  }
+
+  protected attach(insertAtBeginning: Boolean): void {
+    if (this.recipe) {
+      super.attach(insertAtBeginning);
+    }
+  }
 
   private createMessageElement(): HTMLDivElement {
     const messageEl = document.createElement("div");
