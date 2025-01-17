@@ -6,7 +6,7 @@ export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
   implements Observer
 {
   // the template element in the DOM
-  protected templateEl: HTMLTemplateElement;
+  protected templateEl: HTMLTemplateElement | null;
 
   // the element with the id of app
 
@@ -26,7 +26,9 @@ export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
 
     this.templateEl = document.getElementById(
       templateId,
-    )! as HTMLTemplateElement;
+    )! as HTMLTemplateElement | null;
+
+    console.log(this.templateEl);
 
     // This if condition simply allows for passing in a "string" instead of
     // directly passing in the hostEl element
@@ -39,14 +41,21 @@ export abstract class AbstractView<T extends HTMLElement, U extends HTMLElement>
     // returns a document fragment, using cloneNode instead of importNode
     // since the element will be cloned in the same document.
 
-    const cloneNode = this.templateEl.content.cloneNode(
-      true,
-    ) as DocumentFragment;
+    // also handles cases where the template element is empty or does not exist
 
-    this.element = cloneNode.firstElementChild as U;
+    if (this.templateEl && this.templateEl.content.firstChild) {
+      const cloneNode = this.templateEl.content.cloneNode(
+        true,
+      ) as DocumentFragment;
 
-    // this.element = document.createElement("div") as unknown as U;
-    // this.element.appendChild(cloneNode);
+      this.element = cloneNode.firstElementChild as U;
+    } else {
+      console.warn(
+        `Template element with id ${templateId} not found or is empty.`,
+      );
+
+      this.element = document.createElement("div") as unknown as U;
+    }
 
     if (typeof newElId === "string") {
       this.element.id = newElId;
