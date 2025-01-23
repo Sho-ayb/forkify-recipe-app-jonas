@@ -20,8 +20,13 @@ body .recipe__detail-container .recipe__details .recipe__info {
 
   &-buttons {
     display: flex;
+    justify-content: center;
+    align-items: center;
 
     > button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border: none;
       cursor: pointer;
     }
@@ -36,20 +41,12 @@ body .recipe__detail-container .recipe__details .recipe__info {
   }
 }
 
-body .recipe__detail-container .recipe__details .recipe__user-generated {
-  svg {
-    width: 1.2rem;
-    height: 1.2rem;
-    fill: variables.$color-background-orange;
-  }
-}
-
 body .recipe__detail-container .recipe__details .btn--round {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   border: none;
   background-color: variables.$color-background-orange;
@@ -57,8 +54,7 @@ body .recipe__detail-container .recipe__details .btn--round {
   cursor: pointer;
 
   svg {
-    width: 1.2rem;
-    height: 1.2rem;
+    height: 2rem;
     fill: currentcolor;
   }
 }

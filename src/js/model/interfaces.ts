@@ -1,5 +1,5 @@
 export interface Ingredient {
-  quantity: number;
+  quantity: number | null;
   unit: string;
   description: string;
 }
@@ -11,7 +11,7 @@ export interface Recipe {
   image_url: string;
   source_url: string;
   servings: number;
-  cookTime: number;
+  cooking_time: number;
   ingredients: Ingredient[];
 }
 
@@ -41,4 +41,10 @@ export interface AppState {
 
 export interface Observer {
   update(state: AppState): void;
+}
+
+// Interface for the custom event
+
+export interface ServingsUpdatedEvent extends CustomEvent {
+  detail: Recipe;
 }
