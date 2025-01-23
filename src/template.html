@@ -188,19 +188,15 @@
     <!-- Recipe header template -->
 
     <template id="recipe__header-template">
-      <figure class="recipe__fig">
-        <img
-          src="http://forkify-api.herokuapp.com/images/4797377235_c07589b7d4_be953.jpg"
-          alt="Mexican Flatbread"
-          class="recipe__img"
-        />
+      <figure class="recipe__fig"></figure>
+    </template>
 
-        <figcaption class="recipe__title-container">
-          <h1 class="recipe__title">
-            <span>Mexican "Flatbread" Pizza</span>
-          </h1>
-        </figcaption>
-      </figure>
+    <!-- Recipe details template -->
+
+    <template id="recipe__details-template">
+      <!-- Section details -->
+
+      <section class="recipe__detail-container"></section>
     </template>
 
     <!-- Recipe ingredients template -->
@@ -210,77 +206,7 @@
 
       <section class="recipe__ingredients [ u-grid-col ]">
         <h2 class="recipe__ingredients--heading">Recipe Ingredients</h2>
-        <ul class="recipe__ingredient-list">
-          <li class="recipe__ingredient [ u-flex-row ]">
-            <svg class="recipe__icon">
-              <use href="assets/img/icons.svg#icon-check"></use>
-            </svg>
-            <div class="recipe__quantity">1000</div>
-            <div class="recipe__description">
-              <span class="recipe__unit">g</span>
-              pasta
-            </div>
-          </li>
-
-          <li class="recipe__ingredient [ u-flex-row ]">
-            <svg class="recipe__icon">
-              <use href="assets/img/icons.svg#icon-check"></use>
-            </svg>
-            <div class="recipe__quantity">0.5</div>
-            <div class="recipe__description">
-              <span class="recipe__unit">cup</span>
-              ricotta cheese
-            </div>
-          </li>
-        </ul>
-      </section>
-    </template>
-
-    <!-- Recipe details template -->
-
-    <template id="recipe__detail-template">
-      <!-- Section details -->
-
-      <section class="recipe__detail-container">
-        <div class="recipe__details">
-          <div class="recipe__info">
-            <svg class="recipe__info-icon">
-              <use href="assets/img/icons.svg#icon-clock"></use>
-            </svg>
-            <span class="recipe__info-data recipe__info-data--minutes">60</span>
-            <span class="recipe__info-text">minutes</span>
-          </div>
-          <div class="recipe__info">
-            <svg class="recipe__info-icon">
-              <use href="assets/img/icons.svg#icon-users"></use>
-            </svg>
-            <span class="recipe__info-data recipe__info-data--people">4</span>
-            <span class="recipe__info-text">servings</span>
-
-            <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
-                <svg>
-                  <use href="assets/img/icons.svg#icon-minus-circle"></use>
-                </svg>
-              </button>
-              <button class="btn--tiny btn--increase-servings">
-                <svg>
-                  <use href="assets/img/icons.svg#icon-plus-circle"></use>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="recipe__user-generated [ hidden ]">
-            <svg>
-              <use href="assets/img/icons.svg#icon-user"></use>
-            </svg>
-          </div>
-          <button class="btn--round">
-            <svg class="">
-              <use href="assets/img/icons.svg#icon-bookmark-fill"></use>
-            </svg>
-          </button>
-        </div>
+        <ul class="recipe__ingredient-list"></ul>
       </section>
     </template>
 
@@ -291,23 +217,6 @@
 
       <section class="recipe__directions [ u-grid-col ]">
         <h2 class="recipe__directions--heading">How to cook it</h2>
-        <p class="recipe__directions-text">
-          This recipe was carefully designed and tested by
-
-          <span class="recipe__directions-text--publisher"
-            >The Pioneer Woman</span
-          >. Please check out directions at their website.
-        </p>
-        <a
-          href="http://thepioneerwoman.com/cooking/pasta-with-tomato-cream-sauce/"
-          class="recipe__directions--btn [ u-flex-inline ]"
-          target="_blank"
-        >
-          <span>Directions</span>
-          <svg class="search__icon">
-            <use href="assets/img/icons.svg#icon-arrow-right"></use>
-          </svg>
-        </a>
       </section>
     </template>
 

@@ -16,11 +16,11 @@ export class RecipeController {
   constructor(state: State, service: RecipeService) {
     this.state = state;
     this.service = service;
-    this.initialiseView();
+    this.init();
     this.setupEventListener();
   }
 
-  private initialiseView(): void {
+  private init(): void {
     // Query selecting the host elements
     const searchHostEl = document.querySelector(
       ".recipe__search-list",
@@ -44,13 +44,14 @@ export class RecipeController {
       this.searchListView?.renderContent();
     }
 
-    // Initialise the initial recipe view
+    // Initialise the initial recipe view, invokes the renderContent method
+    // this.recipe will be initially undefined so message element is rendered to the DOM.
 
     if (recipeHostEl) {
       // Will be undefined
       this.recipe = this.state.getState().recipe;
       // Create the recipe view
-      this.recipeView = new RecipeView(recipeHostEl, this.recipe);
+      this.recipeView = new RecipeView(recipeHostEl, this.recipe, this.state);
       // Subscribe to the observer
       this.state.subscribe(this.recipeView);
     }
@@ -62,6 +63,7 @@ export class RecipeController {
     const searchBtn = document.querySelector(
       ".header__search-form-btn",
     ) as HTMLFormElement;
+
     searchBtn?.addEventListener("click", (event: Event) => {
       event.preventDefault();
       this.handleFormSubmit(event);
@@ -73,8 +75,6 @@ export class RecipeController {
       const target = event.target as HTMLElement;
 
       const recipeItem = target.closest(".preview") as HTMLElement;
-
-      console.log(recipeItem);
 
       if (recipeItem) {
         const recipeId = recipeItem.dataset.id;
@@ -98,36 +98,14 @@ export class RecipeController {
   private async performSearch(query: string): Promise<void> {
     try {
       const searchResults = await this.service.searchRecipes(query);
-      console.log(searchResults);
+      console.log("Search results: ", searchResults);
 
       // Save the new query to the state
       this.state.setSearchResults(searchResults);
-
-      // Render the search results
-      this.renderSearchResults();
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error: ", error.message);
       }
-    }
-  }
-
-  private renderSearchResults(): void {
-    const appState = this.state.getState();
-    // Create a deep copy so object will have a difference reference
-    const newRecipes = JSON.parse(
-      JSON.stringify(appState.searchResults?.data.recipes || []),
-    );
-
-    console.log(newRecipes);
-    console.log(appState.searchResults);
-
-    if (
-      JSON.stringify(this.searchListView?.recipeResults) !==
-      JSON.stringify(newRecipes)
-    ) {
-      console.log("updating the search list view");
-      this.searchListView?.update(appState);
     }
   }
 
@@ -140,12 +118,12 @@ export class RecipeController {
       // Set the current recipe to the state object
       this.state.setCurrentRecipe(recipeResult);
 
-      const appState = this.state.getState();
+      // const appState = this.state.getState();
 
-      console.log(appState.recipe);
+      // console.log(appState.recipe);
 
-      // Render the the views
-      this.recipeView?.update(appState);
+      // // Render the the views
+      // this.recipeView?.update(appState);
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error: ", error.message);

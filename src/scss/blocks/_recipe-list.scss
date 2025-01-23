@@ -1,9 +1,16 @@
 @use "../base/variables" as variables;
 
 body .main .recipe__ingredients .recipe__ingredient-list .recipe__ingredient {
+  width: 100%;
   font-size: variables.$font-size-md;
   text-transform: uppercase;
   justify-content: center;
+  align-items: center;
+
+  &__icon-container {
+    width: 2rem;
+    height: 2rem;
+  }
 
   svg {
     width: 1.6rem;

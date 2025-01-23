@@ -5,7 +5,7 @@ export class RecipeService {
   //   Search for all recipes matching the user query
   async searchRecipes(query: string): Promise<SearchResult> {
     try {
-      console.log(BASE_URL, API_KEY);
+      console.log("RecipeService: searches for all recipes");
 
       const headers = { Authorization: `Bearer: ${API_KEY}` };
 
