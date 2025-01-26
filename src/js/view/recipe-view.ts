@@ -8,73 +8,52 @@ import { RecipeDirectionsView } from "./recipe-directions-view";
 
 export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
   private messageEl: HTMLDivElement;
-  private recipe: Recipe | undefined;
   private state: State | undefined;
+  private currentRecipe: Recipe | undefined;
   private recipeHeaderView: RecipeHeaderView | null = null;
   private recipeDetailsView: RecipeDetailsView | null = null;
   private recipeIngredientsView: RecipeIngredientsView | null = null;
   private recipeDirectionsView: RecipeDirectionsView | null = null;
 
-  constructor(
-    hostEl: HTMLDivElement,
-    recipe?: Recipe | undefined,
-    state?: State,
-  ) {
+  constructor(hostEl: HTMLDivElement, state?: State | undefined) {
     super("recipe__container-template", hostEl, "recipe-result", false);
 
-    // Initailise recipe prop and state
-    this.recipe = recipe;
+    // Initialis the state and create the message element
     this.state = state;
     this.messageEl = this.createMessageElement();
 
-    // Render the initial view - displays the message
-    this.renderContent();
     // Initialise the configure method
     this.configure();
+    // Render the initial view - displays the message
+    this.renderContent();
   }
 
   configure(): void {
-    this.setupEventListener();
+    // Subscribe to the state
+    this.state?.subscribe(this);
+    // this.setupEventListener();
   }
 
   renderContent(): void {
-    console.log("this is recipe view render content: ", this.recipe);
+    console.log(
+      "this is recipe view render content: ",
+      this.state?.getState().recipe,
+    );
 
     // To clear the view before insertion
     this.clearView();
 
-    if (this.recipe) {
+    // Get the current recipe from the state
+    this.currentRecipe = this.state?.getState().recipe;
+
+    if (this.currentRecipe) {
       // Gets rid of the initial message
       this.messageEl.style.display = "none";
 
       this.attach(true);
       console.log("intialises all recipe views");
-      //   Create the recipe header view
-      this.recipeHeaderView = new RecipeHeaderView(this.element, this.recipe);
-      //   Subscribe to state
-      this.state?.subscribe(this.recipeHeaderView);
-      //   Create the recipe details view
-      this.recipeDetailsView = new RecipeDetailsView(
-        this.element,
-        this.recipe,
-        this.state,
-      );
-      // Subscribe to state
-      this.state?.subscribe(this.recipeDetailsView);
-      //   Create the recipe ingredients view
-      this.recipeIngredientsView = new RecipeIngredientsView(
-        this.element,
-        this.recipe,
-      );
-      //   Subscribe to state
-      this.state?.subscribe(this.recipeIngredientsView);
-      //   Create the recipe directions view
-      this.recipeDirectionsView = new RecipeDirectionsView(
-        this.element,
-        this.recipe,
-      );
-      // Subscribe to state
-      this.state?.subscribe(this.recipeDirectionsView);
+      // Initialises all sub views of recipe view
+      this.initialiseSubViews();
     } else {
       this.messageEl.style.display = "block";
       // Append the message elemenet to the host element
@@ -83,12 +62,11 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
   }
 
   update(state: AppState): void {
-    this.recipe = state.recipe;
     this.renderContent();
   }
 
   protected attach(insertAtBeginning: Boolean): void {
-    if (this.recipe) {
+    if (this.currentRecipe) {
       super.attach(insertAtBeginning);
     }
   }
@@ -112,24 +90,44 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
     }
   }
 
-  private setupEventListener(): void {
-    this.element.addEventListener(
-      "servingsUpdated",
-      this.handleServingsUpdate.bind(this),
+  private initialiseSubViews(): void {
+    //   Create the recipe header view
+    this.recipeHeaderView = new RecipeHeaderView(this.element, this.state);
+
+    //   Create the recipe details view
+    this.recipeDetailsView = new RecipeDetailsView(this.element, this.state);
+
+    //   Create the recipe ingredients view
+    this.recipeIngredientsView = new RecipeIngredientsView(
+      this.element,
+      this.state,
+    );
+
+    //   Create the recipe directions view
+    this.recipeDirectionsView = new RecipeDirectionsView(
+      this.element,
+      this.state,
     );
   }
 
-  private handleServingsUpdate(event: CustomEvent): void {
-    console.log(
-      "Custom event from recipe details caught in recipe view: ",
-      event.detail,
-    );
+  // private setupEventListener(): void {
+  //   this.element.addEventListener(
+  //     "servingsUpdated",
+  //     this.handleServingsUpdate.bind(this),
+  //   );
+  // }
 
-    // Invoke the update method in recipe ingredients here and pass
-    // in event.detail which is the new recipe
+  // private handleServingsUpdate(event: CustomEvent): void {
+  //   console.log(
+  //     "Custom event from recipe details caught in recipe view: ",
+  //     event.detail,
+  //   );
 
-    this.recipe = event.detail;
+  //   // Invoke the update method in recipe ingredients here and pass
+  //   // in event.detail which is the new recipe
 
-    this.recipeIngredientsView?.update(this.recipe);
-  }
+  //   this.recipe = event.detail;
+
+  //   this.recipeIngredientsView?.update(this.recipe);
+  // }
 }

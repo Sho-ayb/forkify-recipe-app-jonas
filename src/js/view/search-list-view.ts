@@ -1,28 +1,80 @@
 import { AbstractView } from "./abstract-view";
 import { AppState, SearchRecipe } from "js/model/interfaces";
-
+import { State } from "js/model/state";
 export class SearchListView extends AbstractView<
   HTMLDivElement,
   HTMLUListElement
 > {
-  recipeResults: SearchRecipe[];
+  private recipeResults!: SearchRecipe[];
   private resultsPerPage!: number;
   private currentPage!: number;
+  private state: State;
 
-  constructor(hostEl: HTMLDivElement, recipes: SearchRecipe[]) {
+  constructor(hostEl: HTMLDivElement, state: State) {
     super("recipe__search-results-template", hostEl, "recipe-results", true);
 
-    this.recipeResults = recipes;
+    this.state = state;
     this.configure();
   }
 
   configure(): void {
+    // Subscribe this class to the state object
+    this.state.subscribe(this);
+    this.recipeResults = [];
     this.resultsPerPage = 10;
     this.currentPage = 1;
     this.setupPagination();
+    this.renderContent();
   }
 
-  renderPaginationResults(): void {
+  renderContent(): void {
+    // Render the paginated results and buttons
+    this.renderPaginationResults();
+    this.updatePaginationButtons();
+  }
+
+  update(state: AppState): void {
+    this.recipeResults = state.searchResults?.data.recipes || [];
+    // Reset to the first page whenever there is an update
+    this.currentPage = 1;
+    // Render the search results and pagination buttons
+    this.renderContent();
+  }
+
+  private setupPagination(): void {
+    const paginationContainer = document.querySelector(".pagination");
+
+    if (!paginationContainer) return;
+
+    // Clear existing listeners to prevent multiple attachments
+    // paginationContainer.innerHTML = "";
+
+    // Add event listeners to pagination buttons
+    paginationContainer.addEventListener("click", (event: Event) => {
+      console.log("button clicked");
+      const target = event.target as HTMLElement;
+      const prevBtn = target.closest(
+        ".pagination__btn--prev",
+      ) as HTMLButtonElement;
+      const nextBtn = target.closest(
+        ".pagination__btn--next",
+      ) as HTMLButtonElement;
+
+      if (prevBtn) {
+        this.currentPage = this.currentPage - 1;
+        this.renderPaginationResults();
+        this.updatePaginationButtons();
+      }
+
+      if (nextBtn) {
+        this.currentPage = this.currentPage + 1;
+        this.renderPaginationResults();
+        this.updatePaginationButtons();
+      }
+    });
+  }
+
+  private renderPaginationResults(): void {
     const start = (this.currentPage - 1) * this.resultsPerPage;
     const end = this.currentPage * this.resultsPerPage;
 
@@ -30,21 +82,6 @@ export class SearchListView extends AbstractView<
 
     // Render the paginated results using the existing method
     this.renderPaginatedContent(paginationResults);
-  }
-
-  update(state: AppState): void {
-    this.recipeResults = state.searchResults?.data.recipes || [];
-    // Reset to the first page whenever there is an update
-    this.currentPage = 1;
-    // Render the paginated results and buttons
-    this.renderPaginationResults();
-    this.updatePaginationButtons();
-  }
-
-  renderContent(): void {
-    // For initial rendering of search results and buttons
-    this.renderPaginationResults();
-    this.updatePaginationButtons();
   }
 
   // Dedicated class within this class to handle paginated results
@@ -79,39 +116,6 @@ export class SearchListView extends AbstractView<
       `;
 
       this.element.insertAdjacentHTML("beforeend", markup);
-    });
-  }
-
-  private setupPagination(): void {
-    const paginationContainer = document.querySelector(".pagination");
-
-    if (!paginationContainer) return;
-
-    // Clear existing listeners to prevent multiple attachments
-    // paginationContainer.innerHTML = "";
-
-    // Add event listeners to pagination buttons
-    paginationContainer.addEventListener("click", (event: Event) => {
-      console.log("button clicked");
-      const target = event.target as HTMLElement;
-      const prevBtn = target.closest(
-        ".pagination__btn--prev",
-      ) as HTMLButtonElement;
-      const nextBtn = target.closest(
-        ".pagination__btn--next",
-      ) as HTMLButtonElement;
-
-      if (prevBtn) {
-        this.currentPage = this.currentPage - 1;
-        this.renderPaginationResults();
-        this.updatePaginationButtons();
-      }
-
-      if (nextBtn) {
-        this.currentPage = this.currentPage + 1;
-        this.renderPaginationResults();
-        this.updatePaginationButtons();
-      }
     });
   }
 

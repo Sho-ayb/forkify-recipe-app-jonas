@@ -4,21 +4,30 @@ import { AppState, Ingredient, Recipe } from "js/model/interfaces";
 import { State } from "js/model/state";
 
 export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
-  private recipe: Recipe;
-  private originalServings: number;
-  private originalIngredients: Ingredient[];
+  private currentRecipe: Recipe | undefined;
+  private state: State | undefined;
+  private originalServings!: number | undefined;
+  private originalIngredients!: Ingredient[] | undefined;
 
-  constructor(hostEl: HTMLElement, recipe: Recipe, state: State | undefined) {
+  constructor(hostEl: HTMLElement, state: State | undefined) {
     super("recipe__details-template", hostEl, "recipe-details", false);
 
-    this.recipe = recipe;
-    this.originalServings = this.recipe.servings;
-    this.originalIngredients = this.recipe.ingredients;
+    this.state = state;
 
     this.configure();
   }
 
   configure(): void {
+    // Subscribe to the state
+    this.state?.subscribe(this);
+
+    this.currentRecipe = this.state?.getState().recipe;
+
+    if (this.currentRecipe) {
+      this.originalServings = this.currentRecipe?.servings;
+      this.originalIngredients = this.currentRecipe?.ingredients;
+    }
+
     // Render the initial view
     this.renderContent();
     // Setup event listeners
@@ -28,6 +37,10 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   renderContent(): void {
     console.log("The details view has been rendered");
 
+    if (!this.currentRecipe) return;
+
+    const recipe = this.currentRecipe;
+
     const markup = `
     
     <div class="recipe__details">
@@ -35,14 +48,14 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
       <svg class="recipe__info-icon">
         <use href="assets/img/icons.svg#icon-clock"></use>
       </svg>
-      <span class="recipe__info-data recipe__info-data--minutes">${this.recipe.cooking_time}</span>
+      <span class="recipe__info-data recipe__info-data--minutes">${recipe?.cooking_time}</span>
       <span class="recipe__info-text">minutes</span>
     </div>
     <div class="recipe__info">
       <svg class="recipe__info-icon">
         <use href="assets/img/icons.svg#icon-users"></use>
       </svg>
-      <span class="recipe__info-data recipe__info-data--people">4</span>
+      <span class="recipe__info-data recipe__info-data--people">${recipe?.servings}</span>
       <span class="recipe__info-text">servings</span>
 
       <div class="recipe__info-buttons">
@@ -75,7 +88,10 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     this.element.insertAdjacentHTML("beforeend", markup);
   }
 
-  update(state: AppState): void {}
+  update(state: AppState): void {
+    this.currentRecipe = state.recipe;
+    this.renderContent();
+  }
 
   private setupEventListeners(): void {
     const increaseBtn = this.element.querySelector(".btn--increase-servings");
@@ -94,17 +110,26 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   }
 
   private handleIncreaseServings(): void {
-    this.updateServings(this.recipe.servings + 1);
+    if (this.currentRecipe) {
+      this.updateServings(this.currentRecipe?.servings + 1);
+    }
   }
 
   private handleDecreaseServings(): void {
-    if (this.recipe.servings > 1) {
-      this.updateServings(this.recipe.servings - 1);
+    if (this.currentRecipe && this.currentRecipe.servings > 1) {
+      this.updateServings(this.currentRecipe?.servings - 1);
     }
   }
 
   private updateServings(newServings: number): void {
     console.log("Serving is now:", newServings);
+
+    if (
+      !this.currentRecipe ||
+      !this.originalServings ||
+      !this.originalIngredients
+    )
+      return;
 
     // Calculate the ratio before update the
     // original servings with the new servings value
@@ -113,48 +138,32 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
 
     console.log("Ratio:", ratio);
 
-    // Update the servings value in recipe object
-    this.recipe.servings = newServings;
+    // // Update the servings value in recipe object
+    // this.currentRecipe.servings = newServings;
 
-    // Update the ingredients
-    this.recipe.ingredients = this.originalIngredients.map((ing) => ({
-      ...ing,
-      quantity:
-        ing.quantity !== null
-          ? Math.round(ing.quantity * ratio * 100) / 100
-          : null,
-    }));
-
-    console.log(this.recipe.ingredients);
+    const updatedRecipe: Recipe = {
+      ...this.currentRecipe,
+      servings: newServings,
+      ingredients: this.originalIngredients?.map((ing) => ({
+        ...ing,
+        quantity:
+          ing.quantity !== null
+            ? Math.round(ing.quantity * ratio * 100) / 100
+            : null,
+      })),
+    };
 
     // Here we should update the elements that have been changed
     // Invoking updateValues instead of renderContent to render only
     // the elements that have changed values
 
-    this.updateValues();
+    this.updateValues(updatedRecipe);
   }
 
   // Creating a method to update only the elements that have their
   // values changed
 
-  private updateValues(): void {
-    const servingsEl = this.element.querySelector(".recipe__info-data--people");
-
-    console.log(servingsEl);
-
-    if (servingsEl) {
-      servingsEl.textContent = this.recipe.servings.toString();
-    }
-
-    // Creating a custom event that will bubble up to recipeView
-    // we can handle the event by invoking the update on
-    // recipe ingredients view
-
-    const event = new CustomEvent("servingsUpdated", {
-      detail: this.recipe,
-      bubbles: true,
-    });
-
-    this.element.dispatchEvent(event);
+  private updateValues(updatedRecipe: Recipe): void {
+    this.state?.setCurrentRecipe(updatedRecipe);
   }
 }

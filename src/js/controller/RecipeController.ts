@@ -2,16 +2,16 @@ import { State } from "../model/state";
 import { RecipeService } from "js/service/service";
 import { SearchListView } from "../view/search-list-view";
 import { RecipeView } from "../view/recipe-view";
-import { SearchRecipe, Recipe } from "js/model/interfaces";
+// import { SearchRecipe, Recipe } from "js/model/interfaces";
 import { error } from "console";
 
 export class RecipeController {
-  private searchListView: SearchListView | undefined;
-  private recipeView: RecipeView | undefined;
+  // private searchListView: SearchListView | undefined;
+  // private recipeView: RecipeView | undefined;
   private state: State;
   private service: RecipeService;
-  private recipes: SearchRecipe[] = [];
-  private recipe: Recipe | undefined;
+  // private recipes: SearchRecipe[] = [];
+  // private recipe: Recipe | undefined;
 
   constructor(state: State, service: RecipeService) {
     this.state = state;
@@ -31,29 +31,14 @@ export class RecipeController {
 
     // Initialise the search list view
     if (searchHostEl) {
-      // Gets search results object
-      const searchResults = this.state.getState().searchResults;
-      // Extract the recipes array from the above object
-      this.recipes = searchResults?.data?.recipes || [];
-
-      // Create the search list view
-      this.searchListView = new SearchListView(searchHostEl, this.recipes);
-      // Subscribe to observer
-      this.state.subscribe(this.searchListView);
-      // Invoke method to render the intitial search results
-      this.searchListView?.renderContent();
+      new SearchListView(searchHostEl, this.state);
     }
 
     // Initialise the initial recipe view, invokes the renderContent method
     // this.recipe will be initially undefined so message element is rendered to the DOM.
 
     if (recipeHostEl) {
-      // Will be undefined
-      this.recipe = this.state.getState().recipe;
-      // Create the recipe view
-      this.recipeView = new RecipeView(recipeHostEl, this.recipe, this.state);
-      // Subscribe to the observer
-      this.state.subscribe(this.recipeView);
+      new RecipeView(recipeHostEl, this.state);
     }
   }
 
@@ -79,6 +64,7 @@ export class RecipeController {
       if (recipeItem) {
         const recipeId = recipeItem.dataset.id;
         if (recipeId) {
+          console.log(recipeId);
           this.handleRecipeSelection(recipeId);
         }
       }
@@ -117,13 +103,6 @@ export class RecipeController {
 
       // Set the current recipe to the state object
       this.state.setCurrentRecipe(recipeResult);
-
-      // const appState = this.state.getState();
-
-      // console.log(appState.recipe);
-
-      // // Render the the views
-      // this.recipeView?.update(appState);
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error: ", error.message);

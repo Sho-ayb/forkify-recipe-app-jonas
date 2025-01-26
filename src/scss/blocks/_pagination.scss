@@ -9,13 +9,6 @@ body .pagination {
   width: 100%;
 
   &__btn {
-    // font-size: variables.$font-size-sm;
-    // color: variables.$color-text-orange;
-    // border: none;
-    // padding: 0.5em 1em;
-    // cursor: pointer;
-    // background-color: variables.$color-body-backround-grey-1;
-
     @include mix.button("small", "primary");
 
     > svg {
