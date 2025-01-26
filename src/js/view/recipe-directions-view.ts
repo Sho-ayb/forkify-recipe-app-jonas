@@ -1,24 +1,33 @@
 import { AbstractView } from "./abstract-view";
 import { AppState, Recipe } from "js/model/interfaces";
+import { State } from "js/model/state";
 
 export class RecipeDirectionsView extends AbstractView<
   HTMLElement,
   HTMLElement
 > {
-  private recipe: Recipe;
+  private currentRecipe: Recipe | undefined;
+  private state: State | undefined;
 
-  constructor(hostEl: HTMLElement, recipe: Recipe) {
+  constructor(hostEl: HTMLElement, state: State | undefined) {
     super("recipe__directions-template", hostEl, "recipe-directions", false);
 
-    this.recipe = recipe;
+    this.state = state;
 
+    this.configure();
     this.renderContent();
   }
 
-  configure(): void {}
+  configure(): void {
+    // Subscribe to the state
+    this.state?.subscribe(this);
+    this.currentRecipe = this.state?.getState().recipe;
+  }
 
   renderContent(): void {
     console.log("The directions view has been rendered");
+
+    const recipe = this.currentRecipe;
 
     const markup = `
     
@@ -26,11 +35,11 @@ export class RecipeDirectionsView extends AbstractView<
     This recipe was carefully designed and tested by
 
     <span class="recipe__directions-text--publisher"
-      >${this.recipe.publisher}</span
+      >${recipe?.publisher}</span
     >. Please check out directions at their website.
   </p>
   <a
-    href="${this.recipe.source_url}"
+    href="${recipe?.source_url}"
     class="recipe__directions--btn [ u-flex-inline ]"
     target="_blank"
   >

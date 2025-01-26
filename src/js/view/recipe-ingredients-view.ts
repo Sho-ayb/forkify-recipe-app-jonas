@@ -1,23 +1,35 @@
 import { AbstractView } from "./abstract-view";
 import { AppState, Recipe, Ingredient } from "js/model/interfaces";
+import { State } from "js/model/state";
+
+// Importing a helper function to return the fractional part to a better format: 1/2, 1/4, 3/4
+import { decimalToFraction } from "../utils/helpers";
 
 export class RecipeIngredientsView extends AbstractView<
   HTMLElement,
   HTMLElement
 > {
-  private recipe: Recipe;
+  private currentRecipe: Recipe | undefined;
+  private state: State | undefined;
 
-  constructor(hostEl: HTMLElement, recipe: Recipe) {
+  constructor(hostEl: HTMLElement, state: State | undefined) {
     // super("recipe__ingredients-template", hostEl, "recipe-ingredients", false);
 
     super("", hostEl, "recipe-ingredients", false);
 
-    this.recipe = recipe;
+    this.state = state;
 
+    this.configure();
     this.renderContent();
   }
 
-  configure(): void {}
+  configure(): void {
+    // Subscribe to the state
+    this.state?.subscribe(this);
+
+    // Get the current recipe
+    this.currentRecipe = this.state?.getState().recipe;
+  }
 
   renderContent(): void {
     console.log("The ingredients view has been rendered");
@@ -31,7 +43,7 @@ export class RecipeIngredientsView extends AbstractView<
       ".recipe__ingredient-list",
     )! as HTMLUListElement;
 
-    this.recipe.ingredients.forEach((ing) => {
+    this.currentRecipe?.ingredients.forEach((ing) => {
       const markup = this.generateMarkup(ing);
 
       ul.insertAdjacentHTML("beforeend", markup);
@@ -50,7 +62,7 @@ export class RecipeIngredientsView extends AbstractView<
       </svg>
       </div>
       <div class="recipe__description">
-      <span class="recipe__quantity">${ing.quantity === null ? "" : ing.quantity}</span>
+      <span class="recipe__quantity">${ing.quantity === null ? "" : decimalToFraction(ing.quantity)}</span>
         <span class="recipe__unit">${ing.unit}</span>
         ${ing.description}
       </div>
@@ -61,5 +73,6 @@ export class RecipeIngredientsView extends AbstractView<
 
   update(state: AppState): void {
     console.log("This is the update method in recipe ingredients view.", state);
+    this.renderContent();
   }
 }
