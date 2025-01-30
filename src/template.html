@@ -50,27 +50,8 @@
                   </svg>
                   <span>BOOKMARKS</span>
                 </button>
-                <div class="bookmarks">
-                  <ul class="bookmarks__list">
-                    <div class="error">
-                      <div class="error__icon">
-                        <svg>
-                          <use
-                            href="assets/img/icons.svg#icon-alert-triangle"
-                          ></use>
-                        </svg>
-                      </div>
-                      <p class="error__message">
-                        No bookmarks yet. Find a nice recipe and bookmark it 😊
-                      </p>
-                    </div>
-                    <li class="bookmarks__list-item">
-                      <a href="#" class="bookmarks__item"
-                        >mexican flatbread pizza - the pioneer woman</a
-                      >
-                    </li>
-                  </ul>
-                </div>
+                <!-- Bookmarks will be rendered here -->
+                <div class="bookmarks"></div>
               </li>
             </ul>
             <button class="open__search-results">
@@ -145,7 +126,9 @@
           </p>
         </footer>
 
-        <div class="modal [ hidden ]" id="modal-bookmarks">
+        <!-- Modal -->
+
+        <div class="modal" id="modal-bookmarks">
           <div class="modal__header">
             <h2 class="modal__heading">Your Bookmarks</h2>
             <button class="close__modal">&times;</button>
@@ -173,7 +156,9 @@
           </div>
         </div>
 
-        <div class="overlay [ hidden ]"></div>
+        <!-- Overlay -->
+
+        <div class="overlay"></div>
       </div>
     </div>
 
@@ -224,6 +209,12 @@
 
     <template id="recipe__container-template">
       <div class="recipe__content"></div>
+    </template>
+
+    <!-- Bookmarks view template -->
+
+    <template id="recipe__bookmarks-main-template">
+      <ul class="bookmarks__list"></ul>
     </template>
   </body>
 </html>

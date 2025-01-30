@@ -83,11 +83,13 @@ import { RecipeService } from "./service/service";
 
 const init = () => {
   document.addEventListener("DOMContentLoaded", async () => {
-    const uiController = new UIController();
     const state = new State();
     const recipeService = new RecipeService();
 
     const recipeController = new RecipeController(state, recipeService);
+    // To ensure initialisation for elements created by the recipe controller
+    // instantiation of the uicontroller should take after the recipe controller
+    const uiController = new UIController();
   });
 };
 
