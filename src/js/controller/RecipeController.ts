@@ -2,16 +2,11 @@ import { State } from "../model/state";
 import { RecipeService } from "js/service/service";
 import { SearchListView } from "../view/search-list-view";
 import { RecipeView } from "../view/recipe-view";
-// import { SearchRecipe, Recipe } from "js/model/interfaces";
-import { error } from "console";
+import { BookmarksView } from "../view/bookmarks-view";
 
 export class RecipeController {
-  // private searchListView: SearchListView | undefined;
-  // private recipeView: RecipeView | undefined;
   private state: State;
   private service: RecipeService;
-  // private recipes: SearchRecipe[] = [];
-  // private recipe: Recipe | undefined;
 
   constructor(state: State, service: RecipeService) {
     this.state = state;
@@ -26,8 +21,9 @@ export class RecipeController {
       ".recipe__search-list",
     ) as HTMLDivElement;
     const recipeHostEl = document.querySelector(".recipe") as HTMLDivElement;
-
-    console.log(recipeHostEl);
+    const headerBookmarkHostEl = document.querySelector(
+      ".bookmarks",
+    ) as HTMLDivElement;
 
     // Initialise the search list view
     if (searchHostEl) {
@@ -39,6 +35,11 @@ export class RecipeController {
 
     if (recipeHostEl) {
       new RecipeView(recipeHostEl, this.state);
+    }
+
+    // Initialise the headers bookmarks view
+    if (headerBookmarkHostEl) {
+      new BookmarksView(headerBookmarkHostEl, this.state);
     }
   }
 

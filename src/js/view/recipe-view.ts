@@ -109,25 +109,4 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
       this.state,
     );
   }
-
-  // private setupEventListener(): void {
-  //   this.element.addEventListener(
-  //     "servingsUpdated",
-  //     this.handleServingsUpdate.bind(this),
-  //   );
-  // }
-
-  // private handleServingsUpdate(event: CustomEvent): void {
-  //   console.log(
-  //     "Custom event from recipe details caught in recipe view: ",
-  //     event.detail,
-  //   );
-
-  //   // Invoke the update method in recipe ingredients here and pass
-  //   // in event.detail which is the new recipe
-
-  //   this.recipe = event.detail;
-
-  //   this.recipeIngredientsView?.update(this.recipe);
-  // }
 }

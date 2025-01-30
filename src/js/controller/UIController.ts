@@ -28,7 +28,8 @@ export class UIController {
 
   private bookmarksList: NodeListOf<HTMLUListElement>;
 
-  private errorEl: NodeListOf<HTMLElement>;
+  // Private prop for initialising a single place for hover listener
+  private hoverListenerInitialised = false;
 
   constructor() {
     this.aside = document.querySelector(
@@ -64,11 +65,8 @@ export class UIController {
     ) as HTMLButtonElement | null;
     this.bookmarks = document.querySelector(".bookmarks") as HTMLElement | null;
     this.bookmarksList = document.querySelectorAll(
-      ".bookmarks__list",
+      ".nav .nav__list .nav__item--bookmark .bookmarks .bookmarks__list, .modal .modal__content .bookmarks__list",
     ) as NodeListOf<HTMLUListElement>;
-    this.errorEl = document.querySelectorAll(
-      ".error",
-    ) as NodeListOf<HTMLElement>;
 
     // invoke the init method here
 
@@ -85,11 +83,13 @@ export class UIController {
     // Setup event listeners
     this.setupEventListeners();
 
-    // Check if there is any bookmarks list items
-    this.checkBookmarks();
-
     // Add a resize event listener
-    window.addEventListener("resize", this.handleViewportChange.bind(this));
+    window.addEventListener(
+      "resize",
+      this.debounce(this.handleViewportChange.bind(this), 250),
+    );
+
+    console.log(this.bookmarksList);
   }
 
   private insertLogo(): void {
@@ -104,12 +104,28 @@ export class UIController {
 
   private handleViewportChange(): void {
     const isDesktopView = window.innerWidth >= 768;
-    this.updateHoverListener();
 
+    // Update aside visibility
     if (isDesktopView) {
       this.showAside();
     } else {
       this.hideAside();
+    }
+
+    // Update the asideHeader visibility
+    if (isDesktopView) {
+      this.asideHeader?.classList.add("hidden");
+    } else {
+      this.asideHeader?.classList.remove("hidden");
+    }
+
+    // Check if the hoverListenerInitialised prop is false then
+    // Update hover listeners
+
+    if (!this.hoverListenerInitialised) {
+      this.updateHoverListener();
+      // Set the hoverListenerInitialised prop to true here
+      this.hoverListenerInitialised = true;
     }
   }
 
@@ -136,6 +152,7 @@ export class UIController {
       closeModalButton,
     } = this;
 
+    // Show/hide aside when search button or search results button is clicked
     searchButton?.addEventListener("click", (e) => {
       e.preventDefault();
 
@@ -152,10 +169,12 @@ export class UIController {
       }
     });
 
+    // Close aside when the close button is clicked
     asideHeaderCloseButton?.addEventListener("click", () => {
       this.hideAside();
     });
 
+    // Handle bookmarks button click (for mobile view)
     if (bookmarksButton && modal && overlay && closeModalButton) {
       // Show modal on mobile view when the bookmarks button is clicked
 
@@ -198,8 +217,6 @@ export class UIController {
         overlay.classList.add("hidden");
         overlay.classList.remove("visible");
       });
-
-      this.updateHoverListener();
     }
   }
 
@@ -207,96 +224,115 @@ export class UIController {
   // this function can then be invoked inside of handleViewportChange
 
   private updateHoverListener(): void {
-    const {
-      aside,
-      asideHeader,
-      searchResultsButton,
-      bookmarksButton,
-      bookmarks,
-      bookmarksList,
-    } = this;
+    console.log(
+      "The update hover listener in the uicontroller has been triggered!",
+    );
+
+    const { searchResultsButton, bookmarksButton, bookmarksList } = this;
 
     if (window.innerWidth >= 768) {
-      // Show the aside element and hide the aside header and search results button in desktop view
-      // aside?.classList.remove("hidden");
-      // aside?.classList.add("active");
-      asideHeader?.classList.add("hidden");
       searchResultsButton?.classList.add("hidden");
     } else {
-      // Hide aside element and show the aside header in mobile view
-      // aside?.classList.toggle("active");
-      // aside?.classList.toggle("hidden");
-      asideHeader?.classList.remove("hidden");
       searchResultsButton?.classList.remove("hidden");
     }
 
     if (window.innerWidth >= 1024) {
-      // When the bookmark button is hovered over
-      bookmarksButton?.addEventListener("mouseenter", () => {
-        bookmarksList?.forEach((bookList) => {
-          if (!bookList.closest(".modal")) {
-            bookmarks?.classList.add("visible");
-            bookmarks?.classList.remove("hidden");
-          }
+      if (!this.hoverListenerInitialised) {
+        // Event listener added to the bookmarks button
+
+        bookmarksButton?.addEventListener(
+          "mouseenter",
+          this.bookmarkButtonEnterListener.bind(this),
+        );
+
+        bookmarksButton?.addEventListener(
+          "mouseleave",
+          this.bookmarksButtonLeaveListener.bind(this),
+        );
+
+        // Event listener added to the bookmarks list: which are two:
+        // one in the nav menu and the other in the modal
+
+        bookmarksList?.forEach((booklist) => {
+          booklist.addEventListener(
+            "mouseenter",
+            this.bookmarkButtonEnterListener.bind(this),
+          );
+          booklist.addEventListener(
+            "mouseleave",
+            this.bookmarksButtonLeaveListener.bind(this),
+          );
         });
-      });
-      // When the mouse leaves hovering over the bookmark button
-      bookmarksButton?.addEventListener("mouseleave", () => {
-        // Delay the removing the visible class
-        setTimeout(() => {
-          bookmarksList?.forEach((bookList) => {
-            if (!bookList.matches(":hover")) {
-              if (!bookList.closest(".modal")) {
-                bookmarks?.classList.remove("visible");
-                bookmarks?.classList.add("hidden");
-              }
-            }
-          });
-        }, 300);
-      });
+      } else {
+        // If the hoverListener is set to a true then we need to remove all the event listeners
 
-      // Also need event listener(s) on the bookmarks list,
-      // so when the mouse enters and leaves the bookmark list
-      // we cause the bookmark to also be visible or hidden
+        // Remove the event listeners on the bookmarks button element
+        bookmarksButton?.removeEventListener(
+          "mouseenter",
+          this.bookmarkButtonEnterListener,
+        );
+        bookmarksButton?.removeEventListener(
+          "mouseleave",
+          this.bookmarksButtonLeaveListener,
+        );
 
-      bookmarksList?.forEach((bookList) => {
-        bookList.addEventListener("mouseenter", () => {
-          if (!bookList.closest(".modal")) {
-            bookmarks?.classList.add("visible");
-          }
+        // Remove the event listeners on the bookmarks list element
+
+        bookmarksList.forEach((bookList) => {
+          bookList?.removeEventListener(
+            "mouseenter",
+            this.bookmarkButtonEnterListener,
+          );
+          bookList?.removeEventListener(
+            "mouseleave",
+            this.bookmarksButtonLeaveListener,
+          );
         });
-
-        bookList.addEventListener("mouseleave", () => {
-          setTimeout(() => {
-            if (!bookList.closest(".modal")) {
-              bookmarks?.classList.remove("visible");
-            }
-          }, 300);
-        });
-      });
-    } else {
-      // Remove the event listeners in mobile view to prevent uninteded behaviour
-
-      bookmarksButton?.removeEventListener("mouseenter", () => {});
-      bookmarksButton?.removeEventListener("mouseleave", () => {});
-      bookmarksList?.forEach((bookList) => {
-        bookList.removeEventListener("mouseenter", () => {});
-        bookList.removeEventListener("mouseleave", () => {});
-      });
+      }
     }
   }
 
-  // Function to determine if the bookmarks list is empty
+  // Methods to handle the visibility of bookmarks
 
-  private checkBookmarks(): void {
-    this.bookmarksList?.forEach((bookmarksList, index) => {
-      const errorDiv = this.errorEl[index];
+  private bookmarkButtonEnterListener(): void {
+    console.log("bookmarksbuttonenterlistener method invoked");
 
-      if (bookmarksList.children.length > 1) {
-        errorDiv.classList.add("hidden");
-      } else {
-        errorDiv.classList.remove("hidden");
+    const { bookmarksList, bookmarks } = this;
+
+    console.log(bookmarksList);
+
+    bookmarksList?.forEach((bookList) => {
+      if (!bookList.closest(".modal")) {
+        bookmarks?.classList.add("visible");
+        bookmarks?.classList.remove("hidden");
       }
     });
+  }
+
+  private bookmarksButtonLeaveListener(): void {
+    console.log("bookmarksbuttonleavelistener method invoked");
+
+    const { bookmarksList, bookmarks } = this;
+
+    console.log(bookmarksList);
+
+    setTimeout(() => {
+      bookmarksList?.forEach((bookList) => {
+        if (!bookList.matches(":hover") && !bookList.closest(".modal")) {
+          bookmarks?.classList.remove("visible");
+          bookmarks?.classList.add("hidden");
+        }
+      });
+    }, 300);
+  }
+
+  private debounce(func: Function, delay: number): (...args: any[]) => void {
+    let timeoutId: NodeJS.Timeout;
+    return (...args: any[]) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
   }
 }

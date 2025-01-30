@@ -88,8 +88,9 @@ export class SearchListView extends AbstractView<
   private renderPaginatedContent(results: SearchRecipe[]): void {
     this.element.innerHTML = "";
 
-    results.forEach((recipe) => {
-      const markup = `
+    const markup = results
+      .map((recipe) => {
+        return `
             
           <li class="preview" data-id="${recipe.id}">
           <a
@@ -114,9 +115,9 @@ export class SearchListView extends AbstractView<
           </a>
         </li>
       `;
-
-      this.element.insertAdjacentHTML("beforeend", markup);
-    });
+      })
+      .join("");
+    this.element.insertAdjacentHTML("beforeend", markup);
   }
 
   private updatePaginationButtons(): void {
