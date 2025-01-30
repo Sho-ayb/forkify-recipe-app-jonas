@@ -3,6 +3,7 @@ import { RecipeService } from "js/service/service";
 import { SearchListView } from "../view/search-list-view";
 import { RecipeView } from "../view/recipe-view";
 import { BookmarksView } from "../view/bookmarks-view";
+import { ModalBookmarksView } from "../view/modal-bookmarks-view";
 
 export class RecipeController {
   private state: State;
@@ -24,6 +25,9 @@ export class RecipeController {
     const headerBookmarkHostEl = document.querySelector(
       ".bookmarks",
     ) as HTMLDivElement;
+    const modalBookmarkHostEl = document.querySelector(
+      ".modal__content",
+    ) as HTMLDivElement;
 
     // Initialise the search list view
     if (searchHostEl) {
@@ -40,6 +44,11 @@ export class RecipeController {
     // Initialise the headers bookmarks view
     if (headerBookmarkHostEl) {
       new BookmarksView(headerBookmarkHostEl, this.state);
+    }
+
+    // Initialise the modal bookmarks view
+    if (modalBookmarkHostEl) {
+      new ModalBookmarksView(modalBookmarkHostEl, this.state);
     }
   }
 

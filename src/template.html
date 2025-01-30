@@ -88,6 +88,7 @@
         <!-- Main -->
 
         <main class="main">
+          <!-- All main recipe content will be rendered in recipe div container -->
           <div class="recipe" id="recipe-container"></div>
         </main>
         <footer class="footer [ u-flex-col ]">
@@ -134,26 +135,8 @@
             <button class="close__modal">&times;</button>
           </div>
 
-          <div class="modal__content">
-            <ul class="bookmarks__list">
-              <div class="error">
-                <div class="error__icon">
-                  <svg>
-                    <use href="assets/img/icons.svg#icon-alert-triangle"></use>
-                  </svg>
-                </div>
-                <p class="error__message">
-                  No bookmarks yet. Find a nice recipe and bookmark it 😊
-                </p>
-              </div>
-
-              <li class="bookmarks__list-item">
-                <a href="#" class="bookmarks__item"
-                  >mexican flatbread pizza - the pioneer woman</a
-                >
-              </li>
-            </ul>
-          </div>
+          <!-- Bookmarks will be rendered here -->
+          <div class="modal__content"></div>
         </div>
 
         <!-- Overlay -->
@@ -215,6 +198,29 @@
 
     <template id="recipe__bookmarks-main-template">
       <ul class="bookmarks__list"></ul>
+    </template>
+
+    <!-- Modal bookmarks view template -->
+
+    <template id="recipe__bookmarks-modal-template">
+      <ul class="bookmarks__list">
+        <div class="error">
+          <div class="error__icon">
+            <svg>
+              <use href="assets/img/icons.svg#icon-alert-triangle"></use>
+            </svg>
+          </div>
+          <p class="error__message">
+            No bookmarks yet. Find a nice recipe and bookmark it 😊
+          </p>
+        </div>
+
+        <li class="bookmarks__list-item">
+          <a href="#" class="bookmarks__item"
+            >mexican flatbread pizza - the pioneer woman</a
+          >
+        </li>
+      </ul>
     </template>
   </body>
 </html>
