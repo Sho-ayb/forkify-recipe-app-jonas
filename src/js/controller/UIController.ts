@@ -299,8 +299,6 @@ export class UIController {
 
     const { bookmarksList, bookmarks } = this;
 
-    console.log(bookmarksList);
-
     bookmarksList?.forEach((bookList) => {
       if (!bookList.closest(".modal")) {
         bookmarks?.classList.add("visible");
@@ -313,8 +311,6 @@ export class UIController {
     console.log("bookmarksbuttonleavelistener method invoked");
 
     const { bookmarksList, bookmarks } = this;
-
-    console.log(bookmarksList);
 
     setTimeout(() => {
       bookmarksList?.forEach((bookList) => {
