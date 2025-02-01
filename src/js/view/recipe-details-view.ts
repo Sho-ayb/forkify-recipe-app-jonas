@@ -1,6 +1,9 @@
 import { AbstractView } from "./abstract-view";
 
 import { AppState, Ingredient, Recipe } from "js/model/interfaces";
+
+import { BookmarkToggleEvent } from "../../events";
+
 import { State } from "js/model/state";
 
 export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
@@ -96,17 +99,35 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   private setupEventListeners(): void {
     const increaseBtn = this.element.querySelector(".btn--increase-servings");
     const decreaseBtn = this.element.querySelector(".btn--decrease-servings");
+    const toggleIconBtn = this.element.querySelector(".bookmark");
 
     // Attaching event listeners to buttons
-    increaseBtn?.addEventListener(
-      "click",
-      this.handleIncreaseServings.bind(this),
-    );
 
-    decreaseBtn?.addEventListener(
-      "click",
-      this.handleDecreaseServings.bind(this),
-    );
+    if (increaseBtn) {
+      increaseBtn?.addEventListener(
+        "click",
+        this.handleIncreaseServings.bind(this),
+      );
+    }
+
+    if (decreaseBtn) {
+      decreaseBtn?.addEventListener(
+        "click",
+        this.handleDecreaseServings.bind(this),
+      );
+    }
+
+    if (toggleIconBtn) {
+      toggleIconBtn.addEventListener("click", () => {
+        const customEvent = new CustomEvent("bookmarkToggle", {
+          bubbles: true,
+          detail: { button: toggleIconBtn as HTMLElement },
+        }) as BookmarkToggleEvent;
+
+        // Despatch the event when it has been triggered
+        this.element.dispatchEvent(customEvent);
+      });
+    }
   }
 
   private handleIncreaseServings(): void {

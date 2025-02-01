@@ -14,11 +14,11 @@
     "strict": true,
     "baseUrl": ".",
     "skipLibCheck": true,
-    "typeRoots": ["./node_modules/@types", "./types", "./src/custom.d.ts"],
+    "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["webpack", "node"],
     "paths": { "*": ["src/*"] }
   },
-  "include": ["src/**/*.ts", "src/custom.d.ts"],
+  "include": ["src/**/*.ts", "src/custom.d.ts", "src/events.d.ts"],
   "exclude": [
     "node_modules",
     "build", // Exclude the output directory during the build process

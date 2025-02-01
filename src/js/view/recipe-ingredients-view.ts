@@ -13,8 +13,8 @@ export class RecipeIngredientsView extends AbstractView<
   private state: State | undefined;
 
   constructor(hostEl: HTMLElement, state: State | undefined) {
-    // super("recipe__ingredients-template", hostEl, "recipe-ingredients", false);
-
+    // The template element will remain empty since clone the template in the
+    // render content method in order to insert each list item in to unordered list
     super("", hostEl, "recipe-ingredients", false);
 
     this.state = state;
