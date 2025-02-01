@@ -42,9 +42,3 @@ export interface AppState {
 export interface Observer {
   update(state: AppState): void;
 }
-
-// Interface for the custom event
-
-export interface ServingsUpdatedEvent extends CustomEvent {
-  detail: Recipe;
-}

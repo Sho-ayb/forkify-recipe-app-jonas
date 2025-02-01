@@ -1,4 +1,5 @@
 import logoImg from "../../assets/img/logo.png";
+import { BookmarkToggleEvent } from "../../events";
 
 // UIController controls the main UI related operations including responsive layout
 export class UIController {
@@ -151,6 +152,18 @@ export class UIController {
       overlay,
       closeModalButton,
     } = this;
+
+    // Listen to the custom bookmark toggle event here and invoke handleBookmarkToggleEvent
+    // lets listen to the event on the elements parent element
+    // N.b. the recipe container element will exist before all other dynamic content is loaded
+    const recipeContainer = document.querySelector(".recipe") as HTMLElement;
+
+    if (recipeContainer) {
+      recipeContainer?.addEventListener(
+        "bookmarkToggle",
+        this.handleBookmarkToggle.bind(this) as EventListener,
+      );
+    }
 
     // Show/hide aside when search button or search results button is clicked
     searchButton?.addEventListener("click", (e) => {
@@ -322,6 +335,36 @@ export class UIController {
     }, 300);
   }
 
+  // Handling the bookmark toogle custom event
+
+  private handleBookmarkToggle(event: BookmarkToggleEvent): void {
+    // Get the button from event.detail object
+    const { button } = event.detail;
+
+    this.toggleIconButton(button);
+  }
+
+  private toggleIconButton(toggleBtn: HTMLElement): void {
+    console.log("toggle btn has been clicked");
+
+    // Query select the actual svg from the button element
+    const icon = toggleBtn.querySelector("use");
+
+    if (icon) {
+      // Get the icon href attribute
+      const iconHref = icon.getAttribute("href");
+
+      const newHref = iconHref?.includes("-fill")
+        ? "assets/img/icons.svg#icon-bookmark"
+        : "assets/img/icons.svg#icon-bookmark-fill";
+
+      // Set the new href attribute to the icon
+
+      icon?.setAttribute("href", newHref);
+    }
+  }
+
+  // Prevents there from function handle viewport change from being invoked multiple times
   private debounce(func: Function, delay: number): (...args: any[]) => void {
     let timeoutId: NodeJS.Timeout;
     return (...args: any[]) => {
