@@ -16,7 +16,8 @@
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["webpack", "node"],
-    "paths": { "*": ["src/*"] }
+    "paths": { "*": ["src/*"] },
+    "sourceMap": true
   },
   "include": ["src/**/*.ts", "src/custom.d.ts", "src/events.d.ts"],
   "exclude": [

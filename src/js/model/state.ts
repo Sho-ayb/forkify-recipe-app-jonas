@@ -23,7 +23,7 @@ export class State {
     this.observers.push(observer);
   }
 
-  //   Get the latest state
+  //   Returns the latest state
 
   public getState(): AppState {
     return this.state;
@@ -32,8 +32,8 @@ export class State {
   //   Add a bookmark to the bookmarks array
   public addBookmark(recipe: Recipe): void {
     this.state.bookmarks.push(recipe);
-    this.notify();
     this.saveToLocalStorage();
+    this.notify();
   }
 
   //   Remove a bookmark from the bookmarks array
@@ -42,27 +42,110 @@ export class State {
     this.state.bookmarks = this.state.bookmarks.filter(
       (recipe) => recipe.id !== recipeId,
     );
-    this.notify();
     this.saveToLocalStorage();
+    this.notify();
   }
 
   // Update the search results array
 
   public setSearchResults(result: SearchResult): void {
-    this.state.searchResults = result;
+    this.state = {
+      ...this.state,
+      searchResults: result,
+    };
+
     this.notify();
   }
 
   //   Set the current recipe
 
   public setCurrentRecipe(recipe: Recipe): void {
-    this.state.recipe = recipe;
+    // Using a spread operator creates a shallow copy: a brand new
+    // object for immutability from the original state.
+    this.state = {
+      ...this.state,
+      recipe: recipe,
+    };
     this.notify();
+  }
+
+  // Toggle the bookmark
+
+  // A method for toggling the recipe from the bookmarks array
+  // This method should be invoked when the bookmarks toggle button is clicked
+  // Returns the status of the bookmark
+
+  public toggleBookmark(recipeId: string): boolean {
+    // Get the recipe
+    const recipe = this.state.recipe;
+
+    console.log("Recipe from state class: ", recipe);
+
+    // Check if the recipe exists
+    if (!recipe) {
+      console.warn("No recipe loaded. Cannot bookmark.");
+      return false;
+    }
+
+    // Check if the current recipe exists in the bookmarks array, returns boolean value
+    const isCurrentlyBookmarked = this.isBookmarked(recipeId);
+
+    // If truthy remove the recipe from the bookmarks array otherwise add to the array
+    // Update the state object
+
+    // Create a new array to hold the bookmarks
+    let newBookmarks: Recipe[];
+
+    if (isCurrentlyBookmarked) {
+      // Filter out the bookmark from this.bookmarks array
+
+      newBookmarks = this.bookmarks.filter(
+        (bookmark) => bookmark.id !== recipeId,
+      );
+
+      console.log("Filtered bookmarks", newBookmarks);
+    } else {
+      // Add to bookmark
+
+      newBookmarks = [...this.bookmarks, { ...recipe, bookmarked: true }];
+
+      console.log("Recipe added to new bookmarks", newBookmarks);
+    }
+
+    // Create a new recipe object with updated bookmarked status
+
+    const updatedRecipe: Recipe = {
+      ...recipe,
+      bookmarked: !isCurrentlyBookmarked,
+    };
+
+    // Mutate the state to include the new updated recipe and bookmarks
+
+    this.state = {
+      ...this.state,
+      recipe: updatedRecipe,
+      bookmarks: newBookmarks,
+    };
+
+    // Saving the newBookmarks to the this.bookmarks array
+    this.bookmarks = newBookmarks;
+    console.log(isCurrentlyBookmarked, this.bookmarks);
+
+    // Save the bookmarks now to local storage or remove the bookmark
+
+    this.saveToLocalStorage();
+    // And notify all observers of the change
+    this.notify();
+
+    console.log("Current state after toggle btn clicked: ", this.state);
+    // Return the boolean value to this function
+    return !isCurrentlyBookmarked;
   }
 
   //   Update the subscribers of state change
 
   private notify(): void {
+    console.log("State has changed. Notifying observers");
     this.observers.forEach((observer) => observer.update(this.state));
   }
 
@@ -77,6 +160,28 @@ export class State {
   private loadBookmarks(): Recipe[] {
     const bookmarks = localStorage.getItem("bookmarks");
     this.bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
+
+    console.log("this.bookmarks in loadbookmarks method", this.bookmarks);
+
     return this.bookmarks;
+  }
+
+  // Helper method for checking if the current recipe is bookmarked, returns a boolean value
+
+  private isBookmarked(recipeId: string): boolean {
+    console.log(recipeId);
+
+    console.log(
+      "The current bookmarks array from isBookmarked method: ",
+      this.bookmarks,
+    );
+
+    const isBookmarked = this.bookmarks.some(
+      (bookmark) => bookmark.id === recipeId,
+    );
+
+    console.log("isBookmarked variable value is: ", isBookmarked);
+
+    return isBookmarked;
   }
 }

@@ -89,6 +89,7 @@ const init = () => {
     const recipeController = new RecipeController(state, recipeService);
     // To ensure initialisation for elements created by the recipe controller
     // instantiation of the uicontroller should take after the recipe controller
+    // Using callback function to invoke the handle bookmark storage method within the ui controller
     const uiController = new UIController();
   });
 };

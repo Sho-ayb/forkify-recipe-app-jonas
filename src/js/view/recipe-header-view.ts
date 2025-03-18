@@ -12,7 +12,6 @@ export class RecipeHeaderView extends AbstractView<HTMLElement, HTMLElement> {
     this.state = state;
 
     this.configure();
-    this.renderContent();
   }
 
   configure(): void {
@@ -21,6 +20,8 @@ export class RecipeHeaderView extends AbstractView<HTMLElement, HTMLElement> {
 
     // pass the current recipe from state to recipe prop
     this.currentRecipe = this.state?.getState().recipe;
+    // Render the initial view
+    this.renderContent();
   }
 
   renderContent(): void {
@@ -49,7 +50,7 @@ export class RecipeHeaderView extends AbstractView<HTMLElement, HTMLElement> {
     this.element.insertAdjacentHTML("beforeend", markup);
   }
 
-  //  Includes state as the arg even if method not used to mantain consistency with the
-  // Abstract class
-  update(state: AppState): void {}
+  update(state: AppState): void {
+    this.renderContent();
+  }
 }

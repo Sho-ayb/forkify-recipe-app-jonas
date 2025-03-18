@@ -4,7 +4,7 @@
 
 export interface BookmarkToggleEvent extends CustomEvent {
   detail: {
-    button: HTMLElement;
+    button: HTMLButtonElement;
   };
 }
 

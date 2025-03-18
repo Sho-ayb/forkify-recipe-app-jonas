@@ -18,6 +18,7 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
     this.bookmarks = this.state.getState().bookmarks;
 
     this.configure();
+    this.initEventDelegation();
   }
 
   configure(): void {
@@ -58,7 +59,7 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
           return `
               
               <li class="bookmarks__list-item">
-              <a href="${bookmark.source_url}" class="bookmarks__item"
+              <a href="${bookmark.source_url}" class="bookmarks__item" target="_blank"
                 >${bookmark.title} - ${bookmark.publisher}</a
               >
             </li>
@@ -80,5 +81,18 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
     while (this.element.firstChild) {
       this.element.removeChild(this.element.firstChild);
     }
+  }
+
+  private initEventDelegation() {
+    this.element.addEventListener("click", (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest("bookmarks__item");
+
+      if (link) {
+        e.preventDefault();
+        const url = link.getAttribute("href");
+        if (url) window.open(url, "_blank");
+      }
+    });
   }
 }

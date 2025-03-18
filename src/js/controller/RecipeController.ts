@@ -5,9 +5,12 @@ import { RecipeView } from "../view/recipe-view";
 import { BookmarksView } from "../view/bookmarks-view";
 import { ModalBookmarksView } from "../view/modal-bookmarks-view";
 
+import { Recipe } from "js/model/interfaces";
+
 export class RecipeController {
   private state: State;
   private service: RecipeService;
+  private currentRecipe: Recipe | undefined;
 
   constructor(state: State, service: RecipeService) {
     this.state = state;
@@ -53,7 +56,7 @@ export class RecipeController {
   }
 
   private setupEventListener(): void {
-    console.log("setupevent listener");
+    console.log("setupevent listener in recipe controller");
 
     const searchBtn = document.querySelector(
       ".header__search-form-btn",
@@ -74,7 +77,6 @@ export class RecipeController {
       if (recipeItem) {
         const recipeId = recipeItem.dataset.id;
         if (recipeId) {
-          console.log(recipeId);
           this.handleRecipeSelection(recipeId);
         }
       }
@@ -109,10 +111,33 @@ export class RecipeController {
     try {
       const recipeResult = await this.service.getRecipe(recipeId);
 
-      console.log(recipeResult);
+      console.log("Recipe result from the forkify api: ", recipeResult);
 
-      // Set the current recipe to the state object
-      this.state.setCurrentRecipe(recipeResult);
+      // Check if the recipeId is in the bookmarks array in the state
+      const isAlreadyBookmarked = this.state
+        .getState()
+        .bookmarks.some((bookmark) => bookmark.id === recipeId);
+
+      // Conditionally set the 'bookmarked' property based on whether it's already bookmarked
+      const newRecipeObj: Recipe = {
+        ...recipeResult,
+        bookmarked: isAlreadyBookmarked, // Set bookmarked based on state
+      };
+
+      console.log("New recipe obj with bookmarked prop: ", newRecipeObj);
+
+      // Assigning this new recipe obj to this.currentRecipe private prop
+      this.currentRecipe = newRecipeObj;
+
+      console.log(
+        "handle recipe selectionin recipe controller: ",
+        this.currentRecipe,
+      );
+
+      if (this.currentRecipe) {
+        // Set the current recipe to the state object
+        this.state.setCurrentRecipe(this.currentRecipe);
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error: ", error.message);
