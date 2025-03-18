@@ -1,3 +1,4 @@
+import { CLIENT_RENEG_LIMIT } from "tls";
 import logoImg from "../../assets/img/logo.png";
 import { BookmarkToggleEvent } from "../../events";
 
@@ -89,8 +90,6 @@ export class UIController {
       "resize",
       this.debounce(this.handleViewportChange.bind(this), 250),
     );
-
-    console.log(this.bookmarksList);
   }
 
   private insertLogo(): void {
@@ -152,18 +151,6 @@ export class UIController {
       overlay,
       closeModalButton,
     } = this;
-
-    // Listen to the custom bookmark toggle event here and invoke handleBookmarkToggleEvent
-    // lets listen to the event on the elements parent element
-    // N.b. the recipe container element will exist before all other dynamic content is loaded
-    const recipeContainer = document.querySelector(".recipe") as HTMLElement;
-
-    if (recipeContainer) {
-      recipeContainer?.addEventListener(
-        "bookmarkToggle",
-        this.handleBookmarkToggle.bind(this) as EventListener,
-      );
-    }
 
     // Show/hide aside when search button or search results button is clicked
     searchButton?.addEventListener("click", (e) => {
@@ -237,10 +224,6 @@ export class UIController {
   // this function can then be invoked inside of handleViewportChange
 
   private updateHoverListener(): void {
-    console.log(
-      "The update hover listener in the uicontroller has been triggered!",
-    );
-
     const { searchResultsButton, bookmarksButton, bookmarksList } = this;
 
     if (window.innerWidth >= 768) {
@@ -308,8 +291,6 @@ export class UIController {
   // Methods to handle the visibility of bookmarks
 
   private bookmarkButtonEnterListener(): void {
-    console.log("bookmarksbuttonenterlistener method invoked");
-
     const { bookmarksList, bookmarks } = this;
 
     bookmarksList?.forEach((bookList) => {
@@ -321,8 +302,6 @@ export class UIController {
   }
 
   private bookmarksButtonLeaveListener(): void {
-    console.log("bookmarksbuttonleavelistener method invoked");
-
     const { bookmarksList, bookmarks } = this;
 
     setTimeout(() => {
@@ -333,35 +312,6 @@ export class UIController {
         }
       });
     }, 300);
-  }
-
-  // Handling the bookmark toogle custom event
-
-  private handleBookmarkToggle(event: BookmarkToggleEvent): void {
-    // Get the button from event.detail object
-    const { button } = event.detail;
-
-    this.toggleIconButton(button);
-  }
-
-  private toggleIconButton(toggleBtn: HTMLElement): void {
-    console.log("toggle btn has been clicked");
-
-    // Query select the actual svg from the button element
-    const icon = toggleBtn.querySelector("use");
-
-    if (icon) {
-      // Get the icon href attribute
-      const iconHref = icon.getAttribute("href");
-
-      const newHref = iconHref?.includes("-fill")
-        ? "assets/img/icons.svg#icon-bookmark"
-        : "assets/img/icons.svg#icon-bookmark-fill";
-
-      // Set the new href attribute to the icon
-
-      icon?.setAttribute("href", newHref);
-    }
   }
 
   // Prevents there from function handle viewport change from being invoked multiple times

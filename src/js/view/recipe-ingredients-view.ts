@@ -20,15 +20,16 @@ export class RecipeIngredientsView extends AbstractView<
     this.state = state;
 
     this.configure();
-    this.renderContent();
   }
-
+  
   configure(): void {
     // Subscribe to the state
     this.state?.subscribe(this);
-
+    
     // Get the current recipe
     this.currentRecipe = this.state?.getState().recipe;
+    // Render the initial view
+    this.renderContent();
   }
 
   renderContent(): void {

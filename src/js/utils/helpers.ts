@@ -10,8 +10,6 @@ export function decimalToFraction(decimal: number): string {
 
   const [wholePart, FractionalPart] = [Math.floor(decimal), decimal % 1];
 
-  console.log("whole part:", wholePart, "fractional part: ", FractionalPart);
-
   switch (FractionalPart.toFixed(2)) {
     case "0.25":
       return wholePart > 0 ? `${wholePart} 1/4` : "1/4";

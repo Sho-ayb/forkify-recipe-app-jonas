@@ -13,6 +13,7 @@ export interface Recipe {
   servings: number;
   cooking_time: number;
   ingredients: Ingredient[];
+  bookmarked?: boolean;
 }
 
 export interface SearchRecipe {

@@ -24,36 +24,37 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
 
     // Initialise the configure method
     this.configure();
-    // Render the initial view - displays the message
-    this.renderContent();
   }
 
   configure(): void {
     // Subscribe to the state
     this.state?.subscribe(this);
-    // this.setupEventListener();
+    this.currentRecipe = this.state?.getState().recipe;
+    // Render the initial view - displays the message
+    this.renderContent(false);
   }
 
-  renderContent(): void {
-    console.log(
-      "this is recipe view render content: ",
-      this.state?.getState().recipe,
-    );
-
-    // To clear the view before insertion
-    this.clearView();
-
+  renderContent(reinitialise: Boolean = true): void {
     // Get the current recipe from the state
     this.currentRecipe = this.state?.getState().recipe;
+    console.log("renderContent currentRecipe", this.currentRecipe);
 
-    if (this.currentRecipe) {
+    if (reinitialise) {
+      // To clear the view before insertion
+      this.clearView();
       // Gets rid of the initial message
       this.messageEl.style.display = "none";
 
+      // Re-clone the template content
+      if (this.templateEl && this.templateEl.content.firstChild) {
+        const cloneNode = this.templateEl.content.cloneNode(
+          true,
+        ) as DocumentFragment;
+
+        this.element = cloneNode.firstElementChild as HTMLElement;
+      }
+
       this.attach(true);
-      console.log("intialises all recipe views");
-      // Initialises all sub views of recipe view
-      this.initialiseSubViews();
     } else {
       this.messageEl.style.display = "block";
       // Append the message elemenet to the host element
@@ -62,12 +63,19 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
   }
 
   update(state: AppState): void {
-    this.renderContent();
+    console.log("Recipe view is updating with the state", state);
+
+    this.renderContent(true);
   }
 
+  // This method overrides the method in abstract class
   protected attach(insertAtBeginning: Boolean): void {
     if (this.currentRecipe) {
       super.attach(insertAtBeginning);
+      console.log("intialises all recipe sub views");
+      // Initialises all sub views of recipe view
+
+      this.initialiseSubViews();
     }
   }
 
@@ -85,26 +93,15 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
   }
 
   private clearView(): void {
-    while (this.element.firstChild) {
-      this.element.removeChild(this.element.firstChild);
+    while (this.hostEl.firstChild) {
+      this.hostEl.removeChild(this.hostEl.firstChild);
     }
   }
 
   private initialiseSubViews(): void {
-    //   Create the recipe header view
     this.recipeHeaderView = new RecipeHeaderView(this.element, this.state);
-
-    //   Create the recipe details view
     this.recipeDetailsView = new RecipeDetailsView(this.element, this.state);
-
-    //   Create the recipe ingredients view
     this.recipeIngredientsView = new RecipeIngredientsView(
-      this.element,
-      this.state,
-    );
-
-    //   Create the recipe directions view
-    this.recipeDirectionsView = new RecipeDirectionsView(
       this.element,
       this.state,
     );
