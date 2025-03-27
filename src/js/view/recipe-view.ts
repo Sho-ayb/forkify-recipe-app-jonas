@@ -64,7 +64,7 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
 
   update(state: AppState): void {
     console.log("Recipe view is updating with the state", state);
-
+    console.log("Recipe view component: ", state);
     this.renderContent(true);
   }
 

@@ -74,6 +74,7 @@ export class RecipeIngredientsView extends AbstractView<
 
   update(state: AppState): void {
     console.log("This is the update method in recipe ingredients view.", state);
+    console.log("Recipe ingredients component view: ", state);
     this.renderContent();
   }
 }

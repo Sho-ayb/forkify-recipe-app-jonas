@@ -102,8 +102,10 @@ export class RecipeController {
       const searchResults = await this.service.searchRecipes(query);
       console.log("Search results: ", searchResults);
 
-      // Save the new query to the state
-      this.state.setSearchResults(searchResults);
+      if (searchResults) {
+        // Save the new query to the state
+        this.state.setSearchResults(searchResults);
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error: ", error.message);
@@ -141,6 +143,11 @@ export class RecipeController {
       if (this.currentRecipe) {
         // Set the current recipe to the state object
         this.state.setCurrentRecipe(this.currentRecipe);
+
+        // Trigger a search only if there are no search results
+        if (!this.state.getState().searchResults?.data?.recipes) {
+          await this.performSearch(this.currentRecipe.title);
+        }
       }
     } catch (error) {
       if (error instanceof Error) {

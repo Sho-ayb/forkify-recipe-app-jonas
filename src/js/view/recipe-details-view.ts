@@ -90,6 +90,8 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   update(state: AppState): void {
     console.log("RecipeDetailsView update method called"); // ADDED
     console.log("Current isBookmarked value:", this.isBookmarked); // ADDED
+    console.log("Recipe view component: ", state);
+
     // Since the state has changed we need to update the props
     this.currentRecipe = state.recipe;
     this.originalIngredients = this.currentRecipe?.ingredients;

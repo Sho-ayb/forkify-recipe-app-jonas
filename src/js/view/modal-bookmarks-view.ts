@@ -68,6 +68,7 @@ export class ModalBookmarksView extends AbstractView<HTMLElement, HTMLElement> {
   }
 
   update(state: AppState): void {
+    console.log("Modal bookmarks view component", state);
     this.bookmarks = state.bookmarks;
     this.renderContent();
   }

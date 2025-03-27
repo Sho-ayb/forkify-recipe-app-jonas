@@ -28,10 +28,7 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
 
   configure(): void {
     this.state.subscribe(this);
-    // Setting the root element to this.element
-    // this.element = document.querySelector(".bookmarks") as HTMLDivElement;
-    // Render the element
-    // this.element = this.hostEl;
+
     this.renderContent();
     // Initialise events **after** setting this.element
     this.initEventDelegation();
@@ -84,6 +81,7 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
   }
 
   update(state: AppState): void {
+    console.log("Bookmarks view component: ", state);
     this.bookmarks = state.bookmarks;
     this.renderContent();
   }
