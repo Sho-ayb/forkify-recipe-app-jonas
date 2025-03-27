@@ -46,7 +46,11 @@ export class RecipeController {
 
     // Initialise the headers bookmarks view
     if (headerBookmarkHostEl) {
-      new BookmarksView(headerBookmarkHostEl, this.state);
+      new BookmarksView(
+        headerBookmarkHostEl,
+        this.state,
+        this.handleRecipeSelection.bind(this),
+      );
     }
 
     // Initialise the modal bookmarks view

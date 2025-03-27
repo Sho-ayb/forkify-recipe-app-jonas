@@ -5,8 +5,13 @@ import { AppState, Recipe } from "js/model/interfaces";
 export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
   private state: State;
   private bookmarks: Recipe[];
+  private onBookmarkSelect: (id: string) => void;
 
-  constructor(hostEl: HTMLElement, state: State) {
+  constructor(
+    hostEl: HTMLElement,
+    state: State,
+    onBookmarkSelect: (id: string) => void,
+  ) {
     super(
       "recipe__bookmarks-main-template",
       hostEl,
@@ -16,14 +21,20 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
 
     this.state = state;
     this.bookmarks = this.state.getState().bookmarks;
+    this.onBookmarkSelect = onBookmarkSelect;
 
     this.configure();
-    this.initEventDelegation();
   }
 
   configure(): void {
     this.state.subscribe(this);
+    // Setting the root element to this.element
+    // this.element = document.querySelector(".bookmarks") as HTMLDivElement;
+    // Render the element
+    // this.element = this.hostEl;
     this.renderContent();
+    // Initialise events **after** setting this.element
+    this.initEventDelegation();
   }
 
   renderContent(): void {
@@ -58,8 +69,8 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
         .map((bookmark) => {
           return `
               
-              <li class="bookmarks__list-item">
-              <a href="${bookmark.source_url}" class="bookmarks__item" target="_blank"
+              <li class="bookmarks__list-item" data-id="${bookmark.id}">
+              <a class="bookmarks__item"
                 >${bookmark.title} - ${bookmark.publisher}</a
               >
             </li>
@@ -85,13 +96,20 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
 
   private initEventDelegation() {
     this.element.addEventListener("click", (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const link = target.closest("bookmarks__item");
+      console.log("bookmark has been clicked");
 
-      if (link) {
+      const target = e.target as HTMLElement;
+      const listItem = target.closest(".bookmarks__list-item") as HTMLLIElement;
+
+      if (listItem) {
+        // event prevent defaults prevents the default link from navigating to the source url
         e.preventDefault();
-        const url = link.getAttribute("href");
-        if (url) window.open(url, "_blank");
+
+        const recipeId = listItem?.dataset.id;
+
+        if (recipeId) {
+          this.onBookmarkSelect(recipeId);
+        }
       }
     });
   }

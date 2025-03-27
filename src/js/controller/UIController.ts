@@ -65,7 +65,9 @@ export class UIController {
     this.bookmarksButton = document.querySelector(
       ".nav__btn--bookmark-recipe",
     ) as HTMLButtonElement | null;
-    this.bookmarks = document.querySelector(".bookmarks") as HTMLElement | null;
+    this.bookmarks = document.querySelector(
+      ".bookmarks",
+    ) as HTMLDivElement | null;
     this.bookmarksList = document.querySelectorAll(
       ".nav .nav__list .nav__item--bookmark .bookmarks .bookmarks__list, .modal .modal__content .bookmarks__list",
     ) as NodeListOf<HTMLUListElement>;
