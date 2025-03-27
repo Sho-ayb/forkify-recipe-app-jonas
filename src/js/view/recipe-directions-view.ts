@@ -56,6 +56,7 @@ export class RecipeDirectionsView extends AbstractView<
   }
 
   update(state: AppState): void {
+    console.log("Recipe directions view component: ", state);
     this.renderContent();
   }
 }

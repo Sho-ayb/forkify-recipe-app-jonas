@@ -51,6 +51,7 @@ export class RecipeHeaderView extends AbstractView<HTMLElement, HTMLElement> {
   }
 
   update(state: AppState): void {
+    console.log("Recipe header component view: ", state);
     this.renderContent();
   }
 }

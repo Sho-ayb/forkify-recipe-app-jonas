@@ -34,7 +34,12 @@ export class SearchListView extends AbstractView<
   }
 
   update(state: AppState): void {
-    this.recipeResults = state.searchResults?.data.recipes || [];
+    console.log("Search list view component: ", state);
+    this.recipeResults = state.searchResults?.data?.recipes || [];
+    console.log(
+      "This should be the recipe results from update method in search list view component: ",
+      this.recipeResults,
+    );
     // Reset to the first page whenever there is an update
     this.currentPage = 1;
     // Render the search results and pagination buttons
