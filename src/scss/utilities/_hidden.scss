@@ -17,6 +17,7 @@ body .hidden {
 .bookmarks.visible {
   opacity: 1;
   visibility: visible;
+  display: flex;
 }
 
 .modal.visible {
