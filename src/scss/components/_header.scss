@@ -5,6 +5,8 @@ body .header {
   grid-area: hdr;
   grid-column: 1 / -1;
   grid-row: 1 / 2;
+  position: relative;
+  z-index: 2;
 
   // stacking all elements within header as stack
   @include mix.stack(1.7em);
