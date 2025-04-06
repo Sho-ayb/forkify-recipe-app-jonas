@@ -298,7 +298,7 @@ export class UIController {
     bookmarksList?.forEach((bookList) => {
       if (!bookList.closest(".modal")) {
         bookmarks?.classList.add("visible");
-        bookmarks?.classList.remove("hidden");
+        // bookmarks?.classList.remove("hidden");
       }
     });
   }
@@ -309,8 +309,8 @@ export class UIController {
     setTimeout(() => {
       bookmarksList?.forEach((bookList) => {
         if (!bookList.matches(":hover") && !bookList.closest(".modal")) {
-          bookmarks?.classList.remove("visible");
-          bookmarks?.classList.add("hidden");
+          // bookmarks?.classList.remove("visible");
+          // bookmarks?.classList.add("hidden");
         }
       });
     }, 300);

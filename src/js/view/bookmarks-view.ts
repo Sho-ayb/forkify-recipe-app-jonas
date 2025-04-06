@@ -70,6 +70,7 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
               <a class="bookmarks__item"
                 >${bookmark.title} - ${bookmark.publisher}</a
               >
+              <i class='bx bx-trash' ></i>
             </li>
               
               `;
