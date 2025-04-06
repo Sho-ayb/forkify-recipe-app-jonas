@@ -105,5 +105,9 @@ export class RecipeView extends AbstractView<HTMLDivElement, HTMLElement> {
       this.element,
       this.state,
     );
+    this.recipeDirectionsView = new RecipeDirectionsView(
+      this.element,
+      this.state,
+    );
   }
 }
