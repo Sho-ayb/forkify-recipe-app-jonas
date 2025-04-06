@@ -100,6 +100,24 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
       const target = e.target as HTMLElement;
       const listItem = target.closest(".bookmarks__list-item") as HTMLLIElement;
 
+      // gaurd clause
+      if (!listItem) return;
+
+      if (target.classList.contains("bx-trash")) {
+        // stop the propagation up to the parent element list item
+        e.stopPropagation();
+
+        const recipeId = listItem?.dataset.id;
+
+        // invoke the state method to remove the bookmark
+        if (recipeId) {
+          this.state.removeBookmark(recipeId);
+        }
+
+        // re-render the bookmarks view
+        this.renderContent();
+      }
+
       if (listItem) {
         // event prevent defaults prevents the default link from navigating to the source url
         e.preventDefault();
