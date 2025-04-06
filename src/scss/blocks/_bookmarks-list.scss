@@ -15,11 +15,24 @@ body .bookmarks {
       font-size: variables.$font-size-md;
       margin-bottom: variables.$spacing-md;
       box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       > a {
+        margin-right: variables.$spacing-md;
         text-decoration: none;
         color: variables.$color-text-orange;
         cursor: pointer;
+
+        &:hover {
+          color: variables.$color-border-maroon;
+        }
+      }
+
+      > i {
+        font-size: variables.$font-size-3xl;
+        color: variables.$color-background-orange;
 
         &:hover {
           color: variables.$color-border-maroon;
