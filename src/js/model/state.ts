@@ -97,9 +97,9 @@ export class State {
     let newBookmarks: Recipe[];
 
     if (isCurrentlyBookmarked) {
-      // Filter out the bookmark from this.bookmarks array
+      // Filter out the bookmark from this.state.bookmarks array
 
-      newBookmarks = this.bookmarks.filter(
+      newBookmarks = this.state.bookmarks.filter(
         (bookmark) => bookmark.id !== recipeId,
       );
 
@@ -107,7 +107,7 @@ export class State {
     } else {
       // Add to bookmark
 
-      newBookmarks = [...this.bookmarks, { ...recipe, bookmarked: true }];
+      newBookmarks = [...this.state.bookmarks, { ...recipe, bookmarked: true }];
 
       console.log("Recipe added to new bookmarks", newBookmarks);
     }
@@ -176,7 +176,7 @@ export class State {
       this.bookmarks,
     );
 
-    const isBookmarked = this.bookmarks.some(
+    const isBookmarked = this.state.bookmarks.some(
       (bookmark) => bookmark.id === recipeId,
     );
 
