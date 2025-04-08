@@ -5,6 +5,8 @@ body .bookmarks {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 350px;
+    overflow: hidden auto;
 
     &-item {
       padding: variables.$spacing-md;

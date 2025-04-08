@@ -33,14 +33,13 @@ body .header {
 
     &-input {
       flex-grow: 1;
-      font-size: variables.$font-size-md;
       font-family: inherit;
       background: none;
       border: none;
+      border-radius: 10em;
       outline: none;
       padding-left: 1em;
       color: variables.$color-text-dark-1;
-      width: 12.6rem;
       height: 2.2rem;
 
       @media (width >= 48rem) {
@@ -52,9 +51,11 @@ body .header {
         color: variables.$color-text-placeholder;
       }
 
-      &:focus-within {
+      &:focus {
         transform: translateY(-2px);
         box-shadow: 0 0.7rem 3rem rgba(variables.$color-text-dark-1, 0.08);
+        outline: none;
+        background-color: variables.$color-text-white;
       }
     }
 
