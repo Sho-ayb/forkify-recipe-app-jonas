@@ -96,11 +96,29 @@ export class UIController {
 
   private insertLogo(): void {
     if (this.headerContainer) {
+      // Create anchor link
+      const logoLink = document.createElement("a");
+      logoLink.href = "#";
+      logoLink.className = "header__logo-link";
+
+      // Create image element
       this.headerLogo = document.createElement("img");
       this.headerLogo.src = logoImg;
       this.headerLogo.alt = "Forkify Logo";
       this.headerLogo.className = "header__logo";
-      this.headerContainer.insertAdjacentElement("afterbegin", this.headerLogo);
+
+      // Append image to anchor
+      logoLink.appendChild(this.headerLogo);
+
+      // Append anchor to header container
+      this.headerContainer.insertAdjacentElement("afterbegin", logoLink);
+
+      // Add event listener to reload the page
+      logoLink.addEventListener("click", (e) => {
+        e.preventDefault(); // prevent default anchor behaviour
+
+        window.location.reload(); // reload the website
+      });
     }
   }
 
