@@ -113,6 +113,10 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
         if (recipeId) {
           this.state.removeBookmark(recipeId);
         }
+
+        // Need to returnt to stop remaining code from executing
+
+        return;
       }
 
       if (listItem) {
