@@ -42,7 +42,18 @@ export class State {
     this.state.bookmarks = this.state.bookmarks.filter(
       (recipe) => recipe.id !== recipeId,
     );
+
+    // need to reset the bookmarked value to false
+    if (this.state.recipe?.id === recipeId) {
+      this.state.recipe.bookmarked = false;
+    }
+
+    // Will save the filtered bookmarks to local storage
     this.saveToLocalStorage();
+
+    // Notifies all observers - most importantly recipe details view
+    // of the state change and the update method will execute
+
     this.notify();
   }
 
@@ -75,7 +86,7 @@ export class State {
   // This method should be invoked when the bookmarks toggle button is clicked
   // Returns the status of the bookmark
 
-  public toggleBookmark(recipeId: string): boolean {
+  public toggleBookmark(recipeId: string): void {
     // Get the recipe
     const recipe = this.state.recipe;
 
@@ -84,7 +95,7 @@ export class State {
     // Check if the recipe exists
     if (!recipe) {
       console.warn("No recipe loaded. Cannot bookmark.");
-      return false;
+      return;
     }
 
     // Check if the current recipe exists in the bookmarks array, returns boolean value
@@ -136,10 +147,6 @@ export class State {
     this.saveToLocalStorage();
     // And notify all observers of the change
     this.notify();
-
-    console.log("Current state after toggle btn clicked: ", this.state);
-    // Return the boolean value to this function
-    return !isCurrentlyBookmarked;
   }
 
   //   Update the subscribers of state change

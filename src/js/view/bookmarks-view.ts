@@ -100,6 +100,7 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
       const target = e.target as HTMLElement;
       const listItem = target.closest(".bookmarks__list-item") as HTMLLIElement;
 
+      const recipeId = listItem?.dataset.id;
       // gaurd clause
       if (!listItem) return;
 
@@ -107,14 +108,12 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
         // stop the propagation up to the parent element list item
         e.stopPropagation();
 
-        const recipeId = listItem?.dataset.id;
-
         // invoke the state method to remove the bookmark
         if (recipeId) {
           this.state.removeBookmark(recipeId);
         }
 
-        // Need to returnt to stop remaining code from executing
+        // Need to return to stop remaining code from executing
 
         return;
       }
@@ -122,8 +121,6 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
       if (listItem) {
         // event prevent defaults prevents the default link from navigating to the source url
         e.preventDefault();
-
-        const recipeId = listItem?.dataset.id;
 
         if (recipeId) {
           this.onBookmarkSelect(recipeId);
