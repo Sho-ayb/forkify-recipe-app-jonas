@@ -13,7 +13,7 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   private decreaseBtn: HTMLButtonElement | null = null;
   private toggleIconBtn: HTMLButtonElement | null = null;
   // Prop for storing the boolean value returned from state.toggleBookmark
-  private isBookmarked: Boolean = false;
+  // private isBookmarked: Boolean = false;
   constructor(hostEl: HTMLElement, state: State | undefined) {
     super("recipe__details-template", hostEl, "recipe-details", false);
     this.state = state;
@@ -24,7 +24,7 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     this.state?.subscribe(this);
 
     this.currentRecipe = this.state?.getState().recipe;
-    this.isBookmarked = this.currentRecipe?.bookmarked!;
+    // this.isBookmarked = this.currentRecipe?.bookmarked!;
 
     if (this.currentRecipe) {
       this.originalServings = this.currentRecipe?.servings;
@@ -79,7 +79,7 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     </div>
     <button class="btn--round bookmark" data-recipe-id="${recipe?.id}">
       <svg class="">
-        <use href="assets/img/icons.svg#icon-bookmark${this.isBookmarked ? "-fill" : ""}"></use>
+        <use href="assets/img/icons.svg#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
       </svg>
     </button>
   </div>
@@ -89,16 +89,33 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   }
   update(state: AppState): void {
     console.log("RecipeDetailsView update method called"); // ADDED
-    console.log("Current isBookmarked value:", this.isBookmarked); // ADDED
-    console.log("Recipe view component: ", state);
+    console.log("Current state.recipe:", state.recipe); // ADDED
 
-    // Since the state has changed we need to update the props
-    this.currentRecipe = state.recipe;
-    this.originalIngredients = this.currentRecipe?.ingredients;
-    this.originalServings = this.currentRecipe?.servings;
-    this.isBookmarked = this.currentRecipe?.bookmarked!;
-    this.updateBookmarkIcon(this.isBookmarked);
+    // Check if the state exists
+    if (state && state.recipe) {
+      // Since the state has changed we need to update the props
+      this.currentRecipe = state.recipe;
+      this.originalIngredients = this.currentRecipe?.ingredients;
+      this.originalServings = this.currentRecipe?.servings;
+
+      console.log(typeof this.currentRecipe?.bookmarked === "boolean");
+
+      if (typeof this.currentRecipe?.bookmarked === "boolean") {
+        console.log(
+          "The update bookmark icon method is invoked is inside recipe details update method",
+        );
+        this.updateBookmarkIcon(this.currentRecipe.bookmarked);
+      } else {
+        console.warn(
+          "Bookmarked property missing on recipe: ",
+          this.currentRecipe,
+        );
+      }
+    } else {
+      console.warn("There is no recipe in the state object");
+    }
   }
+
   private handleIncreaseServings(): void {
     if (this.currentRecipe) {
       this.updateServings(this.currentRecipe?.servings + 1);
@@ -147,13 +164,17 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   private handleToggleEvent(event: Event): void {
     event.preventDefault();
     if (this.state && this.currentRecipe) {
-      this.isBookmarked = this.state.toggleBookmark(this.currentRecipe.id);
-      console.log(
-        "this is isbookmarked in recipe details handle toggle event method: ",
-        this.isBookmarked,
-      );
+      this.state.toggleBookmark(this.currentRecipe.id); // Toggles it
+
+      const isBookmarked = this.state.getState().recipe?.bookmarked;
+
+      if (isBookmarked) {
+        this.updateBookmarkIcon(isBookmarked);
+      }
     } else {
-      console.warn("State is undefined. Cannot toggle bookmark.");
+      console.warn(
+        "State or curreent recipe is undefined. Cannot toggle bookmark.",
+      );
     }
   }
   private updateBookmarkIcon(isBookmarked: Boolean): void {
@@ -161,28 +182,25 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
       console.warn("Toggle button icon not found.");
       return;
     }
-    console.log("this.toggleIconBtn:", this.toggleIconBtn); // ADDED
+
     const useElement = this.toggleIconBtn.querySelector("use");
-    console.log("useElement:", useElement); // Existing log
+
     if (useElement) {
       const newHref = isBookmarked
         ? "assets/img/icons.svg#icon-bookmark-fill"
         : "assets/img/icons.svg#icon-bookmark";
       useElement.setAttribute("href", newHref);
-      console.log("New href set on button use element", useElement); // Existing log
-      console.log(
-        "useElement href after setAttribute:",
-        useElement.getAttribute("href"),
-      ); // ADDED
     } else {
       console.warn("Could not find use element inside button.");
     }
   }
+
   initialiseElements(): void {
     this.increaseBtn = this.element.querySelector(".btn--increase-servings");
     this.decreaseBtn = this.element.querySelector(".btn--decrease-servings");
     this.toggleIconBtn = this.element.querySelector(".bookmark");
   }
+
   setupEventListeners(): void {
     // Attaching event listeners to buttons
     if (this.increaseBtn) {

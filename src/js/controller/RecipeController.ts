@@ -55,7 +55,11 @@ export class RecipeController {
 
     // Initialise the modal bookmarks view
     if (modalBookmarkHostEl) {
-      new ModalBookmarksView(modalBookmarkHostEl, this.state);
+      new ModalBookmarksView(
+        modalBookmarkHostEl,
+        this.state,
+        this.handleRecipeSelection.bind(this),
+      );
     }
   }
 
