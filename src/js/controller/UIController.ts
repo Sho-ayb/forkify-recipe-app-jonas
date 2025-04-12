@@ -128,6 +128,7 @@ export class UIController {
     // Update aside visibility
     if (isDesktopView) {
       this.showAside();
+      this.toggleOverlay(false);
     } else {
       this.hideAside();
     }
@@ -152,11 +153,27 @@ export class UIController {
   private showAside(): void {
     this.aside?.classList.remove("hidden");
     this.aside?.classList.add("active");
+
+    // toggles the overlay
+    this.toggleOverlay(true);
   }
 
   private hideAside(): void {
     this.aside?.classList.add("hidden");
     this.aside?.classList.remove("active");
+
+    // toggles the overlay
+    this.toggleOverlay(false);
+  }
+
+  private toggleOverlay(open: boolean): void {
+    if (open) {
+      this.overlay?.classList.add("visible");
+      this.overlay?.classList.remove("hidden");
+    } else {
+      this.overlay?.classList.remove("visible");
+      this.overlay?.classList.add("hidden");
+    }
   }
 
   private setupEventListeners(): void {
@@ -236,6 +253,9 @@ export class UIController {
         modal.classList.remove("visible");
         overlay.classList.add("hidden");
         overlay.classList.remove("visible");
+
+        // if the overlay is clicked on and the aside is open; hide it
+        this.hideAside();
       });
     }
   }
