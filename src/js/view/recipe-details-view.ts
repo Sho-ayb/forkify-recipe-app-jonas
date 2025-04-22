@@ -47,14 +47,14 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     <div class="recipe__details">
     <div class="recipe__info">
       <svg class="recipe__info-icon">
-        <use href="assets/img/icons.svg#icon-clock"></use>
+        <use href="icons.svg#icon-clock"></use>
       </svg>
       <span class="recipe__info-data recipe__info-data--minutes">${recipe?.cooking_time}</span>
       <span class="recipe__info-text">minutes</span>
     </div>
     <div class="recipe__info">
       <svg class="recipe__info-icon">
-        <use href="assets/img/icons.svg#icon-users"></use>
+        <use href="icons.svg#icon-users"></use>
       </svg>
       <span class="recipe__info-data recipe__info-data--people">${recipe?.servings}</span>
       <span class="recipe__info-text">servings</span>
@@ -79,7 +79,7 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     </div>
     <button class="btn--round bookmark" data-recipe-id="${recipe?.id}">
       <svg class="">
-        <use href="/assets/img/icons.svg#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
+        <use href="icons.svg#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
       </svg>
     </button>
   </div>
@@ -187,8 +187,8 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
 
     if (useElement) {
       const newHref = isBookmarked
-        ? "/assets/img/icons.svg#icon-bookmark-fill"
-        : "/assets/img/icons.svg#icon-bookmark";
+        ? "icons.svg#icon-bookmark-fill"
+        : "icons.svg#icon-bookmark";
       useElement.setAttribute("href", newHref);
     } else {
       console.warn("Could not find use element inside button.");
