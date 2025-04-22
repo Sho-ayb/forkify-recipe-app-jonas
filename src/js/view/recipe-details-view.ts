@@ -62,19 +62,19 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
       <div class="recipe__info-buttons">
         <button class="btn--tiny btn--decrease-servings">
           <svg>
-            <use href="assets/img/icons.svg#icon-minus-circle"></use>
+            <use href="icons.svg#icon-minus-circle"></use>
           </svg>
         </button>
         <button class="btn--tiny btn--increase-servings">
           <svg>
-            <use href="assets/img/icons.svg#icon-plus-circle"></use>
+            <use href="icons.svg#icon-plus-circle"></use>
           </svg>
         </button>
       </div>
     </div>
     <div class="recipe__user-generated [ hidden ]">
       <svg>
-        <use href="assets/img/icons.svg#icon-user"></use>
+        <use href="icons.svg#icon-user"></use>
       </svg>
     </div>
     <button class="btn--round bookmark" data-recipe-id="${recipe?.id}">
