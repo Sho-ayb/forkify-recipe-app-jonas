@@ -79,7 +79,7 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     </div>
     <button class="btn--round bookmark" data-recipe-id="${recipe?.id}">
       <svg class="">
-        <use href="assets/img/icons.svg#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
+        <use href="<%= require('./assets/img/icons.svg') %>#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
       </svg>
     </button>
   </div>
