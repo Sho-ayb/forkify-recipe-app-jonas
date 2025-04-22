@@ -72,10 +72,10 @@ export default merge(common, {
         loader: "html-loader",
       },
       {
-        test: /icons\.svg$/,
+        test: /\.svg$/,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/img/[name].[hash][ext]'
+          filename: 'assets/img/[name][ext]'
         }
       },
     ],

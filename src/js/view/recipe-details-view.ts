@@ -47,14 +47,14 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     <div class="recipe__details">
     <div class="recipe__info">
       <svg class="recipe__info-icon">
-        <use href="icons.svg#icon-clock"></use>
+        <use href="assets/img/icons.svg#icon-clock"></use>
       </svg>
       <span class="recipe__info-data recipe__info-data--minutes">${recipe?.cooking_time}</span>
       <span class="recipe__info-text">minutes</span>
     </div>
     <div class="recipe__info">
       <svg class="recipe__info-icon">
-        <use href="icons.svg#icon-users"></use>
+        <use href="assets/img/icons.svg#icon-users"></use>
       </svg>
       <span class="recipe__info-data recipe__info-data--people">${recipe?.servings}</span>
       <span class="recipe__info-text">servings</span>
@@ -62,12 +62,12 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
       <div class="recipe__info-buttons">
         <button class="btn--tiny btn--decrease-servings">
           <svg>
-            <use href="icons.svg#icon-minus-circle"></use>
+            <use href="assets/img/icons.svg#icon-minus-circle"></use>
           </svg>
         </button>
         <button class="btn--tiny btn--increase-servings">
           <svg>
-            <use href="icons.svg#icon-plus-circle"></use>
+            <use href="assets/img/icons.svg#icon-plus-circle"></use>
           </svg>
         </button>
       </div>
@@ -79,7 +79,7 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     </div>
     <button class="btn--round bookmark" data-recipe-id="${recipe?.id}">
       <svg class="">
-        <use href="icons.svg#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
+        <use href="assets/img/icons.svg#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
       </svg>
     </button>
   </div>
