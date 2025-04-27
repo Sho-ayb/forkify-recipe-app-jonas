@@ -24,3 +24,4 @@ coverage/
 # IDE specific files
 .vscode/
 .idea/
+.aider*
