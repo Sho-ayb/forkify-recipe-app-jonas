@@ -5,6 +5,10 @@ import { State } from "js/model/state";
 // Importing a helper function to return the fractional part to a better format: 1/2, 1/4, 3/4
 import { decimalToFraction } from "../utils/helpers";
 
+// Importing svg file for cache purposes
+
+import iconSvg from "../../assets/img/icons.svg";
+
 export class RecipeIngredientsView extends AbstractView<
   HTMLElement,
   HTMLElement
@@ -21,11 +25,11 @@ export class RecipeIngredientsView extends AbstractView<
 
     this.configure();
   }
-  
+
   configure(): void {
     // Subscribe to the state
     this.state?.subscribe(this);
-    
+
     // Get the current recipe
     this.currentRecipe = this.state?.getState().recipe;
     // Render the initial view
@@ -59,7 +63,7 @@ export class RecipeIngredientsView extends AbstractView<
     <li class="recipe__ingredient [ u-flex-row ]">
     <div class="recipe__icon-container">
       <svg class="recipe__icon">
-        <use href="assets/img/icons.svg#icon-check"></use>
+        <use href="${iconSvg}#icon-check"></use>
       </svg>
       </div>
       <div class="recipe__description">

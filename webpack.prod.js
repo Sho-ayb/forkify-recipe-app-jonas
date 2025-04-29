@@ -73,10 +73,10 @@ export default merge(common, {
       },
       {
         test: /\.svg$/,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'assets/img/[name][ext]'
-        }
+          filename: "assets/img/[name].[hash][ext]",
+        },
       },
     ],
   },
