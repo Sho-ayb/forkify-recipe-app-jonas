@@ -2,6 +2,10 @@ import { AbstractView } from "./abstract-view";
 import { State } from "js/model/state";
 import { AppState, Recipe } from "js/model/interfaces";
 
+// Importing svg file for cache purposes
+
+import iconSvg from "../../assets/img/icons.svg";
+
 export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
   private state: State;
   private bookmarks: Recipe[];
@@ -50,7 +54,7 @@ export class BookmarksView extends AbstractView<HTMLElement, HTMLElement> {
       <div class="error__icon">
         <svg>
           <use
-            href="assets/img/icons.svg#icon-alert-triangle"
+            href="${iconSvg}#icon-alert-triangle"
           ></use>
         </svg>
       </div>

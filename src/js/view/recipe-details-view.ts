@@ -3,6 +3,10 @@ import { AbstractView } from "./abstract-view";
 import { AppState, Ingredient, Recipe } from "js/model/interfaces";
 import { State } from "js/model/state";
 
+// Importing svg icons file for hashing purposes
+
+import iconSvg from "../../assets/img/icons.svg";
+
 export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
   private currentRecipe: Recipe | undefined;
   private state: State | undefined;
@@ -47,14 +51,14 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
     <div class="recipe__details">
     <div class="recipe__info">
       <svg class="recipe__info-icon">
-        <use href="assets/img/icons.svg#icon-clock"></use>
+        <use href="${iconSvg}#icon-clock"></use>
       </svg>
       <span class="recipe__info-data recipe__info-data--minutes">${recipe?.cooking_time}</span>
       <span class="recipe__info-text">minutes</span>
     </div>
     <div class="recipe__info">
       <svg class="recipe__info-icon">
-        <use href="assets/img/icons.svg#icon-users"></use>
+        <use href="${iconSvg}#icon-users"></use>
       </svg>
       <span class="recipe__info-data recipe__info-data--people">${recipe?.servings}</span>
       <span class="recipe__info-text">servings</span>
@@ -62,24 +66,24 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
       <div class="recipe__info-buttons">
         <button class="btn--tiny btn--decrease-servings">
           <svg>
-            <use href="assets/img/icons.svg#icon-minus-circle"></use>
+            <use href="${iconSvg}#icon-minus-circle"></use>
           </svg>
         </button>
         <button class="btn--tiny btn--increase-servings">
           <svg>
-            <use href="assets/img/icons.svg#icon-plus-circle"></use>
+            <use href="${iconSvg}#icon-plus-circle"></use>
           </svg>
         </button>
       </div>
     </div>
     <div class="recipe__user-generated [ hidden ]">
       <svg>
-        <use href="assets/img/icons.svg#icon-user"></use>
+        <use href="${iconSvg}#icon-user"></use>
       </svg>
     </div>
     <button class="btn--round bookmark" data-recipe-id="${recipe?.id}">
       <svg class="">
-        <use href="assets/img/icons.svg#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
+        <use href="${iconSvg}#icon-bookmark${recipe.bookmarked ? "-fill" : ""}"></use>
       </svg>
     </button>
   </div>
@@ -187,8 +191,8 @@ export class RecipeDetailsView extends AbstractView<HTMLElement, HTMLElement> {
 
     if (useElement) {
       const newHref = isBookmarked
-        ? "assets/img/icons.svg#icon-bookmark-fill"
-        : "assets/img/icons.svg#icon-bookmark";
+        ? `${iconSvg}#icon-bookmark-fill`
+        : `${iconSvg}#icon-bookmark`;
       useElement.setAttribute("href", newHref);
     } else {
       console.warn("Could not find use element inside button.");

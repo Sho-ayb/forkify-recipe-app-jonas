@@ -1,6 +1,11 @@
 import { AbstractView } from "./abstract-view";
 import { AppState, SearchRecipe } from "js/model/interfaces";
 import { State } from "js/model/state";
+
+// Importing svg file for hashing purposes
+
+import iconSvg from "../../assets/img/icons.svg";
+
 export class SearchListView extends AbstractView<
   HTMLDivElement,
   HTMLUListElement
@@ -113,7 +118,7 @@ export class SearchListView extends AbstractView<
               <p class="preview__publisher">${recipe.publisher}</p>
               <div class="preview__user-generated">
                 <svg class="[ hidden ]">
-                  <use href="assets/img/icons.svg#icon-user"></use>
+                  <use href="${iconSvg}#icon-user"></use>
                 </svg>
               </div>
             </div>

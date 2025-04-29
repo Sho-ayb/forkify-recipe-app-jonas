@@ -2,6 +2,10 @@ import { AbstractView } from "./abstract-view";
 import { AppState, Recipe } from "js/model/interfaces";
 import { State } from "js/model/state";
 
+// Importing svg file for cache purposes
+
+import iconSvg from "../../assets/img/icons.svg";
+
 export class RecipeDirectionsView extends AbstractView<
   HTMLElement,
   HTMLElement
@@ -46,7 +50,7 @@ export class RecipeDirectionsView extends AbstractView<
   >
     <span>Directions</span>
     <svg class="search__icon">
-      <use href="assets/img/icons.svg#icon-arrow-right"></use>
+      <use href="${iconSvg}#icon-arrow-right"></use>
     </svg>
   </a>
     
